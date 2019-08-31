@@ -1883,3 +1883,9 @@ header {
     background: url(/public/img/bike-bg.jpg) center center no-repeat;
     background-size: cover;
 }
+
+
+
+#register-form-link{
+    color:darkred;
+}

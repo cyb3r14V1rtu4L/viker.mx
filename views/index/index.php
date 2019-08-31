@@ -58,44 +58,66 @@
 <section id="stuff" class="portfolio">
 
     <div class="container">
-        <div class="row">
+        <?php
+        if (is_array($this->Enterprise)){
+            ?>
+            <div class="row">
+                <div class="main_portfolio" style="padding: 30px;">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="head_title text-center">
+                            <h3 class="wow fadeInDown animated animated">CHOOSE YOUR FAVORITE RESTAURANT</h3>
+
+                            <div class="separator_auto"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="portfolio_content">
+                        <div class="col-md-12 m-top-30">
+                            <?php
+
+                            foreach($this->Enterprise as $E)
+                            {
+                                ?>
+                                <div class="col-md-4">
+                                    <a href="/menu/showMenu/<?php echo $E['enterprise_id'];?>">
+                                        <div class="pricing_item blog_item m-top-20">
+                                            <div class="blog_item_img" style="border: solid; border-width: 1px;color:#DDDDDD;">
+                                                <img src="/public/uploads/enterprise/profile/<?php echo $E['enterprise_id'];?>/profile.jpg" alt="" />
+                                            </div>
+                                            <div class="pricing_text roomy-40 text-center">
+                                                <h6><?php echo strtoupper($E['name_enterprise']);?></h6>
+                                                <p><em><a href=""></a><?php echo $E['category'];?></em></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <?php
+        }else {
+        ?>
+
             <div class="main_portfolio" style="padding: 30px;">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="head_title text-center">
-                        <h3 class="wow fadeInDown animated animated">CHOOSE YOUR FAVORITE RESTAURANT</h3>
-
+                        <div class="separator_auto"></div>
+                            <h3 class="wow fadeInDown animated animated">AT THIS MOMENT ARE NOT AVAIBLE ANY RESTAURANT</h3>
                         <div class="separator_auto"></div>
 
                     </div>
                 </div>
-
-                <div class="portfolio_content">
-                    <div class="col-md-12 m-top-30">
-                        <?php
-
-                        foreach($this->Enterprise as $E)
-                        {
-                            ?>
-                            <div class="col-md-4">
-                                <a href="/menu/showMenu/<?php echo $E['enterprise_id'];?>">
-                                    <div class="pricing_item blog_item m-top-20">
-                                        <div class="blog_item_img" style="border: solid; border-width: 1px;color:#DDDDDD;">
-                                            <img src="/public/uploads/enterprise/profile/<?php echo $E['enterprise_id'];?>/profile.jpg" alt="" />
-                                        </div>
-                                        <div class="pricing_text roomy-40 text-center">
-                                            <h6><?php echo strtoupper($E['name_enterprise']);?></h6>
-                                            <p><em><a href=""></a><?php echo $E['category'];?></em></p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                </div>
             </div>
-        </div>
+
+        <?php
+        }
+        ?>
 
     </div>
 </section>

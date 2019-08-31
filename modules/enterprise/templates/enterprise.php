@@ -32,6 +32,16 @@ $rastabgCSS = array(0=>'bg-yellow',1=>'bg-red',2=>'bg-green');
                         ?>
 
                         <a href="#" onclick="<?php echo $onClick;?>" class="btn btn-default <?php echo $rastabgCSS[$box];?> btn-block"><b>VIEW</b></a>
+                        <?php
+
+                        $active_btn = ($E['active_enterprise'] == '0') ? 'ACTIVATE': 'DEACTIVATE' ;
+                        $active_val = ($E['active_enterprise'] == '0') ? '1': '0' ;
+                        $active_color = ($E['active_enterprise'] == '0') ? 'bg-green': 'bg-grey' ;
+
+                        ?>
+
+                        <a href="#" id="btn_active_enterprise" onclick="activateCompany(<?php echo $E['enterprise_id']; ?>,'<?php echo $active_val; ?>')" class="btn btn-default <?php echo $active_color; ?> btn-block"><b><?php echo $active_btn; ?></b></a>
+
                     </div>
                     <!-- /.box-body -->
                 </div>

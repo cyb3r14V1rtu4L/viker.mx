@@ -74,11 +74,14 @@ class ajaxController extends Controller {
                 $resV = $this->model->insert('validations', $val, array());
                 if ($resV['status'] == 'success')
                 {
-                    $dataEnterprise['user_id'] = $user_id;
-                    $dataEnterprise['name_enterprise'] = 'Default Name';
-                    $dataEnterprise['active_enterprise'] = '0';
+
 
                     if ($data['type'] == 1) {
+                        $dataEnterprise['user_id'] = $user_id;
+                        $dataEnterprise['name_enterprise'] = 'Default Name';
+                        $dataEnterprise['active_enterprise'] = '0';
+                        $dataEnterprise['geo_lat'] = '20.6539385';
+                        $dataEnterprise['geo_lng'] = '-87.1417377';
                         $resEnterprise = $this->model->insert('system_user_enterprise', $dataEnterprise, array());
                     }
 
@@ -654,7 +657,25 @@ class ajaxController extends Controller {
     }
 
 
+    public function activateCompany() {
+
+        $columns = array('active_enterprise'=>$this->getPostParam('active_enterprise'));
+        $where = array('enterprise_id'=>$this->getPostParam('enterprise_id'));
+        $result = $this->model->update('system_user_enterprise', $columns, $where,false);
+
+        $message = "Error";
+        if($result)
+        {
+            $message=($this->getPostParam('active_enterprise') == '1') ? "Company Activate" : "Company Deactivated";
+        }
+        $response = array('result'=>$result ,'message'=>$message);
+
+        echo json_encode($response);
+
+    }
+
+
 
     /*
-     * last change... Tue Aug 29, 21:40:20*/
+     * last change... Tue Aug 29, 17 21:40:20*/
 }
