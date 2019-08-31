@@ -194,12 +194,27 @@ if( $controlador !== 'checkout'  ) {
                                    id="total_pay_real"
                                    name="total_pay_real"
                                    value="<?php echo Session::get('gtotal');?>">
-
+                            <!--
                             <label>You pay with...</label>
                             <div class="form-group has-warning">
                                 <input type="text" id="pay_with" name="pay_with" class="form-control number"
                                        maxlength="5" onchange="getChange(this.value);">
                             </div>
+                            -->
+
+                            <div class="form-group">
+                                <div class="input-with-icon  right">
+                                    <i class=""></i>
+                                    <select name="type" id="pay_with" class="form-control reg_info text4rea" onchange="payWith(this.value);">
+                                        <option selected value="">You pay with...</option>
+                                        <option value="1" >Cash</option>
+                                        <option selected value="2" >Paypal</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
                             <div class="form-group has-warning">
                                 <input type="hidden" class="form-control" id="pay_change" name="pay_change" value="" readonly>                            </div>
                         </form>

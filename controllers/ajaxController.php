@@ -17,9 +17,6 @@ class ajaxController extends Controller {
 
     public function profileRequest()
     {
-        $response = false;
-        $message_t = 'error';
-
         $this->getLibrary('encrypt');
         $encrypt=new Encryption(HASH_KEY);
 
@@ -29,12 +26,18 @@ class ajaxController extends Controller {
 
         if(!$UserExist)
         {
+            $response = false;
+            $message_t = 'error';
+            $file_template = '';
+            $toString = '';
+            $subject = '';
+
             $data['type'] = $dataArray['type'];
 
             switch ($dataArray['type'])
             {
-                case 1: #Enterprise
-                case 2: #Customer
+                case 1: //Enterprise
+                case 2: //Customer
                     $file_template = 'welcome.html';
                     $toString = $dataArray['email'];
                     $subject = 'Welcome to VIKER.MX';
@@ -58,7 +61,7 @@ class ajaxController extends Controller {
             $data['company'] = 'VIKER';
             $data['active'] = 0;
             $data['date_created'] = date('Y-m-d H:i:s');
-            #$this->pr($data);
+            //$this->pr($data);
             $res = $this->model->insert('system_users', $data, array());
 
             if ($res['status'] == 'success')
@@ -71,31 +74,38 @@ class ajaxController extends Controller {
                 $resV = $this->model->insert('validations', $val, array());
                 if ($resV['status'] == 'success')
                 {
+                    $dataEnterprise['user_id'] = $user_id;
+                    $dataEnterprise['name_enterprise'] = 'Default Name';
+                    $dataEnterprise['active_enterprise'] = '0';
+
+                    if ($data['type'] == 1) {
+                        $resEnterprise = $this->model->insert('system_user_enterprise', $dataEnterprise, array());
+                    }
+
                     $response = true;
                     $message_a = 'Profile created';
-                    $message_b = 'Activate your account. Please sign in';
+                    $message_b = 'Activating your account...Check your inbox';
                     $message_t = 'success';
 
                     $template_data = array( '{{customer_name}}',
-                                            '{{user_id}}',
-                                            '{{username}}',
-                                            '{{password}}',
-                                            '{{url}}',
-                                            '{{mail_company}}'
+                        '{{user_id}}',
+                        '{{username}}',
+                        '{{password}}',
+                        '{{url}}',
+                        '{{mail_company}}'
                     );
 
                     $template_replace = array(  $data['first_name'] . ' ' . $data['last_name'],
-                                                $encrypt->encrypt($user_id),
-                                                $data['username'],
-                                                $dataArray['password'],
-                                                APP_URL,
-                                                EMAIL_COMPANY
+                        $encrypt->encrypt($user_id),
+                        $data['username'],
+                        $dataArray['password'],
+                        APP_URL,
+                        EMAIL_COMPANY
                     );
 
                     $htmlContent = $this->getEmailTemplate($file_template, $template_data, $template_replace);
-
-                    $response = false;
                     $this->sendMail(EMAIL_COMPANY, $toString, $subject, $htmlContent);
+
                 }
             } else {
                 $message_a = 'Error...';
@@ -105,7 +115,13 @@ class ajaxController extends Controller {
             $message_a = 'Error...';
             $message_b = 'Email Address already register!';
         }
-        $response_data = array('response' => $response, 'message_a' => $message_a, 'message_b' => $message_b, 'message_t' => $message_t);
+
+        $response_data = array(
+            'response' => $response,
+            'message_a' => $message_a,
+            'message_b' => $message_b,
+            'message_t' => $message_t,
+            'data' => $data);
         echo json_encode($response_data);
     }
 
@@ -196,7 +212,6 @@ class ajaxController extends Controller {
         $checkout_shop = Session::get('CheckoutShop');
 
         $order_data = $this->unserilizeArray($_POST['order_data']);
-
         foreach ($Shopping['Enterprise'] as $e => $enterprise)
         {
             foreach ($enterprise as $e_id => $stuff)
@@ -211,14 +226,13 @@ class ajaxController extends Controller {
 
                     $kmDistance = $this->cyclerCostDistance($geo_lat_c, $geo_lng_c, $geo_lat_e, $geo_lng_e);
                     $Emissions = $this->CO2KG($kmDistance);
-                    
 
                     if($kmDistance > 3)
                     {
                         $cost = $kmDistance * 10;
                     }else
                     {
-                        $cost = CYCLER;
+                         $cost = CYCLER;
                     }
 
                     $cycler_cost = number_format($cost,2);
@@ -265,27 +279,53 @@ class ajaxController extends Controller {
                                                value="'.$checkout_shop['total_pay_real'].'">
                                         <div class="col-md-6" style="text-align: center;">
                                         
-                                        <input type="hidden"
+                                            <input type="hidden"
                                                id="distance_kms"
                                                name="distance_kms"
                                                value="'.$kmDistance.'">
-
+                                            <!--
                                             <label>You pay with...</label>
                                             <div class="form-group has-warning">
                                             
                                                 <input type="text" id="pay_with" name="pay_with" class="form-control number"
                                                    maxlength="5" onchange="getChange(this.value);">
                                             </div>
+                                            -->
+                                            
+                                            <div class="form-group">
+                                                <div class="input-with-icon  right">
+                                                    <i class=""></i>
+                                                    <select name="type" id="pay_with" class="form-control reg_info text4rea" onchange="payWith(this.value);">
+                                                        <option selected value="">Choose Your payment method...</option>
+                                                        <option value="1" >Cash</option>
+                                                        <option value="2" >Paypal</option>
+                                                    </select>
+                                                </div>
+                
+                                            </div>
+                                            <div  id="cashPayment" style="display: none;">
+                                                <label>You pay with...<span><small>$100, $200, $500</small></span></label>
+                                                <div class="form-group has-warning" >
+                                                
+                                                    <input type="text" id="pay_with" name="pay_with" class="form-control number"
+                                                       maxlength="5" onchange="getChange(this.value);" placeholder="">
+                                                </div>
+                                                
+                                                <div class="form-group has-warning">
+                                                    <input type="hidden" class="form-control" id="pay_change" name="pay_change" value="" readonly>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <div style="text-align: center;">
+                                                        <a href="#" id="order_now" class="btn btn-primary" onclick="orderCheckout();" style="display: none;">Order NOW!!</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
                                         </div>
 
-                                        <div class="form-group has-warning">
-                                            <input type="hidden" class="form-control" id="pay_change" name="pay_change" value="" readonly>
-                                            </div>
-                                        <div class="col-md-6">
-                                            <div style="text-align: center;">
-                                                <a href="#" id="order_now" class="btn btn-primary" onclick="orderCheckout();" style="display: none;">Order Now!!</a>
-                                            </div>
-                                        </div>
+                                        
                                     </form>';
 
                 }
@@ -301,6 +341,8 @@ class ajaxController extends Controller {
                           'htmlCosts'=>$htmlCosts,
                           'htmlPayment'=>$htmlPayment
                           );
+
+        //var_dump($response);
         echo json_encode($response);
     }
 
@@ -336,10 +378,10 @@ class ajaxController extends Controller {
                     $dataO['geo_int'] = $order_data['number_int'];
 
                     $dataO['total_order'] = $checkout_shop['gran_total'];
-                    $dataO['total_pay'] = $checkout_shop['pay_with'];
+                    $dataO['total_pay'] = ($checkout_shop['pay_with'] > 0 && $checkout_shop['pay_with'] !== null) ? $checkout_shop['pay_with'] : 0.00;
                     $dataO['total_pay_real'] = $checkout_shop['total_pay_real'];
                     $dataO['total_vikers'] = $checkout_shop['granTotal_cycler_float'];
-                    $dataO['total_change'] = $checkout_shop['pay_change'];
+                    $dataO['total_change'] = ($checkout_shop['pay_change'] > 0 && $checkout_shop['pay_change'] !== null) ? $checkout_shop['pay_change'] : 0.00;
                     $dataO['status'] = 'NEW';
                     $orderData = $this->model->insert("order_enterprise",$dataO,array());
                     #$this->pr($orderData);
@@ -361,12 +403,7 @@ class ajaxController extends Controller {
             }
         }
 
-        Session::destroy('Shopping');
-        Session::destroy('ShoppingData');
-        Session::destroy('CheckoutShop');
-        Session::destroy('Checkout');
-        Session::destroy('gtotal');
-        Session::destroy('cycler');
+
 
         $response = array('ShoppingData'=>$shopping_data,'CheckoutShop'=>$checkout_shop,'orderData'=>$orderData);
         echo json_encode($response);

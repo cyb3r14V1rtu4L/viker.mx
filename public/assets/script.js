@@ -109,7 +109,7 @@ function profileRequest()
                     console.log(errorThrown);
                 }
             });
-        }else{
+        }else {
             swal('Viker', 'The password must match', 'warning');
             request = 0;
             return false;
@@ -117,7 +117,7 @@ function profileRequest()
             $('#confirm-password').val('');
             ublockAjax();
         }
-    }else{
+    }else {
             swal('Viker','Please Fill all Fields','warning');
             ublockAjax();
     }
@@ -357,7 +357,8 @@ function determinateCostsCycler()
         }
         ,
         error: function (xhr, textStatus, errorThrown) {
-            console.log(json);
+            console.log('textStatus', textStatus);
+            console.log('errorThrown', errorThrown);
         }
     });
 }
@@ -461,7 +462,7 @@ function oSpecialDelivery()
 }
 
 
-function orderCheckout()
+function orderCheckout(pm)
 {
     var order_data = $('#order_data').serializeArray();
     var checkout_shop = $('#checkout_shop').serializeArray();
@@ -479,13 +480,23 @@ function orderCheckout()
             {
                 if(json.orderData.status=='success')
                 {
-                    console.log(json);
-                    swal('Viker','Your order has been Received');
-                    setTimeout(function() {
-                        window.location.href = '/';
-                    }, 2000);
-                    alertify.set({ delay: 15000 });
-                    alertify.log("Shortly a Cycler will take the order...");
+                    //console.log(json);
+                    if(pm == 'paypal') {
+                        alertify.log("Thank you, Now your order has begun to generated...");
+
+
+                    }else{
+
+                        swal('Viker','Your order has been Received');
+                        setTimeout(function() {
+                            window.location.href = '/';
+                        }, 2000);
+
+                        alertify.set({ delay: 15000 });
+                        alertify.log("Shortly a Cycler will take the order...");
+                    }
+
+
                 }
             }
         ,
@@ -496,6 +507,8 @@ function orderCheckout()
             }
     });
 }
+
+
 
 function confirmDelivery(order_id) {
     $.ajax({
@@ -763,3 +776,30 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
+
+
+
+
+/* * * * *  * *
+*             *
+*   PayPal    *
+*             *
+* * * * * * * */
+
+function payWith(pw){
+    console.log('pw', pw);
+    switch (pw) {
+        case '1': //Cash
+            $('#cashPayment').show();
+            $('#paypalPayment').hide();
+
+            break;
+        case '2': //Paypal
+            //$('#amount').val( $('#granTotal_float').val() );
+            $('#cashPayment').hide();
+            $('#paypalPayment').show();
+
+            break;
+    }
+}
+
