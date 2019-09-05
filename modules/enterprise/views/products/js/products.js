@@ -105,3 +105,95 @@ function addCategory()
         }
     });
 }
+
+
+function activateStuff(stuff_id, e_id, active_stuff)
+{
+    $.ajax({
+        url: "/ajax/activateStuff/",
+        type: "POST",
+        dataType: "json",
+        async: false,
+        data: {
+            active_stuff : active_stuff,
+            stock_stuff : active_stuff,
+            enterprise_id : e_id,
+            stuff_id : stuff_id,
+        },
+        success:
+            function(json)
+            {
+                console.log(json);
+                alertify.set({ delay: 1000 });
+                alertify.log(json.message);
+                var active = (active_stuff == '1') ? '0' : '1';
+
+                switch (active_stuff) {
+
+                    case '1':
+                        $('#btn_active_stuff_' + stuff_id).removeClass('bg-green');
+                        $('#btn_active_stuff_' + stuff_id).addClass('bg-grey');
+                        $('#btn_active_stuff_' + stuff_id).text('DEACTIVATE');
+                        break;
+                    case '0':
+                        $('#btn_active_stuff_' + stuff_id).removeClass('bg-grey');
+                        $('#btn_active_stuff_' + stuff_id).addClass('bg-green');
+                        $('#btn_active_stuff_' + stuff_id).text('ACTIVE');
+
+                        break;
+
+                }
+                $('#btn_active_stuff_' + stuff_id).attr('onclick',"activateStuff(" + stuff_id + ", " + e_id + ", '" + active + "')");
+
+                return false;
+            }
+        ,
+        error:
+            function(xhr, textStatus, errorThrown)
+            {
+                console.log(textStatus);
+            }
+    });
+}
+
+function deleteStuff() {
+    swal({
+            title: "Are you sure?",
+            text: "Your will not be able to recover this product!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        },
+        function() {
+            $.ajax({
+                url: "/ajax/stockStuff/",
+                type: "POST",
+                dataType: "json",
+                async: false,
+                data: {
+                    active_stuff : '0',
+                    stock_stuff : 0,
+                    enterprise_id :  $('#enterprise_id').val(),
+                    stuff_id : $('#stuff_id').val()
+                },
+                success:
+                    function(json)
+                    {
+                        console.log('Result: ',json);
+                        swal("Deleted!", json.message, "success");
+
+                        window.location.href = '/enterprise/products/edit/' + $('#enterprise_id').val();
+                        return false;
+                    }
+                ,
+                error:
+                    function(xhr, textStatus, errorThrown)
+                    {
+                        console.log(textStatus);
+                    }
+            });
+
+        });
+}

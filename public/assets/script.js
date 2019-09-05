@@ -778,6 +778,55 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 
+function activateCompany(e_id, active_enterprise)
+{
+    $.ajax({
+        url: "/ajax/activateCompany/",
+        type: "POST",
+        dataType: "json",
+        async: false,
+        data: {
+            active_enterprise    : active_enterprise,
+            enterprise_id : e_id,
+        },
+        success:
+            function(json)
+            {
+                console.log(json);
+                alertify.set({ delay: 1000 });
+                alertify.log(json.message);
+                var active = (active_enterprise == '1') ? '0' : '1';
+
+                switch (active_enterprise) {
+
+                    case '1':
+                        $('#btn_active_enterprise').removeClass('bg-green');
+                        $('#btn_active_enterprise').addClass('bg-grey');
+                        $('#btn_active_enterprise').text('DEACTIVATE');
+                        break;
+                    case '0':
+                        $('#btn_active_enterprise').removeClass('bg-grey');
+                        $('#btn_active_enterprise').addClass('bg-green');
+                        $('#btn_active_enterprise').text('ACTIVE');
+
+                        break;
+
+                }
+                $('#btn_active_enterprise').attr('onclick',"activateCompany(" + e_id + ", '" + active + "')");
+
+                return false;
+            }
+        ,
+        error:
+            function(xhr, textStatus, errorThrown)
+            {
+                console.log(textStatus);
+            }
+    });
+}
+
+
+
 
 
 /* * * * *  * *
@@ -787,7 +836,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 * * * * * * * */
 
 function payWith(pw){
-    console.log('pw', pw);
+    //console.log('pw', pw);
     switch (pw) {
         case '1': //Cash
             $('#cashPayment').show();
@@ -795,7 +844,7 @@ function payWith(pw){
 
             break;
         case '2': //Paypal
-            //$('#amount').val( $('#granTotal_float').val() );
+            $('#amount').val( $('#granTotal_float').val() );
             $('#cashPayment').hide();
             $('#paypalPayment').show();
 

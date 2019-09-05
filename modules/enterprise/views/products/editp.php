@@ -71,6 +71,16 @@
                     </select>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6 fa-pull-right">
+                    <a href="#"
+                       id="btn_active_stuff_<?php echo $this->Product['stuff_id']; ?>"
+                       onclick="deleteStuff()"
+                       class="btn btn-default pull-right">
+                        <b>DELETE PRODUCT</b>
+                    </a>
+                </div>
+            </div>
             
             
         </div>
@@ -114,6 +124,8 @@
 </div>
 <input  type="hidden"  id="stuff_id"
         value="<?php echo $this->Product['stuff_id'];?>">
+<input  type="text"  id="enterprise_id"
+        value="<?php echo $this->Product['enterprise_id'];?>">
 
 <input  type="hidden"  id="photo_update"
         f="photo_stuff"

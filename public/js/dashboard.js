@@ -220,7 +220,7 @@ $('#world-map').vectorMap({
     });
 	
 	$('#easy-pie-custom-2').easyPieChart({
-       barColor:'#0aa699',
+       barColor:'#6f7b8a',
 	   trackColor:'#fff',
 	   scaleColor:false,
 	   lineCap:'square',
@@ -242,8 +242,8 @@ $('#world-map').vectorMap({
     height: '30px',
     barWidth: 6,
     barSpacing: 2,
-    barColor: '#0aa699',
-    negBarColor: '#0aa699'});	
+    barColor: '#6f7b8a',
+    negBarColor: '#6f7b8a'});
 });
 
 //Weahter Icons 

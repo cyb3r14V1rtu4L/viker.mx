@@ -2,7 +2,7 @@
 <?php
 $rastaCSS = array(0=>'warning',1=>'danger',2=>'success');
 $rastabgCSS = array(0=>'bg-yellow',1=>'bg-red',2=>'bg-green');
-#echo $this->function;
+
 ?>
 
 <div class="col-md-12">
@@ -12,7 +12,7 @@ $rastabgCSS = array(0=>'bg-yellow',1=>'bg-red',2=>'bg-green');
         {
             $box = array_rand($rastaCSS);
             ?>
-            <div class="col-md-3">
+            <div class="col-md-4 col-sm-12 col-xs-12">
                 <!-- Profile Image -->
                 <div class="box box-<?php echo $rastaCSS[$box];?>">
                     <div class="box-body box-profile">

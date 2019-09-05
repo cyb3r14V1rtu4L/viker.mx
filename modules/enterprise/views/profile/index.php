@@ -71,7 +71,10 @@
                 <div class="input-group">
                     <input type="text" class="form-control"
                            placeholder="First Name"
-                           value="<?php echo $this->Enterprise['name_enterprise'];?>" readonly>
+                           value="<?php echo $this->Enterprise['name_enterprise'];?>"
+                           f="name_enterprise"
+                           class="form-control"  onchange="updateProfileE(this)"
+                    >
                     <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
                 </div>
             </div>
@@ -82,8 +85,9 @@
                 <div class="input-group clockpicker">
                     <input  type="text"  id="hour_ini"
                             f="hour_ini"
-                            class="form-control"  onchange="updateProfileE(this)""
-                            value="<?php echo $this->Enterprise['hour_ini'];?>">
+                            class="form-control"  onchange="updateProfileE(this)"
+                            value="<?php echo $this->Enterprise['hour_ini'];?>"
+                    >
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>

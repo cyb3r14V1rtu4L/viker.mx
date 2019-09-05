@@ -230,7 +230,7 @@
     width: 45px;
     position: absolute;
     height: 100%;
-    background-color: #0aa699 !important;
+    background-color: #6f7b8a !important;
   }
   .page-sidebar.opened .inner-menu {
     display: inline-block;
@@ -253,7 +253,7 @@
   .page-sidebar.opened .page-sidebar-wrapper > ul > li > a:hover,
   .page-sidebar.opened .page-sidebar-wrapper > ul > li:hover > a {
     background: #1b1e24;
-    /* border-left:4px solid  #0aa699;*/
+    /* border-left:4px solid  #6f7b8a;*/
     padding: 11.5px 31px;
     color: #fff;
   }

@@ -25,7 +25,7 @@ class companyController extends Controller
 
     public function products()
     {
-        $this->_view->setJs(array('index'));
+        $this->_view->setJs(array('company'));
         $this->_view->getPlugins(array('bootstrap-fileinput','clockpicker'));
 
         $user_id = Session::get('user_id');
@@ -39,7 +39,7 @@ class companyController extends Controller
 
 
     public function reports() {
-        $this->_view->setJs(array('index'));
+        $this->_view->setJs(array('company'));
         $this->_view->getPlugins(array('bootstrap-fileinput','clockpicker'));
 
         $user_id = Session::get('user_id');

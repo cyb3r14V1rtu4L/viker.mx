@@ -33,7 +33,7 @@ class menuController extends Controller
         if(is_array($Category)){
             foreach($Category as $cat_data)
             {
-                $Stuff = $this->enterprise->select_data('enterprise_stuff','*',array('enterprise_id'=>$E_id,'category_id'=>$cat_data['category_id']));
+                $Stuff = $this->enterprise->select_data('enterprise_stuff','*',array('enterprise_id'=>$E_id,'category_id'=>$cat_data['category_id'], 'active_stuff'=> '1'));
                 if(!empty($_SESSION['user_id']))
                 {
                     if(!empty($Stuff))

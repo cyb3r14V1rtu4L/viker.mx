@@ -12,10 +12,11 @@ class productsController extends Controller
     }
 
     public function index(){}
+
     public function editp($stuff_id=null)
     {
         $this->_view->setJs(array('products'));
-        $this->_view->getPlugins(array('bootstrap-fileinput','clockpicker'));
+        $this->_view->getPlugins(array('bootstrap-fileinput','clockpicker','bootstrap-sweetalert-enterprise'));
         $conditions = array('stuff_id' => $stuff_id);
         $Product = $this->model->select_row('enterprise_stuff','*',$conditions);
         $this->_view->setTemplates(array('product_photo'));

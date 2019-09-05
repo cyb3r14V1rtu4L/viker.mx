@@ -124,8 +124,8 @@ $(document).ready(function() {
 		height: '30px',
 		barWidth: 6,
 		barSpacing: 2,
-		barColor: '#0aa699',
-		negBarColor: '#0aa699'});	
+		barColor: '#6f7b8a',
+		negBarColor: '#6f7b8a'});	
 	
 	$('#ram-usage').easyPieChart({
 		lineWidth:9,
@@ -156,7 +156,7 @@ $(document).ready(function() {
 	  xkey: 'y',
 	  ykeys: ['a', 'b'],
 	  labels: ['Series A', 'Series B'],
-	  lineColors:['#0aa699','#d1dade'],
+	  lineColors:['#6f7b8a','#d1dade'],
 	});
 	
 	Morris.Area({
@@ -222,7 +222,7 @@ $(document).ready(function() {
 		type: 'line',
 		width: '100%',
 		height: '200',
-		lineColor: '#0aa699',
+		lineColor: '#6f7b8a',
 		fillColor: '#e6f6f5',
 		minSpotColor: '#0c948a',
 		maxSpotColor: '#78cec7',

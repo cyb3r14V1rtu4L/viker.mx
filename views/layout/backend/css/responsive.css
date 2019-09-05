@@ -215,7 +215,7 @@
   }
   /*** Body ***/
   body {
-    background-color: #0aa699;
+    background-color: #6f7b8a;
     padding-top: 0px;
   }
   .page-sidebar.opened {
@@ -230,7 +230,7 @@
     width: 45px;
     position: absolute;
     height: 100%;
-    background-color: #0aa699 !important;
+    background-color: #6f7b8a !important;
   }
   .page-sidebar.opened .inner-menu {
     display: inline-block;
@@ -253,7 +253,7 @@
   .page-sidebar.opened .page-sidebar-wrapper > ul > li > a:hover,
   .page-sidebar.opened .page-sidebar-wrapper > ul > li:hover > a {
     background: #1b1e24;
-    /* border-left:4px solid  #0aa699;*/
+    /* border-left:4px solid  #6f7b8a;*/
     padding: 11.5px 31px;
     color: #fff;
   }
@@ -463,7 +463,7 @@
     display: none;
   }
   .page-sidebar {
-    background-color: #0aa699 !important;
+    background-color: #6f7b8a !important;
   }
   .page-sidebar .page-sidebar-wrapper > ul > li.open > a,
   .page-sidebar .page-sidebar-wrapper > ul > li > a:hover,
@@ -548,7 +548,7 @@
     height: 100%;
   }
   .inner-menu-always-open .page-sidebar .page-sidebar-wrapper {
-    background-color: #0aa699 !important;
+    background-color: #6f7b8a !important;
   }
   .inner-menu-always-open .page-sidebar .slimScrollDiv {
     overflow: visible !important;
@@ -809,7 +809,7 @@
     overflow: visible;
   }
   .inner-menu-always-open .page-sidebar .page-sidebar-wrapper ul {
-    background-color: #0aa699;
+    background-color: #6f7b8a;
   }
   .inner-menu-always-open .page-sidebar .slimScrollDiv {
     overflow: visible !important;

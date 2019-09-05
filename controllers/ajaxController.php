@@ -675,6 +675,49 @@ class ajaxController extends Controller {
     }
 
 
+    public function activateStuff() {
+
+        $columns = array('active_stuff'=>$this->getPostParam('active_stuff'),'stock_stuff'=>$this->getPostParam('active_stuff'));
+
+        $where = array( 'stuff_id'=>$this->getPostParam('stuff_id'));
+
+        $result = $this->model->update('enterprise_stuff', $columns, $where,false);
+
+        $message = "Error";
+        if($result)
+        {
+            $message=($this->getPostParam('active_stuff') == '1') ? "Stuff Activate" : "Stuff Deactivated";
+        }
+        $response = array('result'=>$result ,'message'=>$message);
+
+        echo json_encode($response);
+
+    }
+
+
+    public  function stockStuff() {
+        $deleteStuff = array();
+        $deleteStuff['active_stuff'] = $this->getPostParam('active_stuff');
+        $deleteStuff['stock_stuff'] = $this->getPostParam('stock_stuff');
+        $deleteStuff['enterprise_id'] = $this->getPostParam('enterprise_id');
+        $deleteStuff['stuff_id'] = $this->getPostParam('stuff_id');
+
+
+        $where = array('stuff_id'=>$this->getPostParam('stuff_id'));
+        $result = $this->model->update('enterprise_stuff', $deleteStuff, $where,false);
+        $message = 'An "Error" occurred during the transaction';
+        if($result)
+        {
+            $message="Your product has been deleted...";
+        }
+
+        $response = array('result'=>$result ,'message'=> $message);
+
+        echo json_encode($response);
+
+    }
+
+
 
     /*
      * last change... Tue Aug 29, 17 21:40:20*/

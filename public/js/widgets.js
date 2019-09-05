@@ -259,7 +259,7 @@ function loadShareMarketGraph(){
 		series: [
 			{
 				data: seriesData_3[0],
-				color: '#0aa699',
+				color: '#6f7b8a',
 				name:'DB Server'
 			},
 			{
@@ -376,8 +376,8 @@ var seriesData_5 = [ [], [],[]];
 		height: '30px',
 		barWidth: 6,
 		barSpacing: 2,
-		barColor: '#0aa699',
-		negBarColor: '#0aa699'
+		barColor: '#6f7b8a',
+		negBarColor: '#6f7b8a'
 	});		
 }
 
@@ -474,8 +474,8 @@ var seriesData_5 = [ [], [],[]];
 		height: '30px',
 		barWidth: 6,
 		barSpacing: 2,
-		barColor: '#0aa699',
-		negBarColor: '#0aa699'
+		barColor: '#6f7b8a',
+		negBarColor: '#6f7b8a'
 	});		
 }
 
@@ -521,7 +521,7 @@ function loadSalesSparkline(){
 		height: '20%',
 		lineColor: '#ffffff',
 		lineWidth: 2,
-		fillColor: '#0aa699',
+		fillColor: '#6f7b8a',
 		spotColor: '#ffffff',
 		minSpotColor: '#ffffff',
 		maxSpotColor: '#f35958',

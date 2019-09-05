@@ -32,6 +32,7 @@
                                     <div class="tab-content"  style="margin-bottom: 10px;">
                                         <?php
                                         $t=1;
+                                        $enterprise_id = intval($_SESSION['Enterprise'][0]['enterprise_id']);
                                         foreach ($this->CategoryStuff as $Cat=>$Stuff)
                                         {
                                             #$this->pr($Stuff);
@@ -74,18 +75,31 @@
                                                                     </div>
                                                                     <p>
                                                                     <center>
-
                                                                         <b>
-                                                                                <span style="padding-left: 5px;color: #3c763d;display: none;"
-                                                                                      id="ex<?php echo $stuff['stuff_id']; ?>CurrentSliderValLabel">
-                                                                                    <span id="<?php echo 'ex' . $stuff['stuff_id']; ?>SliderVal">1</span>
-                                                                                </span>
+                                                                            <span style="padding-left: 5px;color: #3c763d;display: none;"
+                                                                                  id="ex<?php echo $stuff['stuff_id']; ?>CurrentSliderValLabel">
+                                                                                <span id="<?php echo 'ex' . $stuff['stuff_id']; ?>SliderVal">1</span>
+                                                                            </span>
                                                                         </b>
 
-                                                                        <a href="/enterprise/products/editp/<?php echo $stuff['stuff_id']; ?>" class="btn btn-danger text-center">Edit
-
-                                                                            <i class="fa fa-edit"></i>
+                                                                        <a href="/enterprise/products/editp/<?php echo $stuff['stuff_id']; ?>"
+                                                                           class="btn btn-danger text-center btn-block">Edit  <i class="fa fa-edit"></i>
                                                                         </a>
+
+                                                                        <?php
+
+                                                                        $active_btn = ($stuff['active_stuff'] == '0') ? 'ACTIVATE': 'DEACTIVATE' ;
+                                                                        $active_val = ($stuff['active_stuff'] == '0') ? '1': '0' ;
+                                                                        $active_color = ($stuff['active_stuff'] == '0') ? 'bg-green': 'bg-grey' ;
+
+                                                                        ?>
+                                                                        <a href="#"
+                                                                           id="btn_active_stuff_<?php echo $stuff['stuff_id']; ?>"
+                                                                           onclick="activateStuff(<?php echo $stuff['stuff_id']; ?>,<?php echo $stuff['enterprise_id']; ?>,'<?php echo $active_val; ?>')"
+                                                                           class="btn btn-default <?php echo $active_color; ?> btn-block">
+                                                                            <b><?php echo $active_btn; ?></b>
+                                                                        </a>
+
                                                                         <input type="hidden"
                                                                                id="price_<?php echo 'ex' . $stuff['stuff_id']; ?>"
                                                                                class="form-control"
@@ -133,7 +147,7 @@
                                                                     <p>
                                                                     <center>
 
-                                                                        <a href="/enterprise/products/addp/<?php echo $stuff['enterprise_id']?>/<?php echo $stuff['category_id']?>" class="btn btn-danger text-center">Add Stuff
+                                                                        <a href="/enterprise/products/addp/<?php echo $enterprise_id; ?>/<?php echo $stuff['category_id']?>" class="btn btn-danger text-center btn-block">Add Stuff
 
                                                                             <i class="fa fa-edit"></i>
                                                                         </a>

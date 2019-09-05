@@ -4,7 +4,7 @@
 }
 
 .slider.primary .slider-track{
-	background: #0AA699;
+	background: #6f7b8a;
 	background-image:none;
 }
 

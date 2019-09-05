@@ -8,7 +8,7 @@ margin:0;
 
 body {
 font-family:Arial;
-background:#0aa699;
+background:#6f7b8a;
 }
 
 
@@ -56,7 +56,7 @@ background:url(../img/loader.gif) no-repeat center #fff;
 	margin-bottom:10px;
 	font-weight:bold;
 	font-size:15px;
-	color:#0aa699;
+	color:#6f7b8a;
 	text-transform:uppercase;
 }
 
@@ -211,7 +211,7 @@ background:url(../img/loader.gif) no-repeat center #fff;
         transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860); /* easeInOutCirc */
 }
 .progress-bar-success{
-	background-color: #0AA699;
+	background-color: #6f7b8a;
 	background-image: none;
 }
 .progress-bar-info{
@@ -252,7 +252,7 @@ background:url(../img/loader.gif) no-repeat center #fff;
 }
 
 .progress-success.progress-striped .bar, .progress-striped .bar-success{
-	 background-color: #0AA699;
+	 background-color: #6f7b8a;
 }
 .progress-info.progress-striped .bar, .progress-striped .bar-info{
 	background-color: #0090D9;
