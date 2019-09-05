@@ -134,7 +134,6 @@
                                         <div id="errorBlock" class="help-block"></div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
