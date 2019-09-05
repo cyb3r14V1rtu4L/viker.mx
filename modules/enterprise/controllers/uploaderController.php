@@ -39,7 +39,6 @@ class uploaderController extends Controller
                 mkdir($target);
             }
 
-
             if(move_uploaded_file($images['tmp_name'][$i], $target.'profile.jpg')) {
                 $success = true;
                 $paths[] = $target.$filename;

@@ -16,7 +16,7 @@ $rastabgCSS = array(0=>'bg-yellow',1=>'bg-red',2=>'bg-green');
         <div class="box box-<?php echo $rastaCSS[$box]; ?>">
             <div class="box-body box-profile">
                 <img class="profile-user-img img-responsive img-circle"
-                     src="/public/uploads/enterprise/profile/<?php echo $E['enterprise_id']; ?>/<?php echo $E['logo_enterprise']; ?>"
+                     src="/public/uploads/enterprise/profile/<?php echo $E['enterprise_id']; ?>/profile.jpg"
                      alt="User profile picture">
 
                 <h3 class="profile-username text-center"><?php echo $E['name_enterprise']; ?></h3>
