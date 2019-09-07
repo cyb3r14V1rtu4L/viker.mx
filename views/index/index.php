@@ -102,20 +102,20 @@
 
             <?php
         }else {
-        ?>
+            ?>
 
             <div class="main_portfolio" style="padding: 30px;">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="head_title text-center">
                         <div class="separator_auto"></div>
-                            <h3 class="wow fadeInDown animated animated">AT THIS MOMENT ARE NOT AVAIBLE ANY RESTAURANT</h3>
+                        <h3 class="wow fadeInDown animated animated">AT THIS MOMENT ARE NOT AVAIBLE ANY RESTAURANT</h3>
                         <div class="separator_auto"></div>
 
                     </div>
                 </div>
             </div>
 
-        <?php
+            <?php
         }
         ?>
 
@@ -186,7 +186,7 @@
 
 <section class="skill roomy-100" style="background-color:  #d8ecdb ">
     <div class="row" >
-    <div class="about_bottom_content" style="padding-left: 30px;">
+        <div class="about_bottom_content" style="padding-left: 30px;">
             <div class="col-md-4">
                 <div class="about_bottom_item m-top-20">
                     <div class="ab_head">

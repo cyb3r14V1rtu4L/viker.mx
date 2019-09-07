@@ -1,4 +1,4 @@
-function setFileInputProfile(e_id)
+function setFileInputProfile(e_id, u_id) //Logo Empresa
 {
     $("#photo_profile").fileinput({
         uploadUrl: '/enterprise/uploader/photo_profile/'+e_id,
@@ -14,9 +14,37 @@ function setFileInputProfile(e_id)
     }).on("filebatchselected", function(event, files){
         $("#photo_profile").fileinput("upload");
     }).on('fileuploaded', function(event, data) {
-
+        alertify.set({ delay: 1000 });
+        alertify.log("Enterprise updated...");
         d = new Date();
-        $(".photo_profile_img").attr("src", "/public/uploads/enterprise/profile/"+e_id+"/profile.jpg?"+d.getTime());
+        $(".photo_profile").attr("src", "/public/uploads/enterprise/profile/"+e_id+"/profile.jpg?"+d.getTime());
+
+    });
+
+}
+
+function setFileInputProfilePhoto(e_id, u_id) //Logo Profile
+{
+
+    $("#profile_photo").fileinput({
+        uploadUrl: '/enterprise/uploader/profile_photo/' + u_id,
+        maxFilePreviewSize: 10240,
+        maxFileCount: 1,
+        allowedFileExtensions: ["jpg"],
+        overwriteInitial: true,
+        initialPreviewAsData: true,
+        initialPreviewFileType: 'image',
+        showUpload: false,
+        showRemove: false,
+        append: true
+    }).on("filebatchselected", function(event, files){
+        $("#profile_photo").fileinput("upload");
+    }).on('fileuploaded', function(event, data) {
+        alertify.set({ delay: 1000 });
+        alertify.log("Profile updated...");
+        d = new Date();
+        $(".photo_profile_img_e").attr("src", "/public/uploads/customer/profile/"+u_id+"/profile.jpg?"+d.getTime());
+
 
     });
 

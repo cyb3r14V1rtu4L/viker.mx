@@ -36,6 +36,7 @@ class profileController extends Controller
         $this->_view->enterpriseID = $e_id;
         $this->_view->setTemplates(array('profile'));
         $this->_view->setTemplates(array('geoloc_address'),true);
+        $this->_view->setTemplates(array('profile_enterprise'));
         $this->_view->renderizar('index');
     }
 

@@ -17,7 +17,7 @@ class uploaderController extends Controller
         $this->_view->renderizar('index');
     }
 
-    public function photo_profile($user_id = 'trash')
+    public function photo_profile($user_id = 'trash') //Enterprise
     {
         if (empty($_FILES['photo_profile']))
         {
@@ -34,6 +34,52 @@ class uploaderController extends Controller
         {
             $filename = basename($filenames[$i]);
             $target = ROOT."public/uploads/enterprise/profile/$user_id/";
+
+            if (!file_exists($target)) {
+                mkdir($target);
+            }
+
+            if(move_uploaded_file($images['tmp_name'][$i], $target.'profile.jpg')) {
+                $success = true;
+                $paths[] = $target.$filename;
+            } else {
+                $success = false;
+                break;
+            }
+        }
+
+        if ($success === true)
+        {
+            $output = ['uploaded' => $paths];
+        } elseif ($success === false) {
+            $output = ['error'=>'Error while uploading images. Contact the system administrator'];
+            foreach ($paths as $file) {
+                unlink($file);
+            }
+        } else {
+            $output = ['error'=>'No files were processed.'];
+        }
+        echo json_encode($output);
+    }
+
+
+    public function profile_photo($user_id = 'trash') //Customer
+    {
+        if (empty($_FILES['profile_photo']))
+        {
+            echo json_encode(['error'=>'No files found for upload.']);
+            return;
+        }
+
+        $images = $_FILES['profile_photo'];
+        $success = null;
+
+        $paths= [];
+        $filenames = $images['name'];
+        for($i=0; $i < count($filenames); $i++)
+        {
+            $filename = basename($filenames[$i]);
+            $target = ROOT."public/uploads/customer/profile/$user_id/";
 
             if (!file_exists($target)) {
                 mkdir($target);

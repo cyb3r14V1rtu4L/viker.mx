@@ -1,9 +1,9 @@
 <div class="box box-widget">
     <div class="box-header with-border">
         <div class="user-block">
-            <img class="img-circle photo_profile" src="/public/uploads/enterprise/profile/<?php echo $this->Enterprise['enterprise_id'];?>/profile.jpg" alt="User Image">
+            <img class="img-circle photo_profile_img_e" src="/public/uploads/customer/profile/<?php echo $this->customerID;?>/profile.jpg" alt="User Image">
             <span class="username"><a href="#"><?php echo $this->Enterprise['name_enterprise'];?></a></span>
-            <span class="description">Enterprise Logotype</span>
+            <span class="description">Profile Logotype</span>
         </div>
         <!-- /.user-block -->
 
@@ -11,7 +11,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-        <img class="img-responsive pad photo_profile" src="/public/uploads/enterprise/profile/<?php echo $this->Enterprise['enterprise_id'];?>/profile.jpg" alt="Photo">
+        <img class="img-responsive pad photo_profile_img_e" src="/public/uploads/customer/profile/<?php echo $this->Enterprise['user_id'];?>/profile.jpg" alt="Photo">
 
     </div>
     <!-- /.box-body -->

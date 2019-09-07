@@ -2,6 +2,76 @@
 #$this->pr($this->Enterprise);
 ?>
 <div class="row">
+
+    <div class="col-xs-12 col-lg-6">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <i class="fa fa-connectdevelop"></i><h1 class="box-title">Logo Enterprise</h1>
+            </div>
+            <div class="box-body">
+                <div class="col-lg-12">
+                    <?php
+                    require_once $params['templates'][0];
+                    ?>
+                </div>
+                <div class="col-lg-12">
+                    <div>
+                        <div class="panel panel-danger" style="background-color: white">
+                            <div class="panel-heading">Change Logotype</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input id="photo_profile" name="photo_profile[]" type="file" multiple class="file-loading">
+                                        <div id="errorBlock" class="help-block"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br/>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-6">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <i class="fa fa-connectdevelop"></i><h1 class="box-title">Logo Profile</h1>
+            </div>
+            <div class="box-body">
+                <div class="col-lg-12">
+                    <?php
+                    require_once $params['templates'][2];
+                    ?>
+                </div>
+                <div class="col-lg-12">
+                    <div>
+                        <div class="panel panel-danger" style="background-color: white">
+                            <div class="panel-heading">Change Logotype</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <input id="profile_photo" name="profile_photo[]" type="file" multiple class="file-loading">
+                                        <div id="errorBlock" class="help-block"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br/>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="row">
 <div class="col-xs-12 col-lg-6">
 
     <div class="box box-success">
@@ -75,7 +145,20 @@
                            f="name_enterprise"
                            class="form-control"  onchange="updateProfileE(this)"
                     >
-                    <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <label>Category Name</label>
+
+                <div class="input-group">
+                    <input type="text" class="form-control"
+                           placeholder="Category"
+                           value="<?php echo $this->Enterprise['category'];?>"
+                           f="category"
+                           class="form-control"  onchange="updateProfileE(this)"
+                    >
+                    <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
                 </div>
             </div>
             <div class="clear"></div>
@@ -111,38 +194,8 @@
     </div>
 </div>
 </div>
-<div class="row">
-    <div class="col-xs-12 col-lg-6">
-        <div class="box box-danger">
-            <div class="box-header with-border">
-                <i class="fa fa-connectdevelop"></i><h1 class="box-title">Logo Enterprise</h1>
-            </div>
-            <div class="box-body">
-                <div class="col-lg-12">
-                    <?php
-                    require_once $params['templates'][0];
-                    ?>
-                </div>
-                <div class="col-lg-12">
-                    <div>
-                        <div class="panel panel-danger" style="background-color: white">
-                            <div class="panel-heading">Change Logotype</div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <input id="photo_profile" name="photo_profile[]" type="file" multiple class="file-loading">
-                                        <div id="errorBlock" class="help-block"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-            </div>
-            <br/>
-        </div>
-    </div>
+<div class="row">
     <div class="col-xs-12 col-lg-6">
         <div class="box box-comments">
             <div class="box-header with-border">
@@ -162,12 +215,17 @@
         </div>
     </div>
 </div>
+<?php
+# s$this->pr($params['templates']);
+?>
+
 
 <script>
     window.onload = function()
     {
         //setImportFile(<?php echo $this->customerID;?>);
-        setFileInputProfile(<?php echo $this->Enterprise['enterprise_id'];?>);
+        setFileInputProfile(<?php echo $this->Enterprise['enterprise_id'];?>, <?php echo $this->Enterprise['user_id'];?>);
+        setFileInputProfilePhoto(<?php echo $this->Enterprise['enterprise_id'];?>, <?php echo $this->Enterprise['user_id'];?>);
         $('.clockpicker').clockpicker({
             placement: 'bottom',
             align: 'left',
