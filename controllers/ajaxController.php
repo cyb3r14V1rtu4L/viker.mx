@@ -83,6 +83,14 @@ class ajaxController extends Controller {
                         $dataEnterprise['geo_lat'] = '20.6539385';
                         $dataEnterprise['geo_lng'] = '-87.1417377';
                         $resEnterprise = $this->model->insert('system_user_enterprise', $dataEnterprise, array());
+
+                        if ($resEnterprise['status'] == 'success') {
+                            $enterprise_id = $resEnterprise['data'];
+                            $dataEnterpriseHO['enterprise_id'] = $enterprise_id;
+                            $dataEnterpriseHO['user_id'] = $user_id;
+                            $resEnterpriseHO = $this->model->insert('enterprise_opening_hour', $dataEnterpriseHO, array());
+                        }
+
                     }
 
                     $response = true;

@@ -7,41 +7,42 @@
 
     </style>
     <div class="row">
-
-
-    <div id="map-canvas"></div>
-    <div id="markerStatus" style="font-size: 14px;color:#00a65a"><i>If this is not your current location, click and drag the marker...</i></div>
-    <div id="address" style="color: #1f962d"></div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-xs-6">
-            <div class="form-group">
-                <label>Street Number</label>
-                <input name="geo_ext" id="geo_ext" type="text" class="form-control" placeholder="Outdoor Number"  value="<?php echo $this->Enterprise['geo_int']?>">
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xs-6">
-            <div class="form-group">
-                <label>Interior Number</label>
-                <input name="geo_int" id="geo_int" type="text" class="form-control" placeholder="Outdoor Number"  value="<?php echo $this->Enterprise['geo_ext']?>">
-            </div>
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <div id="map-canvas"></div>
+            <div id="markerStatus" style="font-size: 14px;color:#00a65a"><i>If this is not your current location, click and drag the marker...</i></div>
+            <div id="address" style="color: #1f962d"></div>
         </div>
         <div class="col-lg-12 col-md-12 col-xs-12">
-            <div class="form-group">
-                <?php
-                $address = (!empty($this->Enterprise['geo_str'])) ? $this->Enterprise['geo_str'] : 'Playa del Carmen, México';
-                ?>
-                <div class="input-group input-group">
-                    <input id="geo_str" name="geo_str" type="text"  class="form-control" value="<?php echo $address;?>" readonly/>
-                    <span class="input-group-btn">
-                    <button  onclick="updateAddressE();" id="find"  type="button" class="btn btn-warning btn-flat">Save</button>
-                </span>
+            <div class="col-lg-6 col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label>Street Number</label>
+                    <input name="geo_ext" id="geo_ext" type="text" class="form-control" placeholder="Outdoor Number"  value="<?php echo $this->Enterprise['geo_int']?>">
                 </div>
             </div>
+            <div class="col-lg-6 col-md-6 col-xs-6">
+                <div class="form-group">
+                    <label>Interior Number</label>
+                    <input name="geo_int" id="geo_int" type="text" class="form-control" placeholder="Outdoor Number"  value="<?php echo $this->Enterprise['geo_ext']?>">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <div class="form-group">
+                    <?php
+                    $address = (!empty($this->Enterprise['geo_str'])) ? $this->Enterprise['geo_str'] : 'Playa del Carmen, México';
+                    ?>
+                    <div class="input-group input-group ">
+                        <input id="geo_str" name="geo_str" type="hidden"  class="form-control" value="<?php echo $address;?>"/>
+                        <span class="input-group-btn ">
+                            <button  onclick="updateAddressE();" id="find"  type="button" class="btn btn-warning btn-flat">Save</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <input id="geo_lat" name="geo_lat" type="hidden" value="<?php echo $this->Enterprise['geo_lat'];?>">
+            <input id="geo_lng" name="geo_lng" type="hidden" value="<?php echo $this->Enterprise['geo_lng'];?>">
         </div>
-        <input id="geo_lat" name="geo_lat" type="hidden" value="<?php echo $this->Enterprise['geo_lat'];?>">
-        <input id="geo_lng" name="geo_lng" type="hidden" value="<?php echo $this->Enterprise['geo_lng'];?>">
     </div>
+
 <script>
 
     var geocoder;

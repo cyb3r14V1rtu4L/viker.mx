@@ -24,19 +24,24 @@ class profileController extends Controller
 
         $conditions = array('enterprise_id' => $e_id);
         $Enterprise = $this->model->select_row('system_user_enterprise','*',$conditions);
+
+        $EnterpriseHO = $this->model->select_row('enterprise_opening_hour','*',$conditions);
+
+
         $SetViewMap['geo_lat'] = round($Enterprise['geo_lat'],4);
         $SetViewMap['geo_lng'] = round($Enterprise['geo_lng'],4);
         #$this->pr($SetViewMap);
         $this->_view->Customer = $Customer;
         $this->_view->SetViewMap = $SetViewMap;
         $this->_view->Enterprise = $Enterprise;
+        $this->_view->EnterpriseHO = $EnterpriseHO;
         $this->_view->function = 'getProfile';
         $this->_view->customerName = Session::get('first_name').' '.Session::get('last_name');
         $this->_view->customerID = $user_id;
         $this->_view->enterpriseID = $e_id;
         $this->_view->setTemplates(array('profile'));
         $this->_view->setTemplates(array('geoloc_address'),true);
-        $this->_view->setTemplates(array('profile_enterprise'));
+        $this->_view->setTemplates(array('profile_enterprise','profile_enterprise_hour','profile_enterprise_user_data','profile_enterprise_user_data_e'));
         $this->_view->renderizar('index');
     }
 
@@ -95,4 +100,19 @@ class profileController extends Controller
         $response = array('profile_update'=>$Profile['status'],'query'=>$mySQL);
         echo json_encode($response);
     }
+
+    public function update_enterprise_ho()
+    {
+        $field = $_POST['f'];
+        $value = $_POST['v'];
+        $enterpise_id = $_POST['enterprise_id'];
+        $user_id = $_POST['user_id'];
+
+        $mySQL = " UPDATE enterprise_opening_hour SET $field = '$value'  WHERE enterprise_id = $enterpise_id AND user_id = $user_id ";
+        $Hour = $this->model->query($mySQL);
+
+        $response = array('hour_update'=>$Hour['status'],'query'=>$mySQL);
+        echo json_encode($response);
+    }
 }
+
