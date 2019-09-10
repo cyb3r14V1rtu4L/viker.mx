@@ -17,7 +17,6 @@ class loginController extends Controller
         $this->_view->register = $register;
         $this->_view->getPlugins(array('jquery-masked','font-awesome'));
 
-
         if ($this->getInt('submitButton') == 1) {
 
             $this->_view->datos = $_POST;
@@ -55,7 +54,7 @@ class loginController extends Controller
             $row = $data;
 
             if (!$row) {
-                $this->_view->error = 'User and/or password incorrect';
+                $this->_view->error = 'Incorrect username or password.';
                 $this->_view->renderizar('index');
                 exit;
             }
@@ -91,10 +90,7 @@ class loginController extends Controller
                 Session::set('Enterprise',$enterprise);
             }
 
-
-
             $url =  'index/index#stuff';
-
             if($row['type'] =='enterprise'){
                 $this->redireccionar($row['type']);
             }
