@@ -5,12 +5,12 @@
 <div class="row">
     <div class="col-xs-12 col-lg-6">
         <?php
-        require_once $params['templates'][4]; //profile_enterprise_user_data
+        require_once $params['templates'][5]; //profile_enterprise_user_data
         ?>
     </div>
     <div class="col-xs-12 col-lg-6">
         <?php
-        require_once $params['templates'][5]; //profile_enterprise_user_data_e
+        require_once $params['templates'][4]; //profile_enterprise_user_data_e
         ?>
     </div>
 </div>

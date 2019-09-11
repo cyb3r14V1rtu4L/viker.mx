@@ -92,15 +92,15 @@ class productsController extends Controller
 
 
         $this->_view->Category = $Category;
-
         foreach($Category as $cat_data)
         {
             $Stuff = $this->model->select_data('enterprise_stuff','*',array('enterprise_id'=>$e_id,'category_id'=>$cat_data['category_id']));
             $CategoryTab[$cat_data['name_cat']] = $Stuff;
+            $CategoryTab[$cat_data['name_cat']]['Data'] = $cat_data;
         }
+
+
         $this->_view->CategoryStuff = $CategoryTab;
-
-
 
         $this->_view->setTemplates(array('products_edit','category'));
         $this->_view->setTemplates(array('geoloc_address'),true);

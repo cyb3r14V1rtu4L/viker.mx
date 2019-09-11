@@ -1,5 +1,6 @@
 <?php
     require_once $params['templates'][1];
+
 ?>
 
 
@@ -33,86 +34,90 @@
                                         <?php
                                         $t=1;
                                         $enterprise_id = intval($_SESSION['Enterprise'][0]['enterprise_id']);
+
                                         foreach ($this->CategoryStuff as $Cat=>$Stuff)
                                         {
-                                            #$this->pr($Stuff);
                                             $active = ($t == 1) ? 'active' : '' ;
                                             ?>
                                             <div class="tab-pane <?php echo $active;?>" role="tabpanel" id="tab-<?php echo $t;?>" style="margin-top: 10px;margin-bottom: 50px;">
                                                 <?php
                                                 if(!empty($Stuff))
                                                 {
-                                                    foreach ($Stuff as $stuff)
+                                                    foreach ($Stuff as $kt=>$stuff)
                                                     {
-                                                        ?>
-                                                        <div class="col-sm-12 col-lg-4 col-md-4 shadow-post">
-                                                            <div class="pricing_item blog_item m-top-20 "  style="position: relative;box-shadow: 2px 2px 5px rgba(0,0,0,.3);">
-                                                                <div class="blog_item_img">
-                                                                    <img class="img-responsive" src="/public/uploads/enterprise/stuff/<?php echo $stuff['stuff_id']?>/<?php echo $stuff['photo_stuff']?>" />
-                                                                </div>
+                                                        if($kt !== 'Data') {
+                                                            ?>
 
-                                                                <div class="blog_text roomy-40 roomy-10-10">
-                                                                    <h2 class="pull-right label label-success">
-                                                                        $<span
-                                                                            style="color:#FFFFFF;"
-                                                                            id="subtotal_ex<?php echo $stuff['stuff_id'] ?>">
+                                                            <div class="col-sm-12 col-lg-4 col-md-4 shadow-post">
+                                                                <div class="pricing_item blog_item m-top-20 "  style="position: relative;box-shadow: 2px 2px 5px rgba(0,0,0,.3);">
+                                                                    <div class="blog_item_img">
+                                                                        <img class="img-responsive" src="/public/uploads/enterprise/stuff/<?php echo $stuff['stuff_id']?>/<?php echo $stuff['photo_stuff']?>" />
+                                                                    </div>
+
+                                                                    <div class="blog_text roomy-40 roomy-10-10">
+                                                                        <h2 class="pull-right label label-success">
+                                                                            $<span
+                                                                                    style="color:#FFFFFF;"
+                                                                                    id="subtotal_ex<?php echo $stuff['stuff_id'] ?>">
                                                                             <?php echo $stuff['price_stuff'] ?>
                                                                         </span>
-                                                                    </h2>
-                                                                    <h5 style="color:#1CA347;">
-                                                                        <?php
-                                                                        echo $stuff['name_stuff']; ?>
+                                                                        </h2>
+                                                                        <h5 style="color:#1CA347;">
+                                                                            <?php
+                                                                            echo $stuff['name_stuff']; ?>
 
-                                                                    </h5>
+                                                                        </h5>
 
-                                                                    <div class="">
-                                                                        <?php
-                                                                        /*$points =(strlen($stuff['desc_stuff']) > 65) ? '...': '';
+                                                                        <div class="">
+                                                                            <?php
+                                                                            /*$points =(strlen($stuff['desc_stuff']) > 65) ? '...': '';
 
-                                                                        echo substr($stuff['desc_stuff'],0,70).$points;*/
-                                                                        echo $stuff['desc_stuff']
-                                                                        ?>
-                                                                    </div>
-                                                                    <p>
-                                                                    <center>
-                                                                        <b>
+                                                                            echo substr($stuff['desc_stuff'],0,70).$points;*/
+                                                                            echo $stuff['desc_stuff']
+                                                                            ?>
+                                                                        </div>
+                                                                        <p>
+                                                                        <center>
+                                                                            <b>
                                                                             <span style="padding-left: 5px;color: #3c763d;display: none;"
                                                                                   id="ex<?php echo $stuff['stuff_id']; ?>CurrentSliderValLabel">
                                                                                 <span id="<?php echo 'ex' . $stuff['stuff_id']; ?>SliderVal">1</span>
                                                                             </span>
-                                                                        </b>
+                                                                            </b>
 
-                                                                        <a href="/enterprise/products/editp/<?php echo $stuff['stuff_id']; ?>"
-                                                                           class="btn btn-danger text-center btn-block">Edit  <i class="fa fa-edit"></i>
-                                                                        </a>
+                                                                            <a href="/enterprise/products/editp/<?php echo $stuff['stuff_id']; ?>"
+                                                                               class="btn btn-danger text-center btn-block">Edit  <i class="fa fa-edit"></i>
+                                                                            </a>
 
-                                                                        <?php
+                                                                            <?php
 
-                                                                        $active_btn = ($stuff['active_stuff'] == '0') ? 'ACTIVATE': 'DEACTIVATE' ;
-                                                                        $active_val = ($stuff['active_stuff'] == '0') ? '1': '0' ;
-                                                                        $active_color = ($stuff['active_stuff'] == '0') ? 'bg-green': 'bg-grey' ;
+                                                                            $active_btn = ($stuff['active_stuff'] == '0') ? 'ACTIVATE': 'DEACTIVATE' ;
+                                                                            $active_val = ($stuff['active_stuff'] == '0') ? '1': '0' ;
+                                                                            $active_color = ($stuff['active_stuff'] == '0') ? 'bg-green': 'bg-grey' ;
 
-                                                                        ?>
-                                                                        <a href="#"
-                                                                           id="btn_active_stuff_<?php echo $stuff['stuff_id']; ?>"
-                                                                           onclick="activateStuff(<?php echo $stuff['stuff_id']; ?>,<?php echo $stuff['enterprise_id']; ?>,'<?php echo $active_val; ?>')"
-                                                                           class="btn btn-default <?php echo $active_color; ?> btn-block">
-                                                                            <b><?php echo $active_btn; ?></b>
-                                                                        </a>
+                                                                            ?>
+                                                                            <a href="#"
+                                                                               id="btn_active_stuff_<?php echo $stuff['stuff_id']; ?>"
+                                                                               onclick="activateStuff(<?php echo $stuff['stuff_id']; ?>,<?php echo $stuff['enterprise_id']; ?>,'<?php echo $active_val; ?>')"
+                                                                               class="btn btn-default <?php echo $active_color; ?> btn-block">
+                                                                                <b><?php echo $active_btn; ?></b>
+                                                                            </a>
 
-                                                                        <input type="hidden"
-                                                                               id="price_<?php echo 'ex' . $stuff['stuff_id']; ?>"
-                                                                               class="form-control"
-                                                                               value="<?php echo $stuff['price_stuff']; ?>">
-                                                                    </center>
-                                                                    </p>
-                                                                    <br/>
+                                                                            <input type="hidden"
+                                                                                   id="price_<?php echo 'ex' . $stuff['stuff_id']; ?>"
+                                                                                   class="form-control"
+                                                                                   value="<?php echo $stuff['price_stuff']; ?>">
+                                                                        </center>
+                                                                        </p>
+                                                                        <br/>
+                                                                    </div>
+
                                                                 </div>
-
                                                             </div>
-                                                        </div>
 
-                                                        <?php
+                                                            <?php
+                                                        }
+
                                                     }
                                                     
                                                 }

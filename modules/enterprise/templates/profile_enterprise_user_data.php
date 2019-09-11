@@ -1,4 +1,4 @@
-<div class="box box-danger">
+<div class="box box-warning">
     <div class="box-header with-border">
         <i class="fa fa-user-o"></i><h1 class="box-title">Customer Profile</h1>
     </div>

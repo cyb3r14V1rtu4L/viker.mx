@@ -1,4 +1,4 @@
-<div class="box box-warning">
+<div class="box box-danger">
     <div class="box-header with-border">
         <i class="fa fa- fa-building-o"></i><h1 class="box-title">Your Enterprise</h1>
     </div>

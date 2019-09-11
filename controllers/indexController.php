@@ -18,9 +18,25 @@ class indexController extends Controller
         $this->_view->setJs(array('index'));
         $this->_view->setCss(array('index'));
 
-        $this->_view->Enterprise = $this->enterprise->select_data('system_user_enterprise','*',array('active_enterprise'=>'1'));
+        $hora_actual = $this->enterprise->query(" SELECT CURRENT_TIME ");
+        $hora_db = $hora_actual[0]['CURRENT_TIME'];
+
+        $field_open = strtolower(date("D").'_hour_open');
+        $field_close = strtolower(date("D").'_hour_close');
+
+        $mySQL = ' SELECT enterprise_id FROM enterprise_opening_hour WHERE '.$field_open.' <= "'.$hora_db.'" AND '.$field_close.' >="'.$hora_db.'";';
+        $EnterpriseOpened =  $this->enterprise->query($mySQL);
+
+        $Enterprise = array();
+        if(is_array($EnterpriseOpened)){
+            foreach ($EnterpriseOpened as $e){
+                $E = $this->enterprise->select_data('system_user_enterprise','*',array('active_enterprise'=>'1', 'enterprise_id' => $e['enterprise_id']));
+                array_push($Enterprise, $E[0]);
+            }
+        }
 
         $total_distance = $this->enterprise->query(" SELECT SUM(distance_kms) AS distance_kms FROM order_enterprise; ");
+        $this->_view->Enterprise = $Enterprise;
         $this->_view->Emissions = $this->CO2KG($total_distance[0]['distance_kms']);
         $this->_view->total_distance = $total_distance[0]['distance_kms'];
 
