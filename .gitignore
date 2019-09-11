@@ -3,7 +3,7 @@ node_modules/
 application/
 nbproject/
 .idea/
-
+public/uploads
 
 # Compiled source #
 ###################
