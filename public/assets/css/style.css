@@ -1582,11 +1582,13 @@ Blog Section style
 }
 .blog_item_img img{
     width:100%;
+    max-height: 230px;
     -webkit-transition: all 0.6s;
     -o-transition: all 0.6s;
     -moz-transition: all 0.6s;
     -ms-transition: all 0.6s;
     transition: all 0.6s;
+
 }
 .blog_item:hover .blog_item_img img{
     -webkit-transform: scale(1.1) rotate(2deg);
