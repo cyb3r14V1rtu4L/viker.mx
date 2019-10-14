@@ -117,7 +117,7 @@ class profileController extends Controller
         : " UPDATE enterprise_opening_hour SET $field = $value  WHERE enterprise_id = $enterpise_id AND user_id = $user_id "; 
         $Hour = $this->model->query($mySQL);
         
-        $message = ($field !== 'day_open') ? 'Hour updated...' : 'Day updated...';
+        $message = ($is_bool !== true) ? 'Hour updated...' : 'Day updated...';
 
         $response = array('hour_update'=>$Hour['status'],'query'=>$mySQL, 'message'=>$message);
         echo json_encode($response);
