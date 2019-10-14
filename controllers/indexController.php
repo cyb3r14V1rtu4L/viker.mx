@@ -23,13 +23,17 @@ class indexController extends Controller
 
         $field_open = strtolower(date("D").'_hour_open');
         $field_close = strtolower(date("D").'_hour_close');
-
-        $mySQL = ' SELECT enterprise_id FROM enterprise_opening_hour WHERE '.$field_open.' <= "'.$hora_db.'" AND '.$field_close.' >="'.$hora_db.'";';
+        $field_day_open = strtolower(date("D").'_day_open');
+        
+        $mySQL =' SELECT enterprise_id FROM enterprise_opening_hour WHERE '
+                .$field_open.' <= "'.$hora_db.'" AND '
+                .$field_close.' >="'.$hora_db.'" AND '
+                .$field_day_open.' = true; ';
         $EnterpriseOpened =  $this->enterprise->query($mySQL);
 
         $Enterprise = array();
-        if(is_array($EnterpriseOpened)){
-            foreach ($EnterpriseOpened as $e){
+        if (is_array($EnterpriseOpened)) {
+            foreach ($EnterpriseOpened as $e) {
                 $E = $this->enterprise->select_data('system_user_enterprise','*',array('active_enterprise'=>'1', 'enterprise_id' => $e['enterprise_id']));
                 array_push($Enterprise, $E[0]);
             }

@@ -142,6 +142,14 @@ function updateProfileHO(obj)
 {
     var f = $(obj).attr('f');
     var v = $(obj).val();
+    days_open_arr = ['sun_day_open','mon_day_open','tue_day_open','wed_day_open','thu_day_open','fri_day_open','sat_day_open'];
+    var es_bool = $.inArray(f, days_open_arr)
+    
+    
+    if (es_bool !== -1) {
+    	v = $(obj).is(':checked');
+    }
+    console.log('value', v);
 
     $.ajax({
         url: '/enterprise/profile/update_enterprise_ho',
@@ -157,7 +165,7 @@ function updateProfileHO(obj)
         success: function (json) {
             //console.log(json);
             alertify.set({ delay: 1000 });
-            alertify.log("Hour updated...");
+            alertify.log(json.message);
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log(textStatus);

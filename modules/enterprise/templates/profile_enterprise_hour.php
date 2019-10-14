@@ -1,29 +1,30 @@
 <?php
 
 /*
-+----------------+---------+------+-----+---------+----------------+
-| Field          | Type    | Null | Key | Default | Extra          |
-+----------------+---------+------+-----+---------+----------------+
-| hour_id        | int(11) | NO   | PRI | NULL    | auto_increment |
++------------------+---------+------+-----+---------+----------------+
+| Field            | Type    | Null | Key | Default | Extra          |
++------------------+---------+------+-----+---------+----------------+
+| hour_id          | int(11) | NO   | PRI | NULL    | auto_increment |
 | EnterpriseHO_id  | int(11) | NO   |     | NULL    |                |
-| sun_hour_open  | time    | YES  |     | NULL    |                |
-| sun_hour_close | time    | YES  |     | NULL    |                |
-| mon_hour_open  | time    | YES  |     | NULL    |                |
-| mon_hour_close | time    | YES  |     | NULL    |                |
-| tue_hour_open  | time    | YES  |     | NULL    |                |
-| tue_hour_close | time    | YES  |     | NULL    |                |
-| wed_hour_open  | time    | YES  |     | NULL    |                |
-| wed_hour_close | time    | YES  |     | NULL    |                |
-| thu_hour_open  | time    | YES  |     | NULL    |                |
-| thu_hour_close | time    | YES  |     | NULL    |                |
-| fri_hour_open  | time    | YES  |     | NULL    |                |
-| fri_hour_close | time    | YES  |     | NULL    |                |
-| sat_hour_open  | time    | YES  |     | NULL    |                |
-| sat_hour_close | time    | YES  |     | NULL    |                |
-+----------------+---------+------+-----+---------+----------------+
+| sun_hour_open    | time    | YES  |     | NULL    |                |
+| sun_hour_close   | time    | YES  |     | NULL    |                |
+| mon_hour_open    | time    | YES  |     | NULL    |                |
+| mon_hour_close   | time    | YES  |     | NULL    |                |
+| tue_hour_open    | time    | YES  |     | NULL    |                |
+| tue_hour_close   | time    | YES  |     | NULL    |                |
+| wed_hour_open    | time    | YES  |     | NULL    |                |
+| wed_hour_close   | time    | YES  |     | NULL    |                |
+| thu_hour_open    | time    | YES  |     | NULL    |                |
+| thu_hour_close   | time    | YES  |     | NULL    |                |
+| fri_hour_open    | time    | YES  |     | NULL    |                |
+| fri_hour_close   | time    | YES  |     | NULL    |                |
+| sat_hour_open    | time    | YES  |     | NULL    |                |
+| sat_hour_close   | time    | YES  |     | NULL    |                |
+| day_open         | bool    | YES  |     | TRUE    |                |
++----------------+---------+------+-----+---------+------------------+
+$this->pr($this->EnterpriseHO);
 
 */
-
 ?>
 <input
     type="hidden"  id="hour_id"
@@ -41,6 +42,8 @@
                 <th style="width: 15px">Day</th>
                 <th>Open Hour</th>
                 <th>Close Hour</th>
+                <th>Open / Closed</th>
+                
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -69,6 +72,20 @@
                     </div>
 
                 </td>
+                <td>
+                <?php 
+                    $checked = ($this->EnterpriseHO['sun_day_open'] == 0) ? '':'checked';
+                ?>
+                  <input type="checkbox" <?php echo $checked;?> 
+              			data-toggle="toggle" 
+                  		data-on="Open" 
+               			data-off="Closed"
+               			data-onstyle="success" 
+               			data-offstyle="danger"
+               			f="sun_day_open"
+               			onchange="updateProfileHO(this)"
+               			>
+                  </td> 
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -97,6 +114,21 @@
                     </div>
 
                 </td>
+                <td>
+                <?php 
+                    $checked = ($this->EnterpriseHO['mon_day_open'] == 0) ? '':'checked';
+                ?>
+                  <input type="checkbox" <?php echo $checked;?> 
+              			data-toggle="toggle" 
+                  		data-on="Open" 
+               			data-off="Closed"
+               			data-onstyle="success" 
+               			data-offstyle="danger"
+               			f="mon_day_open"
+               			onchange="updateProfileHO(this)"
+               			>
+                  </td> 
+                
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -125,6 +157,20 @@
                     </div>
 
                 </td>
+                <td>
+                <?php 
+                    $checked = ($this->EnterpriseHO['tue_day_open'] == 0) ? '':'checked';
+                ?>
+                  <input type="checkbox" <?php echo $checked;?> 
+              			data-toggle="toggle" 
+                  		data-on="Open" 
+               			data-off="Closed"
+               			data-onstyle="success" 
+               			data-offstyle="danger"
+               			f="tue_day_open"
+               			onchange="updateProfileHO(this)"
+               			>
+                  </td> 
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -153,6 +199,20 @@
                     </div>
 
                 </td>
+                <td>
+                <?php 
+                    $checked = ($this->EnterpriseHO['wed_day_open'] == 0) ? '':'checked';
+                ?>
+                  <input type="checkbox" <?php echo $checked;?> 
+              			data-toggle="toggle" 
+                  		data-on="Open" 
+               			data-off="Closed"
+               			data-onstyle="success" 
+               			data-offstyle="danger"
+               			f="wed_day_open"
+               			onchange="updateProfileHO(this)"
+               			>
+                  </td> 
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -181,6 +241,20 @@
                     </div>
 
                 </td>
+                <td>
+                <?php 
+                    $checked = ($this->EnterpriseHO['thu_day_open'] == 0) ? '':'checked';
+                ?>
+                  <input type="checkbox" <?php echo $checked;?> 
+              			data-toggle="toggle" 
+                  		data-on="Open" 
+               			data-off="Closed"
+               			data-onstyle="success" 
+               			data-offstyle="danger"
+               			f="thu_day_open"
+               			onchange="updateProfileHO(this)"
+               			>
+                  </td> 
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -209,6 +283,20 @@
                     </div>
 
                 </td>
+                <td>
+                <?php 
+                    $checked = ($this->EnterpriseHO['fri_day_open'] == 0) ? '':'checked';
+                ?>
+                  <input type="checkbox" <?php echo $checked;?> 
+              			data-toggle="toggle" 
+                  		data-on="Open" 
+               			data-off="Closed"
+               			data-onstyle="success" 
+               			data-offstyle="danger"
+               			f="fri_day_open"
+               			onchange="updateProfileHO(this)"
+               			>
+                  </td> 
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -237,6 +325,20 @@
                     </div>
 
                 </td>
+                <td>
+                <?php 
+                    $checked = ($this->EnterpriseHO['sat_day_open'] == 0) ? '':'checked';
+                ?>
+                  <input type="checkbox" <?php echo $checked;?> 
+              			data-toggle="toggle" 
+                  		data-on="Open" 
+               			data-off="Closed"
+               			data-onstyle="success" 
+               			data-offstyle="danger"
+               			f="sat_day_open"
+               			onchange="updateProfileHO(this)"
+               			>
+                  </td> 
             </tr>
             </tbody></table>
     </div><!-- /.box-body -->

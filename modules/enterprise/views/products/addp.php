@@ -1,6 +1,12 @@
-<?php
-#$this->pr($this->Product);
-?>
+<div class="row">
+    <div class="col-md-4 col-xs-4 col-lg-4 pull-right">
+		<a href="/enterprise/products/edit/<?php echo $this->Product['enterprise_id']; ?>"
+   			class="btn btn-danger pull-right">Products List  <i class="fa fa-cubes"></i>
+		</a>
+		
+	</div>
+</div>
+<hr/>
 <div class="row">
     <div class="col-xs-12 col-lg-12">
     <div class="box box-success">

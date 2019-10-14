@@ -16,7 +16,7 @@ class profileController extends Controller
     public function edit($e_id=null)
     {
         $this->_view->setJs(array('index'));
-        $this->_view->getPlugins(array('bootstrap-fileinput','clockpicker'));
+        $this->_view->getPlugins(array('bootstrap-fileinput','clockpicker','bootstrap-toggle'));
 
         $user_id = Session::get('user_id');
         $conditions = array('user_id' => $user_id);
@@ -105,13 +105,21 @@ class profileController extends Controller
     {
         $field = $_POST['f'];
         $value = $_POST['v'];
+                
         $enterpise_id = $_POST['enterprise_id'];
         $user_id = $_POST['user_id'];
-
-        $mySQL = " UPDATE enterprise_opening_hour SET $field = '$value'  WHERE enterprise_id = $enterpise_id AND user_id = $user_id ";
+        
+        $days_open_arr = array('sun_day_open','mon_day_open','tue_day_open','wed_day_open','thu_day_open','fri_day_open','sat_day_open');
+        $is_bool = in_array($field, $days_open_arr);
+                
+        $mySQL = ($is_bool !== true) 
+        ? " UPDATE enterprise_opening_hour SET $field = '$value'  WHERE enterprise_id = $enterpise_id AND user_id = $user_id " 
+        : " UPDATE enterprise_opening_hour SET $field = $value  WHERE enterprise_id = $enterpise_id AND user_id = $user_id "; 
         $Hour = $this->model->query($mySQL);
+        
+        $message = ($field !== 'day_open') ? 'Hour updated...' : 'Day updated...';
 
-        $response = array('hour_update'=>$Hour['status'],'query'=>$mySQL);
+        $response = array('hour_update'=>$Hour['status'],'query'=>$mySQL, 'message'=>$message);
         echo json_encode($response);
     }
 }

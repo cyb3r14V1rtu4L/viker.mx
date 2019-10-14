@@ -59,7 +59,7 @@
 
     <div class="container">
         <?php
-        if (is_array($this->Enterprise)){
+        if (is_array($this->Enterprise) && count($this->Enterprise) > 0){
             ?>
             <div class="row">
                 <div class="main_portfolio" style="padding: 30px;">

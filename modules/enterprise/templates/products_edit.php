@@ -3,7 +3,6 @@
 
 ?>
 
-
 <input type="hidden" name="enterprise" id="enterprise" value="<?php echo $this->e_id?>"/>
 <!-- End off Stuff Section-->
         <div class="row">
