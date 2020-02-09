@@ -125,19 +125,12 @@ if($params['private_scripts'])
 
 ?>
 
-
-
-            <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $('.popover-content').scrollbar();
         $('[data-toggle="tooltip"]').tooltip();
-
-
-
-
     });
 
-    
 </script>
 
 <!-- END CORE TEMPLATE JS -->

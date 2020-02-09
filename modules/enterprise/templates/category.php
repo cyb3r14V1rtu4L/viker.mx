@@ -12,13 +12,14 @@
                 $active1 = ($cat['active_cat'] == 1 ) ? 'active' : '';
                 $active2 = ($cat['active_cat'] == 1 ) ? '' : 'active';
                 echo '<tr>';
-                echo '<td><div class="input-group">
+                echo '<td>
+                        <div class="input-group">
                             <input type="text" class="form-control" onchange="updateCategory(this)"
                                    placeholder="Category Name" f="name_cat" cat_id ="'.$cat['category_id'].'"
                                    value="'.$cat['name_cat'].'">
                             <span class="input-group-addon"><i class="fa fa-navicon"></i></span>
                         </div>
-                  </td>';
+                      </td>';
 
 
                 echo '<td><div class="input-group">
@@ -31,7 +32,6 @@
                 echo '</tr>';
             }
             ?>
-            </tr>
         </table>    
     </div>
 </div>

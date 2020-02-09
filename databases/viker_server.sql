@@ -68,6 +68,13 @@ CREATE TABLE `enterprise_opening_hour` (
   `fri_hour_close` time DEFAULT NULL,
   `sat_hour_open` time DEFAULT NULL,
   `sat_hour_close` time DEFAULT NULL,
+  `sun_day_open` tinyint(1) DEFAULT 1,
+  `mon_day_open` tinyint(1) DEFAULT 1,
+  `tue_day_open` tinyint(1) DEFAULT 1,
+  `wed_day_open` tinyint(1) DEFAULT 1,
+  `thu_day_open` tinyint(1) DEFAULT 1,
+  `fri_day_open` tinyint(1) DEFAULT 1,
+  `sat_day_open` tinyint(1) DEFAULT 1,
   PRIMARY KEY (`hour_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -78,7 +85,7 @@ CREATE TABLE `enterprise_opening_hour` (
 
 LOCK TABLES `enterprise_opening_hour` WRITE;
 /*!40000 ALTER TABLE `enterprise_opening_hour` DISABLE KEYS */;
-INSERT INTO `enterprise_opening_hour` VALUES (1,1,31,'00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00'),(2,2,34,'00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00'),(3,7,49,'13:00:00','23:00:00','00:00:00','00:00:00','00:00:00','00:00:00','01:00:00','23:00:00','00:00:00','00:00:00','13:00:00','23:00:00','13:00:00','23:00:00');
+INSERT INTO `enterprise_opening_hour` VALUES (1,1,31,'09:00:00','22:00:00','06:00:00','22:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00',1,1,1,1,1,1,1),(2,2,34,'00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00','00:00:00',1,1,1,1,1,1,1),(3,7,49,'13:00:00','23:00:00','06:30:00','18:30:00','00:00:00','00:00:00','01:00:00','23:00:00','00:00:00','00:00:00','13:00:00','23:00:00','13:00:00','23:00:00',1,1,1,1,1,1,1);
 /*!40000 ALTER TABLE `enterprise_opening_hour` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +282,7 @@ CREATE TABLE `system_user_enterprise` (
 
 LOCK TABLES `system_user_enterprise` WRITE;
 /*!40000 ALTER TABLE `system_user_enterprise` DISABLE KEYS */;
-INSERT INTO `system_user_enterprise` VALUES (1,31,'Marvin\'s Burgers','profile.jpg','1','Veggie Burgers','20.63828079653415','-87.06402251310885','Playa del Carmen, México','','',NULL,NULL),(2,34,'Comet 50\'s Diner','profile.png','1','Veggie Food','20.650102796184292','-87.0611847359711',NULL,NULL,NULL,NULL,NULL),(7,49,'Fritxs',NULL,'1',NULL,'20.649236884729458','-87.09718534536898','Playa del Carmen, México','','46','13:00:00','23:00:00');
+INSERT INTO `system_user_enterprise` VALUES (1,31,'Marvin\'s Burgers','profile.jpg','1','Veggie Burgers','20.63828079653415','-87.06402251310885','Playa del Carmen, México','','',NULL,NULL),(2,34,'Comet 50\'s Diner','profile.png','1','Veggie Food','20.650102796184292','-87.0611847359711',NULL,NULL,NULL,NULL,NULL),(7,49,'Fritxs',NULL,'1','Veggie','20.649236884729458','-87.09718534536898','Playa del Carmen, México','','46','13:00:00','23:00:00');
 /*!40000 ALTER TABLE `system_user_enterprise` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,4 +464,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-02  3:38:12
+-- Dump completed on 2019-11-06 18:35:29

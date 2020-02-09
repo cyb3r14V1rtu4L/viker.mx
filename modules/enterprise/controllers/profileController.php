@@ -111,14 +111,36 @@ class profileController extends Controller
         
         $days_open_arr = array('sun_day_open','mon_day_open','tue_day_open','wed_day_open','thu_day_open','fri_day_open','sat_day_open');
         $is_bool = in_array($field, $days_open_arr);
-                
-        $mySQL = ($is_bool !== true) 
-        ? " UPDATE enterprise_opening_hour SET $field = '$value'  WHERE enterprise_id = $enterpise_id AND user_id = $user_id " 
-        : " UPDATE enterprise_opening_hour SET $field = $value  WHERE enterprise_id = $enterpise_id AND user_id = $user_id "; 
-        $Hour = $this->model->query($mySQL);
         
+        $conditions = array('enterprise_id' => $enterpise_id);
+        $HourExist = $this->model->select_row('enterprise_opening_hour','*',$conditions);
+      
+        
+        if ($HourExist) {
+            $mySQL = ($is_bool !== true)
+            ? " UPDATE enterprise_opening_hour SET $field = '$value'  WHERE enterprise_id = $enterpise_id AND user_id = $user_id "
+            : " UPDATE enterprise_opening_hour SET $field = $value  WHERE enterprise_id = $enterpise_id AND user_id = $user_id ";
+            
+            $Hour = $this->model->query($mySQL);
+        } else {
+            $data = array();
+            $data['enterprise_id'] = $enterpise_id;
+            $data['user_id'] = $user_id;
+            $newHour = $this->model->insert('enterprise_opening_hour', $data, array());
+            
+            if($newHour['status'] == 'success')
+            {
+                $hour_id = $newHour['data'];
+        
+                $mySQL = ($is_bool !== true)
+                ? " UPDATE enterprise_opening_hour SET $field = '$value' WHERE hour_id = $hour_id "
+                : " UPDATE enterprise_opening_hour SET $field = $value   WHERE hour_id = $hour_id ";
+                $Hour = $this->model->query($mySQL);
+               
+            }
+        }
+                
         $message = ($is_bool !== true) ? 'Hour updated...' : 'Day updated...';
-
         $response = array('hour_update'=>$Hour['status'],'query'=>$mySQL, 'message'=>$message);
         echo json_encode($response);
     }

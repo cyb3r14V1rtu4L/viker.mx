@@ -197,3 +197,60 @@ function deleteStuff() {
 
         });
 }
+
+function updateExtra(obj, checked)
+{
+    var f = $(obj).attr('f');
+    var v = $(obj).val();
+    var extra_id = $(obj).attr('extra_id');
+   
+    if (f =='extra_activo') {
+    	v = checked;
+    }
+    $.ajax({
+        url: '/enterprise/products/update_extra',
+        type: "POST",
+        dataType: "json",
+        data: {
+            extra_id:extra_id,
+            f:f,
+            v:v,
+        }
+        ,
+        success: function (json) {
+            //console.log(json);
+            alertify.set({ delay: 1000 });
+            alertify.log("Ingredient updated...");
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            showMessage("VIKER: " + errorThrown + ". " + textStatus, 'error');
+        }
+    });
+}
+
+function addExtra()
+{
+    $.ajax({
+        url: '/enterprise/products/add_extra',
+        type: "POST",
+        dataType: "json",
+        data: {
+            enterprise_id:$('#enterprise_id').val(),
+            stuff_id:$('#stuff_id').val(),
+            extra_name:$('#extra_name').val(),
+            extra_price:$('#extra_price').val(),
+
+        }
+        ,
+        success: function (json) {
+            //console.log(json);
+            alertify.set({ delay: 1000 });
+            alertify.log("Ingredient Inserted...");
+
+            setTimeout("location.reload();", 1500);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            showMessage("VIKER: " + errorThrown + ". " + textStatus, 'error');
+        }
+    });
+}

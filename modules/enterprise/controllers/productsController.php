@@ -24,12 +24,10 @@ class productsController extends Controller
         $user_id = Session::get('user_id');
         $this->_view->customerID = $user_id;
         
-        $Category = $this->model->select_data('category_stuff','category_id,name_cat',array('enterprise_id'=>$Product['enterprise_id']),false,false,'tab_cat');
-
-        
-        $this->_view->CategoryStuff = $Category;
-        
-        
+        $Category = $this->model->select_data('category_stuff','category_id,name_cat',
+                                              array('enterprise_id'=>$Product['enterprise_id']),
+                                              false,false,'tab_cat');
+        $this->_view->CategoryStuff = $Category;      
         $this->_view->renderizar('editp');
     }
     
@@ -154,6 +152,65 @@ class productsController extends Controller
         $response = array('category_inserted'=>$newCategory['status']);
         echo json_encode($response);
 
+    }
+    
+    public function additionalStuff() {
+        
+        $conditions = array('stuff_id' => $this->getPostParam('stuff_id'));
+        $Additionals = $this->model->select_data('extra_stuff','*',$conditions);
+        
+        $this->_view->Additionals = $Additionals;
+        ob_start();
+        ?>
+        <link href="/public/plugins/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet" type="text/css">
+        <script src="/public/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js" type="text/javascript"></script>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        
+            <?php
+            echo $this->_view->loadTemplate('additional_stuff','enterprise');
+            ?>
+        </div>
+     
+
+        <div class="clear"></div>
+        
+        <?php
+        $html=ob_get_contents();
+        ob_end_clean();
+
+        $response = array('html'=>$html);
+        echo json_encode($response);
+    }
+    
+    
+    public function add_extra()
+    {
+        $data = array();
+        $data['enterprise_id'] =  $this->getPostParam('enterprise_id');
+        $data['stuff_id'] =  $this->getPostParam('stuff_id');
+        $data['extra_price'] =  $this->getPostParam('extra_price');
+        $data['extra_name'] =  $this->getPostParam('extra_name');
+        $data['extra_activo'] = 1;
+        
+        $newCategory = $this->model->insert('extra_stuff', $data, array());
+        $response = array('category_inserted'=>$newCategory['status']);
+        echo json_encode($response);
+    }
+    
+    
+    public function update_extra()
+    {
+        $field = $_POST['f'];
+        $value = $_POST['v'];
+        $extra_id = $_POST['extra_id'];
+        
+        $mySQL = ($field !== 'extra_activo') 
+            ? " UPDATE extra_stuff SET $field = '$value' WHERE extra_id = $extra_id "
+            : " UPDATE extra_stuff SET $field = $value WHERE extra_id = $extra_id ";
+        $Extra = $this->model->query($mySQL);
+        
+        $response = array('category_update'=>$Extra['status'],'query'=>$mySQL);
+        echo json_encode($response);
     }
 
 

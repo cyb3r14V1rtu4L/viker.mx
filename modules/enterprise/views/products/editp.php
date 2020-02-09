@@ -78,12 +78,27 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6 fa-pull-right">
+            <div class="row" style="padding-top: 30px;">
+            	
+            	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                	<button type="button" class="btn btn-icon-toggle  btn-block bg-green"
+                            data-toggle="tooltip" data-placement="top"
+                            onclick="openAdditionalStuff(this)"
+                            data-stuff_id="<?php echo $this->Product['stuff_id']; ?>"
+                            url="/enterprise/products/additionalStuff"
+                            title="More Ingredients" 
+                             style="padding-top: 10px;"
+                            >
+                            Ingredients
+                    </button>
+            	</div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                     <a href="#"
                        id="btn_active_stuff_<?php echo $this->Product['stuff_id']; ?>"
                        onclick="deleteStuff()"
-                       class="btn btn-default pull-right">
+                       class="btn btn-default btn-block"
+                       style="padding-top: 10px;"
+                       >
                         <b>DELETE PRODUCT</b>
                     </a>
                 </div>

@@ -28,7 +28,7 @@ class indexController extends Controller
                 .$field_open.' <= "'.$hora_db.'" AND '
                 .$field_close.' >="'.$hora_db.'" AND '
                 .$field_day_open.' = true; ';
-        #echo $mySQL;
+        # echo $mySQL;
         $EnterpriseOpened =  $this->enterprise->query($mySQL);
 
         $Enterprise = array();

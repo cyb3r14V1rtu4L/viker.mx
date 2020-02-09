@@ -1,27 +1,6 @@
 <?php
-
 /*
-+------------------+---------+------+-----+---------+----------------+
-| Field            | Type    | Null | Key | Default | Extra          |
-+------------------+---------+------+-----+---------+----------------+
-| hour_id          | int(11) | NO   | PRI | NULL    | auto_increment |
-| EnterpriseHO_id  | int(11) | NO   |     | NULL    |                |
-| sun_hour_open    | time    | YES  |     | NULL    |                |
-| sun_hour_close   | time    | YES  |     | NULL    |                |
-| mon_hour_open    | time    | YES  |     | NULL    |                |
-| mon_hour_close   | time    | YES  |     | NULL    |                |
-| tue_hour_open    | time    | YES  |     | NULL    |                |
-| tue_hour_close   | time    | YES  |     | NULL    |                |
-| wed_hour_open    | time    | YES  |     | NULL    |                |
-| wed_hour_close   | time    | YES  |     | NULL    |                |
-| thu_hour_open    | time    | YES  |     | NULL    |                |
-| thu_hour_close   | time    | YES  |     | NULL    |                |
-| fri_hour_open    | time    | YES  |     | NULL    |                |
-| fri_hour_close   | time    | YES  |     | NULL    |                |
-| sat_hour_open    | time    | YES  |     | NULL    |                |
-| sat_hour_close   | time    | YES  |     | NULL    |                |
-| day_open         | bool    | YES  |     | TRUE    |                |
-+----------------+---------+------+-----+---------+------------------+
+
 $this->pr($this->EnterpriseHO);
 
 */
