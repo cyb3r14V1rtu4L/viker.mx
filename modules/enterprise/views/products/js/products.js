@@ -200,13 +200,15 @@ function deleteStuff() {
 
 function updateExtra(obj, checked)
 {
+	
     var f = $(obj).attr('f');
     var v = $(obj).val();
     var extra_id = $(obj).attr('extra_id');
    
-    if (f =='extra_activo') {
+    if (f =='extra_activo' || f =='extra_default') {
     	v = checked;
     }
+    
     $.ajax({
         url: '/enterprise/products/update_extra',
         type: "POST",
@@ -239,7 +241,8 @@ function addExtra()
             stuff_id:$('#stuff_id').val(),
             extra_name:$('#extra_name').val(),
             extra_price:$('#extra_price').val(),
-
+            extra_default:$('#extra_default').prop("checked"),
+            extra_activo:$('#extra_activo').prop("checked"),
         }
         ,
         success: function (json) {

@@ -157,14 +157,14 @@ class productsController extends Controller
     public function additionalStuff() {
         
         $conditions = array('stuff_id' => $this->getPostParam('stuff_id'));
-        $Additionals = $this->model->select_data('extra_stuff','*',$conditions);
+        $Additionals = $this->model->select_data('enterprise_stuff_extra','*',$conditions);
         
         $this->_view->Additionals = $Additionals;
         ob_start();
         ?>
-        <link href="/public/plugins/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet" type="text/css">
-        <script src="/public/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js" type="text/javascript"></script>
-        <div class="col-md-12 col-sm-12 col-xs-12">
+            <link href="/public/plugins/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet" type="text/css">
+            <script src="/public/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js" type="text/javascript"></script>
+            <div class="col-md-12 col-sm-12 col-xs-12">
         
             <?php
             echo $this->_view->loadTemplate('additional_stuff','enterprise');
@@ -190,10 +190,11 @@ class productsController extends Controller
         $data['stuff_id'] =  $this->getPostParam('stuff_id');
         $data['extra_price'] =  $this->getPostParam('extra_price');
         $data['extra_name'] =  $this->getPostParam('extra_name');
-        $data['extra_activo'] = 1;
-        
-        $newCategory = $this->model->insert('extra_stuff', $data, array());
-        $response = array('category_inserted'=>$newCategory['status']);
+        $data['extra_default'] = ($this->getPostParam('extra_default') == true) ? 1 : 0;
+        $data['extra_activo'] = ($this->getPostParam('extra_activo') == true) ? 1 : 0;
+     
+        $newExtra = $this->model->insert('enterprise_stuff_extra', $data, array());
+        $response = array('extra_inserted'=>$newExtra['status']);
         echo json_encode($response);
     }
     
@@ -202,14 +203,21 @@ class productsController extends Controller
     {
         $field = $_POST['f'];
         $value = $_POST['v'];
+        
         $extra_id = $_POST['extra_id'];
+        if($field === 'extra_activo' || $field === 'extra_default' ) {
+            $value = ($value == 'true') ? 1 : 0;      
+        }
+             
         
-        $mySQL = ($field !== 'extra_activo') 
-            ? " UPDATE extra_stuff SET $field = '$value' WHERE extra_id = $extra_id "
-            : " UPDATE extra_stuff SET $field = $value WHERE extra_id = $extra_id ";
+        $mySQL = ($field !== 'extra_activo' && $field !== 'extra_default' ) 
+            ? " UPDATE enterprise_stuff_extra SET $field = '$value' WHERE extra_id = $extra_id "
+            : " UPDATE enterprise_stuff_extra SET $field = $value WHERE extra_id = $extra_id ";
+        
+        #echo $mySQL;
         $Extra = $this->model->query($mySQL);
-        
-        $response = array('category_update'=>$Extra['status'],'query'=>$mySQL);
+        //$this->pr($Extra);
+        $response = array('extra_update'=>$Extra['status'],'query'=>$mySQL);
         echo json_encode($response);
     }
 
