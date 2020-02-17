@@ -65,7 +65,9 @@ class menuController extends Controller
 
     public function shopping()
     {
+        /*
         $Enterprise = Session::get('Shopping');
+        $this->pr($Enterprise);
         if(!empty($Enterprise))
         {
             foreach ($Enterprise['Enterprise'] as $e => $stuff)
@@ -84,23 +86,24 @@ class menuController extends Controller
             }
             Session::write('Shopping',$Enterprise);
         }
+        */
         #$this->pr($Enterprise);
         #$this->_view->Enterprise = $Enterprise;
         $this->_view->renderizar('shopping');
     }
 
-    public function delete_stuff($enterprise,$stuff_id)
+    public function delete_stuff($enterprise, $stuff_id, $stuff_uid)
     {
         $Shopping = $_SESSION;
-
-        $Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] -= 1;
-        if($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] <= 0) { 
-            unset($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]);
-        }
-        
+        unset($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id][$stuff_uid]);
         $_SESSION = $Shopping;
-
         $this->_view->renderizar('shopping');
+
+        #$Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] -= 1;
+
+        #if($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] <= 0) { 
+        #    unset($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]);
+        #}
     }
 
    

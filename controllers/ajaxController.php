@@ -143,16 +143,21 @@ class ajaxController extends Controller {
         $stuff_id = $_POST['stuff_id'];
         $how_many = $_POST['how_many'];
 
-        $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] =
-            (!isset($_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many']))
+        $stuff_uid = 'VKR' . uniqid();
+
+        $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]["$stuff_uid"]['how_many'] =
+            (!isset($_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]["$stuff_uid"]['how_many']))
                 ? 0
-                : $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'];
+                : $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]["$stuff_uid"]['how_many'];
 
-        $how_many_s = $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'];
+        $how_many_s = $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]["$stuff_uid"]['how_many'];
 
-        $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['price'] = $_POST['price'];
-        $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] +=1;// $_POST['how_many'];
+        $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]["$stuff_uid"]['stuff_uid'] = $stuff_uid;
+        $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]["$stuff_uid"]['price'] = $_POST['price'];
+        $_SESSION['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]["$stuff_uid"]['how_many'] +=1;
+        
         $this->dataStuff();
+     
         $response = array('orderData'=>$_SESSION['Shopping']);
 
         echo json_encode($response);
@@ -403,12 +408,14 @@ class ajaxController extends Controller {
                     $dataS=array();
                     if (is_int($s_id))
                     {
-                        $dataS['order_id'] = $order_id;
-                        $dataS['stuff_id'] = $s_id;
-                        $dataS['how_many_stuff'] = $Stuff['how_many'];
-                        $dataS['price_stuff'] = $Stuff['price'];
-                        #$this->pr($dataS);
-                        $stuffData = $this->model->insert('order_stuff', $dataS, array());
+                        foreach ($Stuff as $stuff) {
+                            $dataS['order_id'] = $order_id;
+                            $dataS['stuff_id'] = $s_id;
+                            $dataS['how_many_stuff'] = $stuff['how_many'];
+                            $dataS['price_stuff'] = $stuff['price'];
+                            #$this->pr($dataS);
+                            $stuffData = $this->model->insert('order_stuff', $dataS, array());
+                        }
                     }
                 }
             }

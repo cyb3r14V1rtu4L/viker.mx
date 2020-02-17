@@ -49,17 +49,21 @@
                                 if ($e_id !== 'enterprise_data'){
                                     $subtotal = 0;
                                     foreach ($stuff as $s_id => $Stuff) {
-                                        if (is_int($s_id)) {
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $Stuff['how_many']; ?></td>
-                                                <td><?php echo $Stuff['stuff_data']['name_stuff']; ?></td>
-                                                <td class="pull-right" >$<?php echo number_format($Stuff['how_many']*$Stuff['price'],2,'.',','); ?></td>
-                                            </tr>
+                                        #$this->pr($Stuff);
+                                        if(is_array($Stuff)) {
+                                            foreach($Stuff as $stuff)
+                                            {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $stuff['how_many']; ?></td>
+                                                    <td><?php echo $stuff['stuff_data']['name_stuff']; ?></td>
+                                                    <td class="pull-right" >$<?php echo number_format($stuff['how_many']*$stuff['price'],2,'.',','); ?></td>
+                                                </tr>
 
-                                            <?php
-                                                $subtotal +=($Stuff['how_many']*$Stuff['price']);
+                                                <?php
+                                                    $subtotal +=($stuff['how_many']*$stuff['price']);
 
+                                            }
                                         }
                                     }
                                 }

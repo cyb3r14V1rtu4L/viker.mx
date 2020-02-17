@@ -42,30 +42,28 @@
                                          
                                         foreach ($stuff as $s_id => $Stuff)
                                         {
-                                            
-                                            if (is_int($s_id) && $Stuff['how_many'] !== 0)
-                                            {
-                                                for($x=1;$x<=$Stuff['how_many'];$x++) { 
-                                                    $s++;
-                                                ?>
+                                            if(is_array($Stuff)) {
+                                                foreach($Stuff as $stuff)
+                                                {
+                                                    ?>
                                                 <li>
                                                     <a href="#" class="photo">
                                                         <img class="cart-thumb" alt=""
-                                                             src="/public/uploads/enterprise/stuff/<?php echo $Stuff['stuff_data']['stuff_id'];?>/<?php echo $Stuff['stuff_data']['photo_stuff']; ?>"
+                                                             src="/public/uploads/enterprise/stuff/<?php echo $stuff['stuff_data']['stuff_id'];?>/<?php echo $stuff['stuff_data']['photo_stuff']; ?>"
                                                              />
                                                     </a>
                                                     <h6>
-                                                        <a href="#"><?php echo $Stuff['stuff_data']['name_stuff']; ?></a>
+                                                        <a href="#"><?php echo $stuff['stuff_data']['name_stuff']; ?></a>
                                                         <div class="product-img pull-right">
                                                             
                                                             <!--
                                                             <span
                                                                 id="item_how2_cart_<?php echo $e . '-' . $s_id; ?>"
                                                                 class="label label-danger"
-                                                            >   <?php echo $Stuff['how_many'].' '; ?>
+                                                            >   <?php echo $stuff['how_many'].' '; ?>
                                                             </span>
                                                             -->
-                                                            <a href="/menu/delete_stuff/<?php echo $Stuff['stuff_data']['enterprise_id'];?>/<?php echo $Stuff['stuff_data']['stuff_id'];?>"class="pull-right" style="padding-left:5px;">
+                                                            <a href="/menu/delete_stuff/<?php echo $stuff['stuff_data']['enterprise_id'];?>/<?php echo $stuff['stuff_data']['stuff_id'];?>/<?php echo $stuff['stuff_uid']?>"class="pull-right" style="padding-left:5px;">
                                                                 <li class="fa fa-trash-o"></li>
                                                             </a>
 
@@ -80,12 +78,12 @@
 
                                                             <span
                                                                 id="item_subt_cart_<?php echo $e . '-' . $s_id; ?>"
-                                                                class="label label-success pull-right subtotal_<?php echo $Stuff['price']; ?>"
+                                                                class="label label-success pull-right subtotal_<?php echo $stuff['price']; ?>"
                                                             >
                                                                 <?php 
                                                                 # $final_price = $Stuff['price'] * $Stuff['how_many'];
                                                                 
-                                                                echo number_format($Stuff['price'], 2, '.', ','); ?>
+                                                                echo number_format($stuff['price'], 2, '.', ','); ?>
                                                             </span>
                                                         </a>
 
@@ -114,11 +112,12 @@
                                                     </p>
                                                 </li>
                                                 <?php
-                                                $subtotal += $Stuff['price'];
+                                                $subtotal += $stuff['price'];
+                                                $s++;
                                                 }
-                                                
-
                                             }
+                                            
+                                            
                                         }
                                         echo '</ul>';
 
@@ -132,6 +131,7 @@
                             ?>
                             <div class="pricing_body bg-white padding-20">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <hr>
                                     <h6>Comments</h6>
                                     <div class="form-group has-warning">
                                         <textarea id="item_note_<?php echo $e; ?>"
