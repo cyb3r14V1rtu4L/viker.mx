@@ -30,42 +30,44 @@ class indexController extends Controller
                                                         array()
                                                     );
         $HoursValids=array();
-        
-        foreach($HoraiosEmpresa as $horario)
-        {
-            $HoursValids=array();
-            $ho = strtotime($date." ".$horario["$field_open"]);
-            $hc = strtotime($date." ".$horario["$field_close"]);
-            
-            // Horario Nocturno
-            if($ho > $hc) { 
-                $mySQL = " SELECT enterprise_id "
-                        ." FROM enterprise_opening_hour "
-                        ." WHERE CONVERT('$date $hora_db', datetime) BETWEEN "
-                        ." CONVERT('".$date." ".$horario["$field_open"]."', datetime) " 
-                        ." AND DATE_ADD(CONVERT('".$date." ".$horario["$field_close"].")', datetime), INTERVAL 1 DAY) "
-                        ." AND $field_day_open = true ";
+
+        if($HoraiosEmpresa){
+            foreach($HoraiosEmpresa as $horario)
+            {
+                $HoursValids=array();
+                $ho = strtotime($date." ".$horario["$field_open"]);
+                $hc = strtotime($date." ".$horario["$field_close"]);
                 
-            }else { 
-                $mySQL = " SELECT enterprise_id, sat_hour_open, sat_hour_close "
-                        ." FROM enterprise_opening_hour "
-                        ." WHERE CURRENT_TIME BETWEEN CONVERT($field_open, time) AND CONVERT($field_close, time) "
-                        ." AND CURRENT_TIME > CONVERT($field_open, time) "
-                        ." AND CONVERT($field_close, time) > CURRENT_TIME "
-                        ." AND $field_day_open = true ";
-            }
-            #echo $mySQL.'<br>';$HoursValids=array();
-            
-            $EnterpriseOpened =  $this->enterprise->query($mySQL);
-            if(is_array($EnterpriseOpened)) {
-                
-                foreach($EnterpriseOpened as $eo) {
-                    array_push($HoursValids, $eo);
+                // Horario Nocturno
+                if($ho > $hc) { 
+                    $mySQL = " SELECT enterprise_id "
+                            ." FROM enterprise_opening_hour "
+                            ." WHERE CONVERT('$date $hora_db', datetime) BETWEEN "
+                            ." CONVERT('".$date." ".$horario["$field_open"]."', datetime) " 
+                            ." AND DATE_ADD(CONVERT('".$date." ".$horario["$field_close"].")', datetime), INTERVAL 1 DAY) "
+                            ." AND $field_day_open = true ";
+                    
+                }else { 
+                    $mySQL = " SELECT enterprise_id, sat_hour_open, sat_hour_close "
+                            ." FROM enterprise_opening_hour "
+                            ." WHERE CURRENT_TIME BETWEEN CONVERT($field_open, time) AND CONVERT($field_close, time) "
+                            ." AND CURRENT_TIME > CONVERT($field_open, time) "
+                            ." AND CONVERT($field_close, time) > CURRENT_TIME "
+                            ." AND $field_day_open = true ";
                 }
+                #echo $mySQL.'<br>';$HoursValids=array();
                 
+                $EnterpriseOpened =  $this->enterprise->query($mySQL);
+                if(is_array($EnterpriseOpened)) {
+                    
+                    foreach($EnterpriseOpened as $eo) {
+                        array_push($HoursValids, $eo);
+                    }
+                    
+                }
             }
         }
-
+        
         return $HoursValids;
         
     }
