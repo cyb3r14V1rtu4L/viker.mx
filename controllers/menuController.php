@@ -92,28 +92,13 @@ class menuController extends Controller
     public function delete_stuff($enterprise,$stuff_id)
     {
         $Shopping = $_SESSION;
-        unset($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]);
-        $_SESSION = $Shopping;
 
-        if(!empty($Shopping))
-        {
-            foreach ($Shopping['Shopping']['Enterprise'] as $e => $enterprise)
-            {
-                foreach ($enterprise as $e_id => $stuff)
-                {
-                    if($e_id !== 'enterprise_data')
-                    {
-                        $s=0;
-                        foreach ($stuff as $s_id => $Stuff)
-                        {
-                            $s++;
-                        }
-                    }
-                }
-            }
+        $Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] -= 1;
+        if($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] <= 0) { 
+            unset($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]);
         }
-
-        echo $s;
+        
+        $_SESSION = $Shopping;
 
         $this->_view->renderizar('shopping');
     }

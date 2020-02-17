@@ -53,7 +53,7 @@
                                             $t=1;
                                             foreach ($this->CategoryStuff as $Cat=>$Stuff)
                                             {
-                                                #$this->pr($Stuff);
+                                                # $this->pr($Stuff);
                                                 $active = ($t == 1) ? 'active' : '' ;
                                                 ?>
                                                 <div class="tab-pane <?php echo $active;?>" role="tabpanel" id="tab-<?php echo $t;?>" style="margin-top: 50px;">

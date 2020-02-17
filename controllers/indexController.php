@@ -11,6 +11,65 @@ class indexController extends Controller
 
     }
 
+    public function getMySQL($field_open, $field_close, $field_day_open) {
+
+        //Current Day
+        $date = date("Y-m-d");
+
+        $hora_actual = $this->enterprise->query(" SELECT CURRENT_TIME ");
+        $hora_db = $hora_actual[0]['CURRENT_TIME'];
+
+        //Check 00/24 Hour
+        $Hour = substr($hora_db,0,2);
+        $Hour = ($Hour == '00') ? '24': $Hour;
+        $hora_db = substr_replace($hora_db, $Hour,0,2);
+
+
+        $HoraiosEmpresa = $this->enterprise->select_data("enterprise_opening_hour",
+                                                         "$field_open, $field_close, $field_day_open",
+                                                        array()
+                                                    );
+        $HoursValids=array();
+        
+        foreach($HoraiosEmpresa as $horario)
+        {
+            $HoursValids=array();
+            $ho = strtotime($date." ".$horario["$field_open"]);
+            $hc = strtotime($date." ".$horario["$field_close"]);
+            
+            // Horario Nocturno
+            if($ho > $hc) { 
+                $mySQL = " SELECT enterprise_id "
+                        ." FROM enterprise_opening_hour "
+                        ." WHERE CONVERT('$date $hora_db', datetime) BETWEEN "
+                        ." CONVERT('".$date." ".$horario["$field_open"]."', datetime) " 
+                        ." AND DATE_ADD(CONVERT('".$date." ".$horario["$field_close"].")', datetime), INTERVAL 1 DAY) "
+                        ." AND $field_day_open = true ";
+                
+            }else { 
+                $mySQL = " SELECT enterprise_id, sat_hour_open, sat_hour_close "
+                        ." FROM enterprise_opening_hour "
+                        ." WHERE CURRENT_TIME BETWEEN CONVERT($field_open, time) AND CONVERT($field_close, time) "
+                        ." AND CURRENT_TIME > CONVERT($field_open, time) "
+                        ." AND CONVERT($field_close, time) > CURRENT_TIME "
+                        ." AND $field_day_open = true ";
+            }
+            #echo $mySQL.'<br>';$HoursValids=array();
+            
+            $EnterpriseOpened =  $this->enterprise->query($mySQL);
+            if(is_array($EnterpriseOpened)) {
+                
+                foreach($EnterpriseOpened as $eo) {
+                    array_push($HoursValids, $eo);
+                }
+                
+            }
+        }
+
+        return $HoursValids;
+        
+    }
+
     public function index($login=0)
     {
         $this->dataStuff();
@@ -20,20 +79,21 @@ class indexController extends Controller
         $hora_actual = $this->enterprise->query(" SELECT CURRENT_TIME ");
         $hora_db = $hora_actual[0]['CURRENT_TIME'];
 
+        //Check 00/24 Hour
+        $Hour = substr($hora_db,0,2);
+        $Hour = ($Hour == '00') ? '24': $Hour;
+        $hora_db = substr_replace($hora_db, $Hour,0,2);
+
         $field_open = strtolower(date("D").'_hour_open');
         $field_close = strtolower(date("D").'_hour_close');
         $field_day_open = strtolower(date("D").'_day_open');
         
-        $mySQL =' SELECT enterprise_id FROM enterprise_opening_hour WHERE '
-                .$field_open.' <= "'.$hora_db.'" AND '
-                .$field_close.' >="'.$hora_db.'" AND '
-                .$field_day_open.' = true; ';
-        # echo $mySQL;
-        $EnterpriseOpened =  $this->enterprise->query($mySQL);
+        $EnterpriseOpened = array();
+        array_push($EnterpriseOpened, $this->getMySQL($field_open, $field_close, $field_day_open));
 
         $Enterprise = array();
         if (is_array($EnterpriseOpened)) {
-            foreach ($EnterpriseOpened as $e) {
+            foreach ($EnterpriseOpened[0] as $e) {
                 $E = $this->enterprise->select_data('system_user_enterprise','*',array('active_enterprise'=>'1', 'enterprise_id' => $e['enterprise_id']));
                 array_push($Enterprise, $E[0]);
             }

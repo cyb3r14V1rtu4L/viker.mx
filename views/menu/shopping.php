@@ -39,13 +39,14 @@
                                     {
                                         $subtotal = 0;
                                         $s=0;
-                                        
+                                         
                                         foreach ($stuff as $s_id => $Stuff)
                                         {
-                                            #$this->pr($Stuff);
+                                            
                                             if (is_int($s_id) && $Stuff['how_many'] !== 0)
                                             {
-                                                $s++;
+                                                for($x=1;$x<=$Stuff['how_many'];$x++) { 
+                                                    $s++;
                                                 ?>
                                                 <li>
                                                     <a href="#" class="photo">
@@ -56,11 +57,14 @@
                                                     <h6>
                                                         <a href="#"><?php echo $Stuff['stuff_data']['name_stuff']; ?></a>
                                                         <div class="product-img pull-right">
+                                                            
+                                                            <!--
                                                             <span
                                                                 id="item_how2_cart_<?php echo $e . '-' . $s_id; ?>"
                                                                 class="label label-danger"
                                                             >   <?php echo $Stuff['how_many'].' '; ?>
                                                             </span>
+                                                            -->
                                                             <a href="/menu/delete_stuff/<?php echo $Stuff['stuff_data']['enterprise_id'];?>/<?php echo $Stuff['stuff_data']['stuff_id'];?>"class="pull-right" style="padding-left:5px;">
                                                                 <li class="fa fa-trash-o"></li>
                                                             </a>
@@ -76,10 +80,12 @@
 
                                                             <span
                                                                 id="item_subt_cart_<?php echo $e . '-' . $s_id; ?>"
-                                                                class="label label-success pull-right subtotal_<?php echo $e; ?>"
+                                                                class="label label-success pull-right subtotal_<?php echo $Stuff['price']; ?>"
                                                             >
-                                                                <?php $final_price = $Stuff['price'] * $Stuff['how_many'];
-                                                                echo number_format($final_price, 2, '.', ','); ?>
+                                                                <?php 
+                                                                # $final_price = $Stuff['price'] * $Stuff['how_many'];
+                                                                
+                                                                echo number_format($Stuff['price'], 2, '.', ','); ?>
                                                             </span>
                                                         </a>
 
@@ -87,7 +93,7 @@
 
                                                         <div class="form-group has-success" style="width: 100%">
 
-                                                            <input id="item_cart_<?php echo $e . '-' . $s_id; ?>"
+                                                            <!-- <input id="item_cart_<?php echo $e . '-' . $s_id; ?>"
                                                                    type="text" class="item_cart"
                                                                    data-slider-min="1"
                                                                    data-slider-max="20"
@@ -102,12 +108,15 @@
                                                                    e_id="<?php echo $e; ?>"
                                                                    s_id="<?php echo $s_id; ?>"
                                                                    value="<?php echo $Stuff['price']; ?>">
+                                                                   -->
                                                         </div>
                                                     </div>
                                                     </p>
                                                 </li>
                                                 <?php
-                                                $subtotal += $final_price;
+                                                $subtotal += $Stuff['price'];
+                                                }
+                                                
 
                                             }
                                         }

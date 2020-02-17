@@ -105,7 +105,12 @@ class profileController extends Controller
     {
         $field = $_POST['f'];
         $value = $_POST['v'];
-                
+
+        //Check 00/24 Hour
+        $Hour = substr($value,0,2);
+        $Hour = ($Hour == '00') ? '24': $Hour;
+        $value = substr_replace($value, $Hour,0,2);
+
         $enterpise_id = $_POST['enterprise_id'];
         $user_id = $_POST['user_id'];
         
