@@ -114,7 +114,9 @@ class profileController extends Controller
         $enterpise_id = $_POST['enterprise_id'];
         $user_id = $_POST['user_id'];
         
-        $days_open_arr = array('sun_day_open','mon_day_open','tue_day_open','wed_day_open','thu_day_open','fri_day_open','sat_day_open');
+        $days_open_arr = array('sun_day_open','mon_day_open','tue_day_open',
+                                'wed_day_open','thu_day_open','fri_day_open',
+                                'sat_day_open');
         $is_bool = in_array($field, $days_open_arr);
         
         $conditions = array('enterprise_id' => $enterpise_id);
@@ -122,11 +124,13 @@ class profileController extends Controller
       
         
         if ($HourExist) {
-            $mySQL = ($is_bool !== true)
-            ? " UPDATE enterprise_opening_hour SET $field = '$value'  WHERE enterprise_id = $enterpise_id AND user_id = $user_id "
-            : " UPDATE enterprise_opening_hour SET $field = $value  WHERE enterprise_id = $enterpise_id AND user_id = $user_id ";
-            
+            $VALUE = ($is_bool !== true) ? " '$value' ": $value;
+            $mySQL = " UPDATE enterprise_opening_hour "
+                    ." SET $field = $VALUE " 
+                    ." WHERE enterprise_id = $enterpise_id "
+                    ." AND user_id = $user_id ";
             $Hour = $this->model->query($mySQL);
+
         } else {
             $data = array();
             $data['enterprise_id'] = $enterpise_id;
