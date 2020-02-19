@@ -35,7 +35,7 @@
 
                                 foreach ($enterprise as $e_id => $stuff)
                                 {
-                                    $this->pr($stuff);
+                                    //$this->pr($stuff);
                                     if($e_id !== 'enterprise_data')
                                     {
                                         $subtotal = 0;
@@ -43,7 +43,7 @@
                                          
                                         foreach ($stuff as $s_id => $Stuff)
                                         {
-                                            
+
                                             if(is_array($Stuff)) {
                                                 foreach($Stuff as $stuff)
                                                 {
