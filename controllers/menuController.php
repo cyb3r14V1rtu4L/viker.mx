@@ -29,11 +29,11 @@ class menuController extends Controller
         $this->_view->Enterprise = $this->enterprise->select_data('system_user_enterprise','*',array('enterprise_id'=>$E_id));
         $CategoryTab = array();
         $Category = $this->enterprise->select_data('category_stuff','*',array('enterprise_id'=>$E_id),false,false,'tab_cat');
-
         if(is_array($Category)){
             foreach($Category as $cat_data)
             {
                 $Stuff = $this->enterprise->select_data('enterprise_stuff','*',array('enterprise_id'=>$E_id,'category_id'=>$cat_data['category_id'], 'active_stuff'=> '1'));
+                
                 if(!empty($_SESSION['user_id']))
                 {
                     if(!empty($Stuff))
@@ -73,7 +73,7 @@ class menuController extends Controller
         $Shopping = $_SESSION;
         unset($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id][$stuff_uid]);
         $_SESSION = $Shopping;
-        $this->_view->renderizar('shopping');
+        $this->redireccionar('menu/shopping');
     }
 
    
