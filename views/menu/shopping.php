@@ -43,6 +43,7 @@
                                          
                                         foreach ($stuff as $s_id => $Stuff)
                                         {
+                                            
                                             if(is_array($Stuff)) {
                                                 foreach($Stuff as $stuff)
                                                 {
