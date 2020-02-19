@@ -153,7 +153,7 @@ function addtoCart(stuff_id,id,from_menu)
         error:
             function(xhr, textStatus, errorThrown)
             {
-                console.log(json);
+                console.log(errorThrown);
             }
     });
 }
