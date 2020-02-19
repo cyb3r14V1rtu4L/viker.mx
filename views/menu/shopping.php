@@ -35,6 +35,7 @@
 
                                 foreach ($enterprise as $e_id => $stuff)
                                 {
+                                    $this->pr($stuff);
                                     if($e_id !== 'enterprise_data')
                                     {
                                         $subtotal = 0;
