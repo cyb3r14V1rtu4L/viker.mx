@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * Created by PhpStorm.
  * User: cyberio
@@ -45,17 +45,20 @@
                                             if(is_array($Stuff)) {
                                                 foreach($Stuff as $stuff)
                                                 {
+                                                   
                                                     ?>
                                                 <li>
+                                                    
                                                     <a href="#" class="photo">
                                                         <img class="cart-thumb" alt=""
                                                              src="/public/uploads/enterprise/stuff/<?php echo $stuff['stuff_data']['stuff_id'];?>/<?php echo $stuff['stuff_data']['photo_stuff']; ?>"
                                                              />
                                                     </a>
+                                                    
                                                     <h6>
-                                                        <a href="#"><?php echo $stuff['stuff_data']['name_stuff']; ?></a>
+                                                        <a href="#"><?php echo $stuff['stuff_data']['name_stuff']; ?> </a>
+                                                        
                                                         <div class="product-img pull-right">
-                                                            
                                                             <!--
                                                             <span
                                                                 id="item_how2_cart_<?php echo $e . '-' . $s_id; ?>"
@@ -63,34 +66,42 @@
                                                             >   <?php echo $stuff['how_many'].' '; ?>
                                                             </span>
                                                             -->
-                                                            <a href="/menu/delete_stuff/<?php echo $stuff['stuff_data']['enterprise_id'];?>/<?php echo $stuff['stuff_data']['stuff_id'];?>/<?php echo $stuff['stuff_uid']?>"class="pull-right" style="padding-left:5px;">
-                                                                <li class="fa fa-trash-o"></li>
-                                                            </a>
-
-                                                        </div>
-
-                                                    </h6>
-                                                    <p class="m-top-10">
-
-                                                    <div class="product-info">
-                                                        <a href="javascript:void(0)"
-                                                           class="product-title">
-
-                                                            <span
+                                                            <span style="margin:10px;"
                                                                 id="item_subt_cart_<?php echo $e . '-' . $s_id; ?>"
-                                                                class="label label-success pull-right subtotal_<?php echo $stuff['price']; ?>"
+                                                                class="label label-success text-center subtotal_<?php echo $stuff['price']; ?>"
                                                             >
                                                                 <?php 
                                                                 # $final_price = $Stuff['price'] * $Stuff['how_many'];
                                                                 
                                                                 echo number_format($stuff['price'], 2, '.', ','); ?>
                                                             </span>
-                                                        </a>
+                                                            <button type="button" class="btn btn-icon bg-yellow" 
+                                                                data-toggle="tooltip" data-placement="top" title="Add Ingredients"
+                                                                onclick="addIngredients(this)" 
+                                                                data-stuff_id="<?php echo $stuff['stuff_data']['stuff_id']?>"
+                                                                data-stuff_uid="<?php echo $stuff['stuff_uid']?>"
+                                                                url="/ajax/addIngredients" 
+                                                                title="" 
+                                                                style="padding-top: 10px;" >
+                                                                <li class="fa fa-th-list"></li>
+                                                            </button>
 
+                                                            <button type="button" class="btn btn-icon bg-red"
+                                                                data-toggle="tooltip" data-placement="top" title="Delete Item"
+                                                                onclick='window.location="/menu/delete_stuff/<?php echo $stuff['stuff_data']['enterprise_id'];?>/<?php echo $stuff['stuff_data']['stuff_id'];?>/<?php echo $stuff['stuff_uid']?>"' role="button">
+                                                                <li class="fa fa-trash"></li>
+                                                            </button>
 
+                                                            
+                                                        </div>
 
+                                                    </h6>
+                                                    <p class="m-top-10">
+
+                                                    <div class="product-info">
+                                                        
                                                         <div class="form-group has-success" style="width: 100%">
-
+                                                            
                                                             <!-- <input id="item_cart_<?php echo $e . '-' . $s_id; ?>"
                                                                    type="text" class="item_cart"
                                                                    data-slider-min="1"
@@ -107,7 +118,9 @@
                                                                    s_id="<?php echo $s_id; ?>"
                                                                    value="<?php echo $Stuff['price']; ?>">
                                                                    -->
+                                                                   
                                                         </div>
+                                                        
                                                     </div>
                                                     </p>
                                                 </li>

@@ -209,6 +209,10 @@ class ajaxController extends Controller {
         echo json_encode($response);
     }
 
+    public function addIngredients(){
+        $this->pr($_POST);
+    }
+
     public function startCheckout()
     {
         $shopping_data = $this->unserilizeArray($_POST['shopping_data']);

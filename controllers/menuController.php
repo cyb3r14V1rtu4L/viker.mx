@@ -29,11 +29,11 @@ class menuController extends Controller
         $this->_view->Enterprise = $this->enterprise->select_data('system_user_enterprise','*',array('enterprise_id'=>$E_id));
         $CategoryTab = array();
         $Category = $this->enterprise->select_data('category_stuff','*',array('enterprise_id'=>$E_id),false,false,'tab_cat');
-
         if(is_array($Category)){
             foreach($Category as $cat_data)
             {
                 $Stuff = $this->enterprise->select_data('enterprise_stuff','*',array('enterprise_id'=>$E_id,'category_id'=>$cat_data['category_id'], 'active_stuff'=> '1'));
+                
                 if(!empty($_SESSION['user_id']))
                 {
                     if(!empty($Stuff))
@@ -65,30 +65,6 @@ class menuController extends Controller
 
     public function shopping()
     {
-        /*
-        $Enterprise = Session::get('Shopping');
-        $this->pr($Enterprise);
-        if(!empty($Enterprise))
-        {
-            foreach ($Enterprise['Enterprise'] as $e => $stuff)
-            {
-                $Enterprise_db = $this->shop->select_row("system_user_enterprise","*",array("enterprise_id"=>$e));
-                $Enterprise['Enterprise'][$e]['enterprise_data'] = $Enterprise_db;
-
-                foreach ($stuff as $S=>$s)
-                {
-                    foreach ($s as $s_id=>$s_data)
-                    {
-                        $Stuff = $this->shop->select_row("enterprise_stuff","*",array("stuff_id"=>$s_id));
-                        $Enterprise['Enterprise'][$e]['stuff'][$s_id]['stuff_data'] = $Stuff;
-                    }
-                }
-            }
-            Session::write('Shopping',$Enterprise);
-        }
-        */
-        #$this->pr($Enterprise);
-        #$this->_view->Enterprise = $Enterprise;
         $this->_view->renderizar('shopping');
     }
 
@@ -97,13 +73,7 @@ class menuController extends Controller
         $Shopping = $_SESSION;
         unset($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id][$stuff_uid]);
         $_SESSION = $Shopping;
-        $this->_view->renderizar('shopping');
-
-        #$Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] -= 1;
-
-        #if($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]['how_many'] <= 0) { 
-        #    unset($Shopping['Shopping']['Enterprise'][$enterprise]['stuff'][$stuff_id]);
-        #}
+        $this->redireccionar('menu/shopping');
     }
 
    

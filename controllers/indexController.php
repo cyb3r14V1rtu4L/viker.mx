@@ -15,6 +15,7 @@ class indexController extends Controller
 
         //Current Day
         $date = date("Y-m-d");
+        $hora = date("H:mm");
 
         $hora_actual = $this->enterprise->query(" SELECT CURRENT_TIME ");
         $hora_db = $hora_actual[0]['CURRENT_TIME'];
@@ -31,13 +32,15 @@ class indexController extends Controller
                                                     );
         $HoursValids=array();
 
+
+        #echo 'HORA ACTUAL: '.$hora.'<BR>';
         if($HoraiosEmpresa){
             foreach($HoraiosEmpresa as $horario)
             {
                 $HoursValids=array();
-                $ho = strtotime($date." ".$horario["$field_open"]);
-                $hc = strtotime($date." ".$horario["$field_close"]);
-                
+                $ho = strtotime($horario["$field_open"]);
+                $hc = strtotime($horario["$field_close"]);
+                #echo $ho.':  '.$horario["$field_open"].'<br>'.$hc.':  '.$horario["$field_close"].'<br><br>';
                 // Horario Nocturno
                 if($ho > $hc) { 
                     $mySQL = " SELECT enterprise_id "
@@ -51,11 +54,11 @@ class indexController extends Controller
                     $mySQL = " SELECT enterprise_id, sat_hour_open, sat_hour_close "
                             ." FROM enterprise_opening_hour "
                             ." WHERE CURRENT_TIME BETWEEN CONVERT($field_open, time) AND CONVERT($field_close, time) "
-                            ." AND CURRENT_TIME > CONVERT($field_open, time) "
-                            ." AND CONVERT($field_close, time) > CURRENT_TIME "
+                            ." AND CONVERT('$hora_db', time) > CONVERT($field_open, time) "
+                            ." AND CONVERT($field_close, time) > CONVERT('$hora_db', time) "
                             ." AND $field_day_open = true ";
                 }
-                #echo $mySQL.'<br>';$HoursValids=array();
+               #echo $mySQL.'sql<br>';//$HoursValids=array();
                 
                 $EnterpriseOpened =  $this->enterprise->query($mySQL);
                 if(is_array($EnterpriseOpened)) {
