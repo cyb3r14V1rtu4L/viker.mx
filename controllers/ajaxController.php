@@ -209,9 +209,7 @@ class ajaxController extends Controller {
         echo json_encode($response);
     }
 
-    public function addIngredients(){
-        $this->pr($_POST);
-    }
+    
 
     public function startCheckout()
     {

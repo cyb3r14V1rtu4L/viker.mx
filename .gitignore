@@ -28,3 +28,4 @@ public/uploads/*
 *.rar
 *.tar
 *.zip
+/vendor/

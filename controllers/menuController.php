@@ -19,7 +19,7 @@ class menuController extends Controller
 
     public function index()
     {
-        $this->dataStuff();
+        // $this->dataStuff();
         $this->_view->renderizar('index');
     }
 
@@ -63,6 +63,105 @@ class menuController extends Controller
         $this->_view->renderizar('index');
     }
 
+    public function addIngredients() { 
+        $this->_view->Shopping = Session::get('Shopping');
+        //$this->pr(Session::get('Shopping'));
+        $stuff_id = $this->getPostParam('stuff_id');
+        $this->_view->stuff_id = $stuff_id;
+
+        $this->_view->enterprise_id = $this->getPostParam('enterprise_id');
+        $this->_view->stuff_uid = $this->getPostParam('stuff_uid');
+
+        $conditions = array('stuff_id' => $stuff_id, 'extra_activo'=> 1);
+        $Additionals = $this->enterprise->select_data('enterprise_stuff_extra','*',$conditions);
+
+        $this->_view->Additionals = $Additionals;
+        ob_start();
+        ?>
+            <link href="/public/plugins/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet" type="text/css">
+            <script src="/public/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js" type="text/javascript"></script>
+            <script src="/views/menu/js/ingredients.js" type="text/javascript"></script>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+        
+            <?php
+            echo $this->_view->loadTemplate('additional_stuff', false);
+            ?>
+        </div>
+     
+
+        <div class="clear"></div>
+        
+        <?php
+        $html=ob_get_contents();
+        ob_end_clean();
+
+        $response = array('html'=>$html);
+        echo json_encode($response);
+
+    }
+
+    public function updateExtraOrder()
+    {
+        $Ingredients = array();
+        $Shopping = array();
+        $Shopping = Session::get('Shopping');
+
+        $ShoppingAux = Session::get('ShoppingAux');
+        if ($ShoppingAux === NULL) {
+            Session::Set('ShoppingAux', Session::get('Shopping'));
+            $ShoppingAux = Session::get('ShoppingAux');
+        }
+
+        $enterprise_id = $this->getPostParam('enterprise_id');
+        $extra_id = $this->getPostParam('extra_id');
+        $stuff_id = $this->getPostParam('stuff_id');
+        $stuff_uid = $this->getPostParam('stuff_uid');
+        $checked   = $this->getPostParam('v');
+        $conditions = array('extra_id' => $extra_id);
+        $Extra = $this->enterprise->select_data('enterprise_stuff_extra','*',$conditions);
+        
+        if(!isset($Shopping['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['stuff_data']['Ingredients'])) {
+            $Shopping['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['stuff_data']['Ingredients'] = array();
+        }
+        
+        if($checked == 'true') {
+            $Ingredients = $Shopping['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['stuff_data']['Ingredients'];
+            $push_item = true;
+            foreach($Ingredients as $ingredient) { 
+                if($ingredient['extra_id'] == $extra_id) {
+                    $push_item = false;
+                    break;
+                }
+            }
+
+            if($push_item) {
+                array_push($Shopping['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['stuff_data']['Ingredients'],$Extra[0]);
+            }
+
+        }else {
+            $Ingredients = $Shopping['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['stuff_data']['Ingredients'];
+            foreach($Ingredients as $i=>$ingredient) {
+                if($ingredient['extra_id'] == $extra_id) {
+                    unset($Ingredients[$i]);
+                }
+            }
+            $Shopping['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['stuff_data']['Ingredients'] = $Ingredients;      
+        }
+
+        $IngredientsPrice = $Shopping['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['stuff_data']['Ingredients'];
+        $iTotal=0;
+        foreach ($IngredientsPrice as $i=>$data) {
+            $iTotal += $data['extra_price'];
+        }
+        $newPrice = $ShoppingAux['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['price'] += $iTotal;
+        $Shopping['Enterprise'][$enterprise_id]['stuff'][$stuff_id][$stuff_uid]['price'] = $newPrice;
+
+        Session::set('Shopping', $Shopping);
+        $response = array('orderData'=>$Shopping);
+        echo json_encode($response);
+    }
+
     public function shopping()
     {
         $this->_view->renderizar('shopping');
@@ -87,6 +186,7 @@ class menuController extends Controller
     public function cancel_shopping()
     {
         Session::destroy('Shopping');
+        Session::destroy('ShoppingAux');
         $this->redireccionar();
     }
 

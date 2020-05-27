@@ -51,7 +51,7 @@ class indexController extends Controller
                             ." AND $field_day_open = true ";
                     
                 }else { 
-                    $mySQL = " SELECT enterprise_id, sat_hour_open, sat_hour_close "
+                    $mySQL = " SELECT enterprise_id"
                             ." FROM enterprise_opening_hour "
                             ." WHERE CURRENT_TIME BETWEEN CONVERT($field_open, time) AND CONVERT($field_close, time) "
                             ." AND CONVERT('$hora_db', time) > CONVERT($field_open, time) "
@@ -88,7 +88,6 @@ class indexController extends Controller
         $Hour = substr($hora_db,0,2);
         $Hour = ($Hour == '00') ? '24': $Hour;
         $hora_db = substr_replace($hora_db, $Hour,0,2);
-
         $field_open = strtolower(date("D").'_hour_open');
         $field_close = strtolower(date("D").'_hour_close');
         $field_day_open = strtolower(date("D").'_day_open');

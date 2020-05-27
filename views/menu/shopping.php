@@ -43,7 +43,6 @@
                                          
                                         foreach ($stuff as $s_id => $Stuff)
                                         {
-
                                             if(is_array($Stuff)) {
                                                 foreach($Stuff as $stuff)
                                                 {
@@ -82,7 +81,9 @@
                                                                 onclick="addIngredients(this)" 
                                                                 data-stuff_id="<?php echo $stuff['stuff_data']['stuff_id']?>"
                                                                 data-stuff_uid="<?php echo $stuff['stuff_uid']?>"
-                                                                url="/ajax/addIngredients" 
+                                                                data-enterprise_id="<?php echo $stuff['stuff_data']['enterprise_id']?>"
+                                                                data-click="updatePrices()"
+                                                                url="/menu/addIngredients" 
                                                                 title="" 
                                                                 style="padding-top: 10px;" >
                                                                 <li class="fa fa-th-list"></li>
