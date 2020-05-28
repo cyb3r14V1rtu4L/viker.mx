@@ -7,13 +7,8 @@ class ajaxController extends Controller {
         $this->shop=$this->loadModel('db');
 
     }
-
-
-    public function index(){
-
-    }
-
-
+    
+    public function index(){ }
 
     public function profileRequest()
     {

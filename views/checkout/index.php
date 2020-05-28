@@ -44,9 +44,9 @@
                         <tbody>
                             <?php
                             $subtotal = 0;
-                            foreach ($enterprise as $e_id => $stuff)
-                            {
-                                if ($e_id !== 'enterprise_data'){
+                            $paypal = '';
+                            foreach ($enterprise as $e_id => $stuff) {
+                                if ($e_id !== 'enterprise_data') {
                                     $subtotal = 0;
                                     foreach ($stuff as $s_id => $Stuff) {
                                         #$this->pr($Stuff);
@@ -66,6 +66,8 @@
                                             }
                                         }
                                     }
+                                } else {
+                                    $paypal = $stuff['paypal_account'];
                                 }
                             }
                             ?>
@@ -134,7 +136,7 @@
                     <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
                         <input name="cmd" type="hidden" value="_cart" />
                         <input name="upload" type="hidden" value="1" />
-                        <input name="business" type="hidden" value="cyberia.virtual@gmail.com" />
+                        <input name="business" type="text" value="<?php echo $paypal?>" />
                         <input name="shopping_url" type="hidden" value="/" />
                         <input name="currency_code" type="hidden" value="MXN" />
                         <input name="return" type="hidden" value="https://viker.mx/checkout/confirmation" />
@@ -162,7 +164,7 @@
                             <input type="hidden" id="concept" name="concept" class="form-control" value="<?php echo $concept; ?>">
                         </div>
                         <div class="form-group">
-                            <input type="hidden" id="amount" name="amount" class="form-control" value="1.00">
+                            <input type="hidden" id="amount" name="amount" class="form-control" value="<?php echo $amount; ?>">
                         </div>
                         <input class="btn btn-lg btn-primary btn-block" name="submitPayment" onclick="orderCheckout('paypal');" type="submit" value="Order NOW!!">
 
