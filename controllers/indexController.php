@@ -160,8 +160,8 @@ class indexController extends Controller
 
     public function cancel_shopping()
     {
-
         Session::destroy('Shopping');
+        Session::destroy('ShoppingAux');
         $this->index();
     }
 

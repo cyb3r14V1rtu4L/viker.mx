@@ -19,6 +19,7 @@ class checkoutController extends Controller
     public function confirmation() {
 
         Session::destroy('Shopping');
+        Session::destroy('ShoppingAux');
         Session::destroy('ShoppingData');
         Session::destroy('CheckoutShop');
         Session::destroy('Checkout');

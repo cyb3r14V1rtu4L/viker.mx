@@ -129,7 +129,7 @@
 
                     ?>
 
-                    <div class="loading">Un momento, por favor</div>
+                    <div class="loading">Please Wait...</div>
 
                     <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
                         <input name="cmd" type="hidden" value="_cart" />

@@ -1,16 +1,11 @@
 <?php
-//Leer POST del sistema de PayPal y a�adir �cmd�
-
+//Leer POST del sistema de PayPal
 $req = 'cmd=_notify-validate';
 
- 
-
 foreach ($_POST as $key => $value) {
-$value = urlencode(stripslashes($value));
-$req .= "&$key=$value";
+    $value = urlencode(stripslashes($value));
+    $req .= "&$key=$value";
 }
-
- 
 
 //header para el sistema de paypal
 $header = "POST /cgi-bin/webscr HTTP/1.0\r\n";
@@ -34,10 +29,12 @@ if (!$fp) {
     fputs ($fp, $header . $req);
     while (!feof($fp)) {
         $res = fgets ($fp, 1024);
-        if (strcmp ($res, "VERIFIED") == 0) {//Almacenamos todos los valores recibidos por $_POST.
+        if (strcmp ($res, "VERIFIED") == 0) {
+
+            //Almacenamos todos los valores recibidos por $_POST.
             foreach($_POST as $key => $value) {
                 $recibido.= $key." = ". $value."\r\n";
-            }//Enviamos por correo todos los datos , esto es solo para que ve�is como funciona
+            }//Enviamos por correo todos los datos
 
             //En un caso real acceder�amos a una BBDD y almacenar�amos los datos.
             // > Comprobando que payment_status es Completed
@@ -49,4 +46,4 @@ if (!$fp) {
         mail("correo", "NOTIFICACION DE PAGO INVALIDA", "invalido",$headers);}
     }fclose ($fp);
 }
-?>
+
