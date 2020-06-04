@@ -39,7 +39,7 @@
                        f="paypal_account"
                        class="form-control"  onchange="updateProfileE(this)"
                 >
-                <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+                <span class="input-group-addon"><i class="fa fa-paypal"></i></span>
             </div>
         </div>
         <div class="col-lg-3">
@@ -52,7 +52,7 @@
                        f="paypal_currency"
                        class="form-control"  onchange="updateProfileE(this)"
                 >
-                <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
             </div>
         </div>
         <div class="clear"></div>
