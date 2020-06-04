@@ -43,7 +43,6 @@
                         </thead>
                         <tbody>
                             <?php
-                            $subtotal = 0;
                             $paypal = '';
                             $currency = 'USD';
                             foreach ($enterprise as $e_id => $stuff) {
@@ -63,6 +62,7 @@
 
                                                 <?php
                                                     $subtotal +=($stuff['how_many']*$stuff['price']);
+                                                    $_SESSION['CheckoutShop']['gran_total'] = $subtotal;
 
                                             }
                                         }

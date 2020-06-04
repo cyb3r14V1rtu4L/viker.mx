@@ -223,8 +223,6 @@ class ajaxController extends Controller {
     {
         $Shopping = Session::get('Shopping');
         $checkout_shop = Session::get('CheckoutShop');
-        $this->pr($checkout_shop);
-
         $order_data = $this->unserilizeArray($_POST['order_data']);
         foreach ($Shopping['Enterprise'] as $e => $enterprise)
         {
@@ -250,7 +248,7 @@ class ajaxController extends Controller {
 
                     $cycler_cost = number_format($cost,2);
 
-                    $_SESSION['CheckoutShop']['gran_total'] = $cycler_cost +  $checkout_shop['total_pay_real'];
+                    $_SESSION['CheckoutShop']['gran_total'] += $cycler_cost;
                     $_SESSION['CheckoutShop']['granTotal_cycler_float'] = $cycler_cost;
 
                     $htmlCosts = '
