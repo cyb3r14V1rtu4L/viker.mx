@@ -415,6 +415,7 @@ class ajaxController extends Controller {
                                 $Ingredients = $stuff['stuff_data']['Ingredients'];
                                 foreach ($Ingredients as $ingredient) {
                                     $dataI=array();
+                                    $this->pr($ingredient);
                                     $dataI['order_id'] = $order_id;
                                     $dataI['stuff_id'] = $s_id;
                                     $dataI['extra_id'] = $ingredient['extra_id'];
