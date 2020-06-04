@@ -29,7 +29,7 @@
                 <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
             </div>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-9">
             <label>Paypal Account</label>
 
             <div class="input-group">
@@ -37,6 +37,19 @@
                        placeholder="your.paypal.email@account.xyz"
                        value="<?php echo $this->Enterprise['paypal_account'];?>"
                        f="paypal_account"
+                       class="form-control"  onchange="updateProfileE(this)"
+                >
+                <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <label>Currency</label>
+
+            <div class="input-group">
+                <input type="text" class="form-control"
+                       placeholder="USD"
+                       value="<?php echo $this->Enterprise['paypal_currency'];?>"
+                       f="paypal_currency"
                        class="form-control"  onchange="updateProfileE(this)"
                 >
                 <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
