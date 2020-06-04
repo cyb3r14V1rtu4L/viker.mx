@@ -50,7 +50,8 @@
                        placeholder="USD"
                        value="<?php echo $this->Enterprise['paypal_currency'];?>"
                        f="paypal_currency"
-                       class="form-control"  onchange="updateProfileE(this)"
+                       class="form-control"
+                       onchange="updateProfileE(this)"
                 >
                 <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
             </div>

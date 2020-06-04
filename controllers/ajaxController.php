@@ -379,7 +379,6 @@ class ajaxController extends Controller {
                 {
                     $dataO['enterprise_id'] = $e;
                     $dataO['user_id'] = Session::get('user_id');
-                    #$dataO['address_id'] = $Stuff['stuff_data'][''];
                     $dataO['notes_order'] = $shopping_data['item_note_' . $e];
                     $dataO['date_order'] = date("Y-m-d H:i");
                     $dataO['distance_kms'] = $checkout_shop['distance_kms'];
@@ -400,6 +399,7 @@ class ajaxController extends Controller {
                     #$this->pr($orderData);
                     $order_id = $orderData['data'];
                 }
+
                 foreach ($stuff as $s_id => $Stuff)
                 {
                     $dataS=array();
@@ -410,17 +410,26 @@ class ajaxController extends Controller {
                             $dataS['stuff_id'] = $s_id;
                             $dataS['how_many_stuff'] = $stuff['how_many'];
                             $dataS['price_stuff'] = $stuff['price'];
-                            #$this->pr($dataS);
                             $stuffData = $this->model->insert('order_stuff', $dataS, array());
+                            if(isset($stuff['stuff_data']['Ingredients'])) {
+                                $Ingredients = $stuff['stuff_data']['Ingredients'];
+                                foreach ($Ingredients as $ingredient) {
+                                    $dataI=array();
+                                    $dataI['order_id'] = $order_id;
+                                    $dataI['stuff_id'] = $s_id;
+                                    $dataI['extra_id'] = $ingredient['extra_id'];
+                                    $dataI['price_extra'] = $ingredient['price_extra'];
+                                    $stuffData = $this->model->insert('order_stuff_extra', $dataS, array());
+                                }
+
+                            }
                         }
                     }
                 }
             }
         }
 
-
-
-        $response = array('ShoppingData'=>$shopping_data,'CheckoutShop'=>$checkout_shop,'orderData'=>$orderData);
+       $response = array('ShoppingData'=>$shopping_data,'CheckoutShop'=>$checkout_shop,'orderData'=>$orderData);
         echo json_encode($response);
     }
 
