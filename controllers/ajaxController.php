@@ -223,6 +223,7 @@ class ajaxController extends Controller {
     {
         $Shopping = Session::get('Shopping');
         $checkout_shop = Session::get('CheckoutShop');
+        $this->pr($checkout_shop);
 
         $order_data = $this->unserilizeArray($_POST['order_data']);
         foreach ($Shopping['Enterprise'] as $e => $enterprise)
@@ -243,8 +244,7 @@ class ajaxController extends Controller {
                     if($kmDistance > 3)
                     {
                         $cost = $kmDistance * 10;
-                    }else
-                    {
+                    } else {
                          $cost = CYCLER;
                     }
 
