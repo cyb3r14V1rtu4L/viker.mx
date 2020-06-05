@@ -418,7 +418,8 @@ class ajaxController extends Controller {
                     $dataS=array();
                     if (is_int($s_id))
                     {
-                        foreach ($Stuff as $stuff) {
+                        foreach ($Stuff as $s_uid => $stuff) {
+                            $this->pr($s_uid);
                             $dataS['order_id'] = $order_id;
                             $dataS['stuff_id'] = $s_id;
                             $dataS['how_many_stuff'] = $stuff['how_many'];

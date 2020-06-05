@@ -109,7 +109,6 @@ class orderController extends Controller
                 $Stuff[$sk]['Ingredients'] = $Ingredients;
             }
         }
-        $this->pr($Stuff);
 
         if($Order['cycler_id'] != null) {
             $conditions = array('user_id' => $Order['cycler_id']);
