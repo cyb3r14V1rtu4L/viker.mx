@@ -92,10 +92,13 @@ class orderController extends Controller
 
         $this->_view->Order = $Order;
         $this->_view->StuffType = 'DBSTUFF';
-        $this->_view->Stuff = $this->model->query("SELECT * FROM order_stuff AS o INNER JOIN enterprise_stuff AS e ON o.stuff_id = e.stuff_id WHERE order_id = ".$Order['order_id']);
+        $this->_view->Stuff = $this->model->query(" SELECT * FROM order_stuff AS o "
+                                                 ." INNER JOIN enterprise_stuff AS e "
+                                                 ." ON o.stuff_id = e.stuff_id "
+                                                 ." WHERE order_id = ".$Order['order_id']);
+        $this->pr($Order['cycler_id']);exit();
         $conditions = array('user_id' => $Order['cycler_id']);
         $Cycler = $this->model->select_row('system_users','*',$conditions);
-
         $this->_view->Cycler = $Cycler;
         
         $total_distance = $this->model->query("SELECT SUM(distance_kms) AS distance_kms FROM order_enterprise WHERE user_id = ".$Cycler['user_id'].";");
