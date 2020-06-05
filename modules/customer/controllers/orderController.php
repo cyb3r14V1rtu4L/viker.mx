@@ -96,19 +96,21 @@ class orderController extends Controller
                                                  ." INNER JOIN enterprise_stuff AS e "
                                                  ." ON o.stuff_id = e.stuff_id "
                                                  ." WHERE order_id = ".$Order['order_id']);
+
         if($Order['cycler_id'] != null) {
             $conditions = array('user_id' => $Order['cycler_id']);
             $Cycler = $this->model->select_row('system_users','*',$conditions);
             $this->_view->Cycler = $Cycler;
 
-            $total_distance = $this->model->query("SELECT SUM(distance_kms) AS distance_kms FROM order_enterprise WHERE user_id = ".$Cycler['user_id'].";");
-            $this->_view->Emissions = $this->CO2KG($total_distance[0]['distance_kms']);
-            $this->_view->total_distance = $total_distance[0]['distance_kms'];
+
         }else {
             $this->_view->Cycler = null;
-            $this->_view->Emissions = 0;
-            $this->_view->total_distance = 0;
         }
+
+        $total_distance = $this->model->query("SELECT SUM(distance_kms) AS distance_kms FROM order_enterprise WHERE user_id = ".$this->getPostParam('order_id').";");
+        $this->_view->Emissions = $this->CO2KG($total_distance[0]['distance_kms']);
+        $this->_view->total_distance = $total_distance[0]['distance_kms'];
+
 
         $conditions = array('user_id' => $Order['user_id']);
         $Customer = $this->model->select_row('system_users','*',$conditions);
@@ -116,11 +118,11 @@ class orderController extends Controller
         
         if(!empty($Order))
         {
-            
+
 
             if(!empty($Cycler))
             {
-                
+
                 if(!empty($Customer))
                 {
                    
