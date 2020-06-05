@@ -227,6 +227,14 @@ class ajaxController extends Controller {
         $this->pr($Shopping['Enterprise']);
         $this->pr($order_data);
 
+        foreach ($Shopping['Enterprise'] as $e => $enterprise) {
+            $subtotal = 0;
+            foreach ($enterprise['stuff'] as $key_stuff => $stuff) {
+                $subtotal += $stuff['price'];
+            }
+            $this->pr($subtotal);
+        }
+
         foreach ($Shopping['Enterprise'] as $e => $enterprise)
         {
             foreach ($enterprise as $e_id => $stuff)
