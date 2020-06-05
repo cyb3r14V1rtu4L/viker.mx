@@ -162,6 +162,12 @@ class indexController extends Controller
     {
         Session::destroy('Shopping');
         Session::destroy('ShoppingAux');
+        Session::destroy('ShoppingData');
+        Session::destroy('CheckoutShop');
+        Session::destroy('Checkout');
+        Session::destroy('gtotal');
+        Session::destroy('cycler');
+
         $this->index();
     }
 

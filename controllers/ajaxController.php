@@ -131,7 +131,6 @@ class ajaxController extends Controller {
         echo json_encode($response_data);
     }
 
-
     public function addStuff()
     {
         $enterprise= $_POST['enterprise'];
@@ -203,8 +202,6 @@ class ajaxController extends Controller {
         $response = array('orderData'=>$_SESSION['Shopping']);
         echo json_encode($response);
     }
-
-    
 
     public function startCheckout()
     {
@@ -443,11 +440,10 @@ class ajaxController extends Controller {
                 }
             }
         }
-
-       $response = array('ShoppingData'=>$shopping_data,'CheckoutShop'=>$checkout_shop,'orderData'=>$orderData);
+        $this->destroySessions();
+        $response = array('ShoppingData'=>$shopping_data,'CheckoutShop'=>$checkout_shop,'orderData'=>$orderData);
         echo json_encode($response);
     }
-
 
     public function oSpecialDelivery()
     {
@@ -516,6 +512,16 @@ class ajaxController extends Controller {
     {
         $response = array('gtotal' => number_format(Session::get('gtotal'),2,'.',','));
         echo json_encode($response);
+    }
+
+    public function destroySessions() {
+        Session::destroy('Shopping');
+        Session::destroy('ShoppingAux');
+        Session::destroy('ShoppingData');
+        Session::destroy('CheckoutShop');
+        Session::destroy('Checkout');
+        Session::destroy('gtotal');
+        Session::destroy('cycler');
     }
 
 
