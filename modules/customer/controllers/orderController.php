@@ -97,7 +97,7 @@ class orderController extends Controller
              ." ON o.stuff_id = e.stuff_id "
              ." WHERE order_id = ".$Order['order_id']
         );
-
+        $this->_viwe->Stuff = $Stuff;
         foreach ($Stuff as $sk=>$stuff) {
             $Ingredients = $this->model->query(" SELECT * FROM order_stuff_extra AS o "
                 ." INNER JOIN enterprise_stuff_extra AS e "
