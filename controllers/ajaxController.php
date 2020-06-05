@@ -431,7 +431,7 @@ class ajaxController extends Controller {
                                     $dataI=array();
                                     $dataI['order_id'] = $order_id;
                                     $dataI['stuff_id'] = $s_id;
-                                    $dataS['stuff_uid'] = $s_uid;
+                                    $dataI['stuff_uid'] = $s_uid;
                                     $dataI['extra_id'] = $ingredient['extra_id'];
                                     $dataI['extra_price'] = $ingredient['extra_price'];
                                     $stuffData = $this->model->insert('order_stuff_extra', $dataI, array());
