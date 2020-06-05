@@ -229,9 +229,8 @@ class ajaxController extends Controller {
         foreach ($Shopping['Enterprise'] as $e => $enterprise) {
             $subtotal = 0;
             foreach ($enterprise['stuff'] as $key_stuff => $stuff) {
-                $subtotal += $stuff['price'];
+                $this->pr($stuff);
             }
-            echo $subtotal;
         }
 
         foreach ($Shopping['Enterprise'] as $e => $enterprise)
