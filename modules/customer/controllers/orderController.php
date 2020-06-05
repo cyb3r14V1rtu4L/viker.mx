@@ -99,7 +99,7 @@ class orderController extends Controller
         $this->_view->Cycler = $Cycler;
         
         $total_distance = $this->model->query("SELECT SUM(distance_kms) AS distance_kms FROM order_enterprise WHERE user_id = ".$Cycler['user_id'].";");
-
+        $this->pr($total_distance);
         $this->_view->Emissions = $this->CO2KG($total_distance[0]['distance_kms']);
         $this->_view->total_distance = $total_distance[0]['distance_kms'];
 
