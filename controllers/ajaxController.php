@@ -430,16 +430,13 @@ class ajaxController extends Controller {
                             if(isset($stuff['stuff_data']['Ingredients'])) {
                                 $Ingredients = $stuff['stuff_data']['Ingredients'];
                                 foreach ($Ingredients as $ingredient) {
-                                    $this->pr($ingredient);
-
                                     $dataI=array();
                                     $dataI['order_id'] = $order_id;
                                     $dataI['stuff_id'] = $s_id;
                                     $dataI['extra_id'] = $ingredient['extra_id'];
                                     $dataI['extra_price'] = $ingredient['extra_price'];
-                                    $stuffData = $this->model->insert('order_stuff_extra', $dataS, array());
+                                    $stuffData = $this->model->insert('order_stuff_extra', $dataI, array());
                                 }
-
                             }
                         }
                     }
