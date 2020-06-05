@@ -224,15 +224,8 @@ class ajaxController extends Controller {
         $Shopping = Session::get('Shopping');
         $checkout_shop = Session::get('CheckoutShop');
         $order_data = $this->unserilizeArray($_POST['order_data']);
-
-
-        foreach ($Shopping['Enterprise'] as $e => $enterprise) {
-            $subtotal = 0;
-            foreach ($enterprise['stuff'] as $key_stuff => $stuff) {
-                $subtotal += $stuff['price'];
-            }
-            $this->pr($subtotal);
-        }
+        $this->pr($Shopping['Enterprise']);
+        $this->pr($order_data);
 
         foreach ($Shopping['Enterprise'] as $e => $enterprise)
         {
