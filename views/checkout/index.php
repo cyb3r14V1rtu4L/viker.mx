@@ -45,7 +45,7 @@
                             <?php
                             $paypal = '';
                             $currency = 'USD';
-                            foreach ($enterprise as $e_id => $stuff) {
+                            foreach ($enterprise as $e_id => $stuff) {                      
                                 if ($e_id !== 'enterprise_data') {
                                     $subtotal = 0;
                                     foreach ($stuff as $s_id => $Stuff) {
@@ -59,12 +59,11 @@
                                                     <td><?php echo $stuff['stuff_data']['name_stuff']; ?></td>
                                                     <td class="pull-right" >$<?php echo number_format($stuff['how_many']*$stuff['price'],2,'.',','); ?></td>
                                                 </tr>
-
                                                 <?php
                                                     $subtotal +=($stuff['how_many']*$stuff['price']);
-                                                    $_SESSION['CheckoutShop']['gran_total'] = $subtotal;
 
                                             }
+                                            $_SESSION['CheckoutShop']['gran_total'] = $subtotal;
                                         }
                                     }
                                 } else {
