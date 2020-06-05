@@ -225,6 +225,15 @@ class ajaxController extends Controller {
         $checkout_shop = Session::get('CheckoutShop');
         $order_data = $this->unserilizeArray($_POST['order_data']);
 
+
+        foreach ($Shopping['Enterprise'] as $e => $enterprise) {
+            $subtotal = 0;
+            foreach ($enterprise['stuff'] as $key_stuff => $stuff) {
+                $subtotal += $stuff['price'];
+            }
+            echo $subtotal;
+        }
+
         foreach ($Shopping['Enterprise'] as $e => $enterprise)
         {
             foreach ($enterprise as $e_id => $stuff)
