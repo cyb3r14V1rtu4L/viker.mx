@@ -427,6 +427,7 @@ class ajaxController extends Controller {
                             $dataS['how_many_stuff'] = $stuff['how_many'];
                             $dataS['price_stuff'] = $stuff['price'];
                             $stuffData = $this->model->insert('order_stuff', $dataS, array());
+                            $this->pr($stuff);
                             if(isset($stuff['stuff_data']['Ingredients'])) {
                                 $Ingredients = $stuff['stuff_data']['Ingredients'];
                                 foreach ($Ingredients as $ingredient) {
