@@ -92,17 +92,29 @@ class orderController extends Controller
 
         $this->_view->Order = $Order;
         $this->_view->StuffType = 'DBSTUFF';
-        $this->_view->Stuff = $this->model->query(" SELECT * FROM order_stuff AS o "
-                                                 ." INNER JOIN enterprise_stuff AS e "
-                                                 ." ON o.stuff_id = e.stuff_id "
-                                                 ." WHERE order_id = ".$Order['order_id']);
+        $Stuff = $this->model->query(" SELECT * FROM order_stuff AS o "
+             ." INNER JOIN enterprise_stuff AS e "
+             ." ON o.stuff_id = e.stuff_id "
+             ." WHERE order_id = ".$Order['order_id']
+        );
+
+        foreach ($Stuff as $sk=>$stuff) {
+            $Ingredients = $this->model->query(" SELECT * FROM order_stuff_extra AS o "
+                ." INNER JOIN enterprise_stuff_extra AS e "
+                ." ON o.extra_id = e.extra_id "
+                ." WHERE order_id = ".$Order['order_id']." AND  stuff_id = ".$Order['stuff_id']
+            );
+
+            if ($Ingredients != null) {
+                $Stuff[$sk]['Ingredients'] = $Ingredients;
+            }
+        }
+        $this->pr($Stuff);
 
         if($Order['cycler_id'] != null) {
             $conditions = array('user_id' => $Order['cycler_id']);
             $Cycler = $this->model->select_row('system_users','*',$conditions);
             $this->_view->Cycler = $Cycler;
-
-
         }else {
             $this->_view->Cycler = null;
         }
@@ -111,28 +123,12 @@ class orderController extends Controller
         $this->_view->Emissions = $this->CO2KG($total_distance[0]['distance_kms']);
         $this->_view->total_distance = $total_distance[0]['distance_kms'];
 
-
         $conditions = array('user_id' => $Order['user_id']);
         $Customer = $this->model->select_row('system_users','*',$conditions);
         $this->_view->Customer = $Customer;
-        
-        if(!empty($Order))
-        {
 
-
-            if(!empty($Cycler))
-            {
-
-                if(!empty($Customer))
-                {
-                   
-                }
-            }
-        }
         ob_start();
-        
         ?>
-
         <div class="col-md-8 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('order_detail','customer');?>
         </div>
@@ -149,13 +145,10 @@ class orderController extends Controller
                     time: 2000
                 });
             }
-
         </script>
-
         <?php
         $html=ob_get_contents();
         ob_end_clean();
-
         $response = array('html'=>$html);
         echo json_encode($response);
     }
