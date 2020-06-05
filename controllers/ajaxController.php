@@ -226,7 +226,7 @@ class ajaxController extends Controller {
         $order_data = $this->unserilizeArray($_POST['order_data']);
 
 
-        foreach ($Shopping['Enterprise'] as $e => $enterprise) {
+        foreach ($Shopping as $e => $enterprise) {
             $subtotal = 0;
             foreach ($enterprise['stuff'] as $key_stuff => $stuff) {
                 $subtotal += $stuff['price'];
