@@ -102,7 +102,7 @@ class orderController extends Controller
             $Ingredients = $this->model->query(" SELECT * FROM order_stuff_extra AS o "
                 ." INNER JOIN enterprise_stuff_extra AS e "
                 ." ON o.extra_id = e.extra_id "
-                ." WHERE order_id = ".$Order['order_id']." AND  stuff_id = ".$Order['stuff_id']
+                ." WHERE order_id = ".$Order['order_id']." AND  stuff_id = ".$stuff['stuff_id']
             );
 
             if ($Ingredients != null) {
