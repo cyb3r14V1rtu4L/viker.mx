@@ -224,10 +224,14 @@ class ajaxController extends Controller {
         $Shopping = Session::get('Shopping');
         $checkout_shop = Session::get('CheckoutShop');
         $order_data = $this->unserilizeArray($_POST['order_data']);
-        $this->pr($Shopping['Enterprise']);
-        $this->pr($order_data);
-        foreach ($Shopping['Enterprise'] as $e => $enterprise)
-        {
+
+
+        foreach ($Shopping['Enterprise'] as $e => $enterprise) {
+            $subtotal = 0;
+            foreach ($enterprise['stuff'] as $key_stuff => $stuff) {
+                $subtotal += $stuff['price'];
+            }
+
             foreach ($enterprise as $e_id => $stuff)
             {
                 if ($e_id == 'enterprise_data')
@@ -245,12 +249,11 @@ class ajaxController extends Controller {
                     {
                         $cost = $kmDistance * 10;
                     } else {
-                         $cost = CYCLER;
+                        $cost = CYCLER;
                     }
 
                     $cycler_cost = number_format($cost,2);
 
-                    $_SESSION['CheckoutShop']['gran_total'] += $cycler_cost;
                     $_SESSION['CheckoutShop']['granTotal_cycler_float'] = $cycler_cost;
 
                     $htmlCosts = '
@@ -258,7 +261,7 @@ class ajaxController extends Controller {
                                 <tbody><tr>
                                     <th>&nbsp;</th>
                                     <th>SUBTOTAL</th>
-                                    <td class="pull-right"  style="color:#00a65a">$'.number_format($checkout_shop['total_pay_real'],2).'</td>
+                                    <td class="pull-right"  style="color:#00a65a">$'.number_format($subtotal,2).'</td>
                                 </tr>
                 
                                 <tr>
@@ -269,11 +272,11 @@ class ajaxController extends Controller {
                                 <tr>
                                     <th>&nbsp;</th>
                                     <th>TOTAL</th>
-                                    <td class="pull-right" id="total_cost" style="color:#00a65a">$'.number_format($cycler_cost +  $checkout_shop['total_pay_real'],2).'</td>
+                                    <td class="pull-right" id="total_cost" style="color:#00a65a">$'.number_format($cycler_cost +  $subtotal,2).'</td>
                                 </tr>             
                                 </tbody>
                             </table>';
-                    $gran_total = $cycler_cost+$checkout_shop['total_pay_real'];
+                    $gran_total = $cycler_cost+$subtotal;
 
                     $htmlPayment = '<form id="checkout_shop" action="" method="post" role="form">
                                         <input type="hidden"
@@ -289,7 +292,7 @@ class ajaxController extends Controller {
                                         <input type="hidden"
                                                id="total_pay_real"
                                                name="total_pay_real"
-                                               value="'.$checkout_shop['total_pay_real'].'">
+                                               value="'.$subtotal.'">
                                         <div class="col-md-6" style="text-align: center;">
                                         
                                             <input type="hidden"
@@ -343,8 +346,9 @@ class ajaxController extends Controller {
 
                 }
             }
-            
         }
+
+
 
 
         $response = array('cycler_cost'=>'$'.$cycler_cost,
