@@ -102,14 +102,16 @@ class orderController extends Controller
             $Ingredients = $this->model->query(" SELECT * FROM order_stuff_extra AS o "
                 ." INNER JOIN enterprise_stuff_extra AS e "
                 ." ON o.extra_id = e.extra_id "
-                ." WHERE o.order_id = ".$Order['order_id']." AND  o.stuff_id = ".$stuff['stuff_id']
+                ." WHERE o.order_id = ".$Order['order_id']
+                ." AND  o.stuff_id = ".$stuff['stuff_id']
+                ." AND  o.stuff_uid = ".$stuff['stuff_uid']
             );
 
             if ($Ingredients != null) {
                 $Stuff[$sk]['Ingredients'] = $Ingredients;
             }
         }
-
+        $this->pr($Stuff);
         if($Order['cycler_id'] != null) {
             $conditions = array('user_id' => $Order['cycler_id']);
             $Cycler = $this->model->select_row('system_users','*',$conditions);
