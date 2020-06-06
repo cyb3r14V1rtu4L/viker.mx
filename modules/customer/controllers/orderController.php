@@ -142,6 +142,9 @@ class orderController extends Controller
 
         ob_start();
         ?>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <?php echo $this->_view->loadTemplate('customer','customer');?>
+        </div>
         <div class="col-md-8 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('order_detail','customer');?>
         </div>

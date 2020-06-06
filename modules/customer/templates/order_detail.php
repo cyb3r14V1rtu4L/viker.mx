@@ -294,7 +294,6 @@ Skill Section style
 
                         <h6><em>Cycler</em></h6>
                         <div class="separator_small"></div>
-
                         <h6 class="statistic-counter"><?php echo number_format($this->Order['total_viker'], 2, '.', ','); ?></h6>
                     </div>
                 </div>
