@@ -116,7 +116,7 @@ class orderController extends Controller
 
                 if ($Ingredients != null ) {
                     $Stuff[$sk]['Ingredients'] = $Ingredients;
-                    foreach ($ingredients as $ingredient) {
+                    foreach ($Ingredients as $ingredient) {
                         $ingredients .= $ingredient['extra_name'].',';
                     }
                     $ingredients =  trim($ingredients, ',');
