@@ -202,9 +202,7 @@ Skill Section style
                             <h6>
                                 <a href="#"><?php echo $Stuff['name_stuff']; ?></a>
                                 <p><?php echo $Stuff['desc_stuff']?><br/>
-                                    <strong>
-                                        <?php echo ' Ingredients: '.$Stuff['ingredientList'];?>
-                                    </strong>
+                                   <i class="fa fa-arrow-circle-o-right"></i><?php echo ' Ingredients: '.$Stuff['ingredientList'];?>
                                 </p>
                                 <div class="product-img pull-right">
                                 <span
