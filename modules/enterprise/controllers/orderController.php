@@ -149,17 +149,12 @@ class orderController extends Controller
         <div class="col-md-6 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('order_detail','enterprise');?>
         </div>
-        <?php
-        if ($Cycler != null) {
-            ?>
-            <div class="col-md-3 col-sm-12 col-xs-12">
-                <?php
-                echo $this->_view->loadTemplate('cycler', 'enterprise');
-                ?>
-            </div>
+
+        <div class="col-md-3 col-sm-12 col-xs-12">
             <?php
-        }
-        ?>
+            echo $this->_view->loadTemplate('cycler', 'enterprise');
+            ?>
+        </div>
 
         <div class="clear"></div>
         <script>
