@@ -26,12 +26,19 @@ class orderController extends Controller
         $this->_view->renderizar('index');
     }
 
+    public function order_rating()
+    {
+        $this->_view->setJs(array('index'));
+        $this->_view->getPlugins(array('jquery-star-rating'));
+
+        $this->_view->renderizar('rating');
+    }
+
 
     public function setTimePrepare()
     {
         $model=$this->loadModel('db');
         $columns = array('time_prepare'=>$this->getPostParam('time_prepare'));
-
         $where = array('order_id'=>$this->getPostParam('order_id'));
 
         $result = $model->update('order_enterprise', $columns, $where,false);
@@ -57,7 +64,6 @@ class orderController extends Controller
     {
         $model=$this->loadModel('db');
         $columns = array('status'=>$this->getPostParam('status'));
-
         $where = array('order_id'=>$this->getPostParam('order_id'));
 
         $result = $model->update('order_enterprise', $columns, $where,false);
@@ -85,8 +91,93 @@ class orderController extends Controller
         $Order = $this->model->select_row('order_enterprise','*',$conditions);
 
         $this->_view->Order = $Order;
-        $this->_view->Stuff = $this->model->query("SELECT * FROM order_stuff AS o INNER JOIN enterprise_stuff AS e ON o.stuff_id = e.stuff_id WHERE order_id = ".$Order['order_id']);
-        $conditions = array('user_id' => $Order['cycler_id']);
+        $this->_view->StuffType = 'DBSTUFF';
+        $Stuff = $this->model->query(
+              " SELECT e.stuff_id, e.enterprise_id, e.category_id, e.name_stuff, e.desc_stuff,
+                       e.photo_stuff, e.time_stuff, e.stock_stuff, e.active_stuff,
+                       o.stuff_uid, o.how_many_stuff, o.price_stuff
+                       FROM order_stuff AS o "
+             ." INNER JOIN enterprise_stuff AS e "
+             ." ON o.stuff_id = e.stuff_id "
+             ." WHERE order_id = ".$Order['order_id']
+        );
+
+        foreach ($Stuff as $sk=>$stuff) {
+            $ingredients = '';
+            if(!empty($stuff['stuff_uid'])) {
+                $mySQL = " SELECT * FROM order_stuff_extra AS o "
+                    ." INNER JOIN enterprise_stuff_extra AS e "
+                    ." ON o.extra_id = e.extra_id "
+                    ." WHERE o.order_id = ".$Order['order_id']
+                    ." AND  o.stuff_id = ".$stuff['stuff_id']
+                    ." AND  o.stuff_uid = '".$stuff['stuff_uid']."'";
+                $Ingredients = $this->model->query($mySQL);
+
+                if ($Ingredients != null ) {
+                    $Stuff[$sk]['Ingredients'] = $Ingredients;
+                    foreach ($Ingredients as $ingredient) {
+                        $ingredients .= $ingredient['extra_name'].',';
+                    }
+                }
+                $Stuff[$sk]['ingredientList'] = trim($ingredients, ',');
+            }
+        }
+
+        if($Order['cycler_id'] != null) {
+            $conditions = array('user_id' => $Order['cycler_id']);
+            $Cycler = $this->model->select_row('system_users','*',$conditions);
+            $this->_view->Cycler = $Cycler;
+        }else {
+            $this->_view->Cycler = null;
+        }
+
+        $total_distance = $this->model->query("SELECT SUM(distance_kms) AS distance_kms FROM order_enterprise WHERE user_id = ".$this->getPostParam('order_id').";");
+        $this->_view->Emissions = $this->CO2KG($total_distance[0]['distance_kms']);
+        $this->_view->total_distance = $total_distance[0]['distance_kms'];
+
+        $conditions = array('user_id' => $Order['user_id']);
+        $Customer = $this->model->select_row('system_users','*',$conditions);
+        $this->_view->Customer = $Customer;
+        $this->_view->Stuff = $Stuff;
+
+        ob_start();
+        ?>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <?php echo $this->_view->loadTemplate('order_detail','enterprise');?>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <?php echo $this->_view->loadTemplate('cycler','enterprise');?>
+        </div>
+
+        <div class="clear"></div>
+        <script>
+            window.onload = function()
+            {
+                $('.statistic-counter').counterUp({
+                    delay: 10,
+                    time: 2000
+                });
+            }
+        </script>
+        <?php
+        $html=ob_get_contents();
+        ob_end_clean();
+        $response = array('html'=>$html);
+        echo json_encode($response);
+    }
+
+
+    public function authCyclerS()
+    {
+        $this->_view->setJs(array('index'));
+        $conditions = array('order_id' => $this->getPostParam('order_id'));
+        $Order = $this->model->select_row('order_special','*',$conditions);
+
+        $this->_view->Order = $Order;
+
+        $this->_view->StuffType = 'SPECIAL';
+
+        $conditions = array('user_id' => $Order['viker_id']);
         $Cycler = $this->model->select_row('system_users','*',$conditions);
 
         $this->_view->Cycler = $Cycler;
@@ -94,20 +185,18 @@ class orderController extends Controller
         $conditions = array('user_id' => $Order['user_id']);
         $Customer = $this->model->select_row('system_users','*',$conditions);
         $this->_view->Customer = $Customer;
-        
-        if(!empty($Order))
+
+       /* if(!empty($Order))
         {
-            
 
             if(!empty($Cycler))
             {
-                
                 if(!empty($Customer))
                 {
-                   
+
                 }
             }
-        }
+        }*/
         ob_start();
         ?>
         <div class="col-md-3 col-sm-12 col-xs-12">
