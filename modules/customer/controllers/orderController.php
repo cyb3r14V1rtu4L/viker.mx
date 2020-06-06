@@ -92,12 +92,17 @@ class orderController extends Controller
 
         $this->_view->Order = $Order;
         $this->_view->StuffType = 'DBSTUFF';
-        $Stuff = $this->model->query(" SELECT * FROM order_stuff AS o "
+        $Stuff = $this->model->query(
+              " SELECT e.stuff_id, e.enterprise_id, e.category_id, e.name_stuff, e.desc_stuff,
+                       e.photo_stuff, e.time_stuff, e.stock_stuff, e.active_stuff,
+                       o.stuff_uid, o.how_many_stuff, o.price_stuff
+                       FROM order_stuff AS o "
              ." INNER JOIN enterprise_stuff AS e "
              ." ON o.stuff_id = e.stuff_id "
              ." WHERE order_id = ".$Order['order_id']
         );
         $this->_view->Stuff = $Stuff;
+
         foreach ($Stuff as $sk=>$stuff) {
             if(!empty($stuff['stuff_uid'])) {
                 $mySQL = " SELECT * FROM order_stuff_extra AS o "
@@ -113,7 +118,7 @@ class orderController extends Controller
                 }
             }
         }
-        $this->pr($Stuff);
+
         if($Order['cycler_id'] != null) {
             $conditions = array('user_id' => $Order['cycler_id']);
             $Cycler = $this->model->select_row('system_users','*',$conditions);
