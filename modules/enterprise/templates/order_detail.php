@@ -179,34 +179,46 @@ Skill Section style
 
 
 </style>
+
 <div class="pricing_item sm-m-top-30">
-        <div class="pricing_top_border"></div>
+    <div class="pricing_top_border"></div>
         <?php
         echo '<ul class="cart-list">';
 
-                $subtotal = 0;
-                foreach ($this->Stuff as $s_id => $Stuff)
-                {
-                    if (is_int($s_id) && $Stuff['how_many_stuff'] !== 0)
-                    {
+            $subtotal = 0;
+            if($this->StuffType !== 'SPECIAL')
+            {
+                foreach ($this->Stuff as $s_id => $Stuff) {
+                    if (is_int($s_id) && $Stuff['how_many_stuff'] !== 0) {
                         ?>
 
-                        <li >
+                        <li>
 
                             <a href="#" class="photo">
                                 <img class="cart-thumb" alt=""
-                                     src="/public/uploads/enterprise/stuff/<?php echo $Stuff['stuff_id'];?>/<?php echo $Stuff['photo_stuff']; ?>"
+                                     src="/public/uploads/enterprise/stuff/<?php echo $Stuff['stuff_id']; ?>/<?php echo $Stuff['photo_stuff']; ?>"
                                 />
                             </a>
                             <h6>
                                 <a href="#"><?php echo $Stuff['name_stuff']; ?></a>
-                                <p><?php echo $Stuff['desc_stuff']; ?></p>
+                                <p><?php echo $Stuff['desc_stuff']?><br/>
+                                    <?php
+                                        if($Stuff['ingredientList'] != '') {
+                                         echo '<i class="fa fa-map-signs"></i>&nbsp;&nbsp;Ingredients: '.$Stuff['ingredientList'];
+                                        }
+                                    ?>
+                                </p>
                                 <div class="product-img pull-right">
-                                    <span
+                                <span
                                         id="item_how2_cart_<?php echo $e . '-' . $s_id; ?>"
                                         class="label label-danger"
-                                    >   <?php echo $Stuff['how_many_stuff']; ?>
-                                    </span>
+                                >   <?php echo $Stuff['how_many_stuff']; ?>
+                                </span>&nbsp;&nbsp;
+                                <span
+                                        id="item_how2_cart_<?php echo $e . '-' . $s_id; ?>"
+                                        class="label label-danger"
+                                >   <?php echo $Stuff['price_stuff']; ?>
+                                </span>
                                 </div>
                             </h6>
 
@@ -217,16 +229,63 @@ Skill Section style
 
                     }
                 }
-                echo '</ul>';
+            }
+            echo '</ul>';
 
+
+    if($this->StuffType !== 'SPECIAL')
+    {
+    ?>
+    <div class="pricing_body bg-white padding-20">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h6>Comments</h6>
+            <div class="form-group has-warning">
+            <p>
+                <?php echo (!empty($this->Order['notes_order'])) ? $this->Order['notes_order'] : 'No comments for this order...'; ?>
+            </p>
+            </div>
+        </div>
+        <div class="text-center">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="skill_bottom_item">
+
+                    <h6><em>Cycler</em></h6>
+                    <div class="separator_small"></div>
+
+                    <h6 class="statistic-counter"><?php echo number_format($this->Order['total_vikers'], 2, '.', ','); ?></h6>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="skill_bottom_item">
+                    <h6><em>Subtotal</em></h6>
+                    <div class="separator_small"></div>
+                    <h6 class="statistic-counter"><?php echo number_format($subtotal, 2, '.', ','); ?></h6>
+                </div>
+            </div>
+            <?php
+            $subtotal += $this->Order['total_vikers'];
+            ?>
+
+        </div>
+    </div>
+    <?php
+    }else{
         ?>
         <div class="pricing_body bg-white padding-20">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <h6>Comments</h6>
+                <h6 style="color: #1f962d"><b>Name Place / Address</b></h6>
                 <div class="form-group has-warning">
-                <p>
-                    <?php echo (!empty($this->Order['notes_order'])) ? $this->Order['notes_order'] : 'No comments for this order...'; ?>
-                </p>
+                    <p>
+                        <?php echo $this->Order['special_delivery_where']; ?>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h6 style="color: #1f962d">What do you want</h6>
+                <div class="form-group has-warning">
+                    <p>
+                        <?php echo $this->Order['special_delivery']; ?>
+                    </p>
                 </div>
             </div>
             <div class="text-center">
@@ -236,7 +295,7 @@ Skill Section style
                         <h6><em>Cycler</em></h6>
                         <div class="separator_small"></div>
 
-                        <h6 class="statistic-counter"><?php echo number_format(CYCLER, 2, '.', ','); ?></h6>
+                        <h6 class="statistic-counter"><?php echo number_format($this->Order['total_viker'], 2, '.', ','); ?></h6>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
@@ -246,10 +305,9 @@ Skill Section style
                         <h6 class="statistic-counter"><?php echo number_format($subtotal, 2, '.', ','); ?></h6>
                     </div>
                 </div>
-                <?php
-                $subtotal += CYCLER;
-                ?>
-
             </div>
         </div>
-    </div>
+        <?php
+    }
+    ?>
+</div>
