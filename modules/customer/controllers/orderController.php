@@ -120,8 +120,8 @@ class orderController extends Controller
                         $ingredients .= $ingredient['extra_name'].',';
                     }
                     $ingredients =  trim($ingredients, ',');
-                    $Stuff[$sk]['ingredientsTxT'] = $ingredients;
                 }
+                $Stuff[$sk]['ingredientList'] = $ingredients;
             }
         }
 
