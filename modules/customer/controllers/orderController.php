@@ -123,6 +123,7 @@ class orderController extends Controller
             }
         }
 
+        $Cycler = null;
         if($Order['cycler_id'] != null) {
             $conditions = array('user_id' => $Order['cycler_id']);
             $Cycler = $this->model->select_row('system_users','*',$conditions);
@@ -148,9 +149,17 @@ class orderController extends Controller
         <div class="col-md-6 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('order_detail','customer');?>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <?php echo $this->_view->loadTemplate('cycler','customer');?>
-        </div>
+        <?php
+        if ($Cycler != null) {
+            ?>
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <?php
+                echo $this->_view->loadTemplate('cycler', 'customer');
+                ?>
+            </div>
+            <?php
+        }
+        ?>
        
         <div class="clear"></div>
         <script>
@@ -174,44 +183,46 @@ class orderController extends Controller
     {
         $this->_view->setJs(array('index'));
         $conditions = array('order_id' => $this->getPostParam('order_id'));
-        $Order = $this->model->select_row('order_special','*',$conditions);
+        $Order = $this->model->select_row('order_special', '*', $conditions);
 
         $this->_view->Order = $Order;
 
         $this->_view->StuffType = 'SPECIAL';
 
-        $conditions = array('user_id' => $Order['viker_id']);
-        $Cycler = $this->model->select_row('system_users','*',$conditions);
+        $Cycler = null;
+        if ($Order['viker_id'] != null) {
+            $conditions = array('user_id' => $Order['viker_id']);
+            $Cycler = $this->model->select_row('system_users', '*', $conditions);
+            $this->_view->Cycler = $Cycler;
+        } else {
+            $this->_view->Cycler = null;
+        }
 
-        $this->_view->Cycler = $Cycler;
 
         $conditions = array('user_id' => $Order['user_id']);
-        $Customer = $this->model->select_row('system_users','*',$conditions);
+        $Customer = $this->model->select_row('system_users', '*', $conditions);
         $this->_view->Customer = $Customer;
 
-       /* if(!empty($Order))
-        {
 
-            if(!empty($Cycler))
-            {
-                if(!empty($Customer))
-                {
-
-                }
-            }
-        }*/
         ob_start();
         ?>
         <div class="col-md-3 col-sm-12 col-xs-12">
-            <?php echo $this->_view->loadTemplate('customer','customer');?>
+            <?php echo $this->_view->loadTemplate('customer', 'customer'); ?>
         </div>
         <div class="col-md-6 col-sm-12 col-xs-12">
-            <?php echo $this->_view->loadTemplate('order_detail','customer');?>
+            <?php echo $this->_view->loadTemplate('order_detail', 'customer'); ?>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <?php echo $this->_view->loadTemplate('cycler','customer');?>
-        </div>
-
+        <?php
+        if ($Cycler != null) {
+            ?>
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <?php
+                    echo $this->_view->loadTemplate('cycler', 'customer');
+                ?>
+            </div>
+            <?php
+        }
+        ?>
         <div class="clear"></div>
         <script>
             window.onload = function()

@@ -123,6 +123,7 @@ class orderController extends Controller
             }
         }
 
+        $Cycler = null;
         if($Order['cycler_id'] != null) {
             $conditions = array('user_id' => $Order['cycler_id']);
             $Cycler = $this->model->select_row('system_users','*',$conditions);
@@ -148,9 +149,17 @@ class orderController extends Controller
         <div class="col-md-6 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('order_detail','enterprise');?>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <?php echo $this->_view->loadTemplate('cycler','enterprise');?>
-        </div>
+        <?php
+        if ($Cycler != null) {
+            ?>
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <?php
+                echo $this->_view->loadTemplate('cycler', 'enterprise');
+                ?>
+            </div>
+            <?php
+        }
+        ?>
 
         <div class="clear"></div>
         <script>
@@ -189,17 +198,6 @@ class orderController extends Controller
         $Customer = $this->model->select_row('system_users','*',$conditions);
         $this->_view->Customer = $Customer;
 
-       /* if(!empty($Order))
-        {
-
-            if(!empty($Cycler))
-            {
-                if(!empty($Customer))
-                {
-
-                }
-            }
-        }*/
         ob_start();
         ?>
         <div class="col-md-3 col-sm-12 col-xs-12">
@@ -208,9 +206,17 @@ class orderController extends Controller
         <div class="col-md-6 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('order_detail','enterprise');?>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <?php echo $this->_view->loadTemplate('cycler','enterprise');?>
-        </div>
+        <?php
+        if ($Cycler != null) {
+            ?>
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <?php
+                echo $this->_view->loadTemplate('cycler', 'enterprise');
+                ?>
+            </div>
+            <?php
+        }
+        ?>
 
         <div class="clear"></div>
         <script>

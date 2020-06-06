@@ -6,7 +6,6 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#new_orders" data-toggle="tab">My Orders</a></li>
                     <li ><a href="#sp_orders" data-toggle="tab">Special Orders</a></li>
-
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="new_orders">
