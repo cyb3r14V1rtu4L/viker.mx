@@ -149,18 +149,10 @@ class orderController extends Controller
         <div class="col-md-6 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('order_detail','customer');?>
         </div>
-        <?php
-        if ($Cycler != null && $Order['status'] == 'AUTH') {
-            ?>
-            <div class="col-md-3 col-sm-12 col-xs-12">
-                <?php
-                echo $this->_view->loadTemplate('cycler', 'customer');
-                ?>
-            </div>
-            <?php
-        }
-        ?>
-       
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <?php echo $this->_view->loadTemplate('cycler', 'customer');?>
+        </div>
+
         <div class="clear"></div>
         <script>
             window.onload = function()
