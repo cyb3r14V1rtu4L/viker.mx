@@ -119,7 +119,6 @@ class orderController extends Controller
                     foreach ($Ingredients as $ingredient) {
                         $ingredients .= $ingredient['extra_name'].',';
                     }
-                    $ingredients =  trim($ingredients, ',');
                 }
                 $Stuff[$sk]['ingredientList'] = $ingredients;
             }
