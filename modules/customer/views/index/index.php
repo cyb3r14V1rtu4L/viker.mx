@@ -11,7 +11,7 @@
                             <!-- small box -->
 
                             <div class="info-box bg-green">
-                                <span class="info-box-icon"><i class="ion fa fa-motorcycle"></i></span>
+                                <span class="info-box-icon"><i class="ion fa fa-bicycle"></i></span>
 
                                 <div class="info-box-content">
                                     <span class="info-box-text">Emissions (CO<sub>2</sub>)</span>
