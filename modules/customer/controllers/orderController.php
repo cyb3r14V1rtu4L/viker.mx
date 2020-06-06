@@ -99,16 +99,19 @@ class orderController extends Controller
         );
         $this->_view->Stuff = $Stuff;
         foreach ($Stuff as $sk=>$stuff) {
-            $Ingredients = $this->model->query(" SELECT * FROM order_stuff_extra AS o "
-                ." INNER JOIN enterprise_stuff_extra AS e "
-                ." ON o.extra_id = e.extra_id "
-                ." WHERE o.order_id = ".$Order['order_id']
-                ." AND  o.stuff_id = ".$stuff['stuff_id']
-                ." AND  o.stuff_uid = ".$stuff['stuff_uid']
-            );
+            if(!empty($stuff['stuff_uid'])) {
+                $mySQL = " SELECT * FROM order_stuff_extra AS o "
+                    ." INNER JOIN enterprise_stuff_extra AS e "
+                    ." ON o.extra_id = e.extra_id "
+                    ." WHERE o.order_id = ".$Order['order_id']
+                    ." AND  o.stuff_id = ".$stuff['stuff_id']
+                    ." AND  o.stuff_uid = ".$stuff['stuff_uid'];
+                $this->pr($mySQL);
+                $Ingredients = $this->model->query($mySQL);
 
-            if ($Ingredients != null) {
-                $Stuff[$sk]['Ingredients'] = $Ingredients;
+                if ($Ingredients != null ) {
+                    $Stuff[$sk]['Ingredients'] = $Ingredients;
+                }
             }
         }
         $this->pr($Stuff);
