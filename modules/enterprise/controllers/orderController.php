@@ -142,13 +142,13 @@ class orderController extends Controller
 
         ob_start();
         ?>
-        <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="col-md-3 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('customer','enterprise');?>
         </div>
-        <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('order_detail','enterprise');?>
         </div>
-        <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="col-md-3 col-sm-12 col-xs-12">
             <?php echo $this->_view->loadTemplate('cycler','enterprise');?>
         </div>
 
