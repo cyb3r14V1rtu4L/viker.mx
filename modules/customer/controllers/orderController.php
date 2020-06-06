@@ -101,7 +101,6 @@ class orderController extends Controller
              ." ON o.stuff_id = e.stuff_id "
              ." WHERE order_id = ".$Order['order_id']
         );
-        $this->_view->Stuff = $Stuff;
 
         foreach ($Stuff as $sk=>$stuff) {
             $ingredients = '';
@@ -139,6 +138,7 @@ class orderController extends Controller
         $conditions = array('user_id' => $Order['user_id']);
         $Customer = $this->model->select_row('system_users','*',$conditions);
         $this->_view->Customer = $Customer;
+        $this->_view->Stuff = $Stuff;
 
         ob_start();
         ?>
