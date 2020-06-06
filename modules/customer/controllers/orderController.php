@@ -105,8 +105,7 @@ class orderController extends Controller
                     ." ON o.extra_id = e.extra_id "
                     ." WHERE o.order_id = ".$Order['order_id']
                     ." AND  o.stuff_id = ".$stuff['stuff_id']
-                    ." AND  o.stuff_uid = ".$stuff['stuff_uid'];
-                $this->pr($mySQL);
+                    ." AND  o.stuff_uid = '".$stuff['stuff_uid']."'";
                 $Ingredients = $this->model->query($mySQL);
 
                 if ($Ingredients != null ) {
