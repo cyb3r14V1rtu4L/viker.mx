@@ -150,7 +150,7 @@ class orderController extends Controller
             <?php echo $this->_view->loadTemplate('order_detail','customer');?>
         </div>
         <?php
-        if ($Cycler != null) {
+        if ($Cycler != null && $Order['status'] == 'AUTH') {
             ?>
             <div class="col-md-3 col-sm-12 col-xs-12">
                 <?php
