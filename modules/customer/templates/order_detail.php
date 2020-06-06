@@ -204,7 +204,7 @@ Skill Section style
                                 <p><?php echo $Stuff['desc_stuff']?><br/>
                                     <?php
                                         if($Stuff['ingredientList'] != '') {
-                                         echo '<i class="fa fa-arrow-circle-o-right"></i>Ingredients: '.$Stuff['ingredientList'];
+                                         echo '<i class="fa fa-clipboard"></i>&nbsp;&nbsp;Ingredients: '.$Stuff['ingredientList'];
                                         }
                                     ?>
                                 </p>
