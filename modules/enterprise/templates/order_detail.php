@@ -203,7 +203,7 @@ Skill Section style
                                 <a href="#"><?php echo $Stuff['name_stuff']; ?></a>
                                 <p><?php echo $Stuff['desc_stuff']?><br/>
                                     <?php
-                                        if($Stuff['ingredientList'] != '') {
+                                        if(isset($Stuff['ingredientList']) && $Stuff['ingredientList'] != '') {
                                          echo '<i class="fa fa-map-signs"></i>&nbsp;&nbsp;Ingredients: '.$Stuff['ingredientList'];
                                         }
                                     ?>
