@@ -104,6 +104,7 @@ class orderController extends Controller
         $this->_view->Stuff = $Stuff;
 
         foreach ($Stuff as $sk=>$stuff) {
+            $ingredients = '';
             if(!empty($stuff['stuff_uid'])) {
                 $mySQL = " SELECT * FROM order_stuff_extra AS o "
                     ." INNER JOIN enterprise_stuff_extra AS e "
@@ -115,6 +116,11 @@ class orderController extends Controller
 
                 if ($Ingredients != null ) {
                     $Stuff[$sk]['Ingredients'] = $Ingredients;
+                    foreach ($ingredients as $ingredient) {
+                        $ingredients .= $ingredient['extra_name'].',';
+                    }
+                    $ingredients =  trim($ingredients, ',');
+                    $Stuff[$sk]['IngredientsTxt'] = $ingredients;
                 }
             }
         }
