@@ -97,6 +97,47 @@
         $order = date('ymdHis');
     ?>
     <div class="row p-bottom-40">
+
+        <div class="row" id="paypalPayment" style="display: none;">
+            <?php
+            $error = false;
+            $amount = 0;
+            $concept = '';
+
+            if (isset($_GET['error']))
+                $error = $_GET['error'];
+
+            if (isset($_GET['amount']))
+                $amount = $_GET['amount'];
+
+            if (isset($_POST['submitPayment'])) {
+                $amount = $_POST['amount'];
+                $concept = 'Food and Stuff Delivery';
+                ?>
+                <div class="loading">Please Wait...</div>
+                <script>
+                    $(document).ready(function () {
+                        $("#realizarPago").submit();
+                    });
+                </script>
+            <?php
+            } else {
+            ?>
+                <form class="form-amount" action="/checkout/index" method="post">
+                    <div class="form-group">
+                        <input type="hidden" id="concept" name="concept" class="form-control" value="<?php echo $concept; ?>">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="amount" name="amount" class="form-control" value="<?php echo $amount; ?>">
+                    </div>
+                    <input class="btn btn-lg btn-primary btn-block" name="submitPayment" onclick="orderCheckout('paypal');" type="submit" value="Order NOW!!">
+
+                </form>
+                <?php
+            }
+            ?>
+
+        </div>
         <!-- accepted payments column -->
         <div class="col-xs-6">
             <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
@@ -118,49 +159,7 @@
         <!-- /.col -->
         <div class="col-xs-6">
 
-            <div class="row" id="paypalPayment" style="display: none;">
-                <?php
-                $error = false;
-                $amount = 0;
-                $concept = '';
 
-                if (isset($_GET['error']))
-                    $error = $_GET['error'];
-
-                if (isset($_GET['amount']))
-                    $amount = $_GET['amount'];
-
-                if (isset($_POST['submitPayment'])) {
-
-                    $amount = $_POST['amount'];
-                    $concept = 'Food and Stuff Delivery';
-
-
-                    ?>
-                    <div class="loading">Please Wait...</div>
-                    <script>
-                        $(document).ready(function () {
-                            $("#realizarPago").submit();
-                        });
-                    </script>
-                <?php
-                } else {
-                ?>
-                    <form class="form-amount" action="/checkout/index" method="post">
-                        <div class="form-group">
-                            <input type="hidden" id="concept" name="concept" class="form-control" value="<?php echo $concept; ?>">
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" id="amount" name="amount" class="form-control" value="<?php echo $amount; ?>">
-                        </div>
-                        <input class="btn btn-lg btn-primary btn-block" name="submitPayment" onclick="orderCheckout('paypal');" type="submit" value="Order NOW!!">
-
-                    </form>
-                    <?php
-                }
-                ?>
-
-            </div>
 
         </div>
         <!-- /.col -->
