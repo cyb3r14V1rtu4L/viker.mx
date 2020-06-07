@@ -104,6 +104,7 @@
                 $error = false;
                 $amount = '';
                 $concept = '';
+                $order = date('ymdHis');
 
                 if (isset($_GET['error']))
                     $error = $_GET['error'];
@@ -115,7 +116,6 @@
 
                     $amount = $_POST['amount'];
                     $concept = 'Food and Stuff Delivery';
-                    $order = date('ymdHis');
 
                     ?>
 
