@@ -143,7 +143,7 @@
             <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
                 <input name="cmd" type="hidden" value="_cart" />
                 <input name="upload" type="hidden" value="1" />
-                <input name="business" type="text" value="<?php echo $paypal; ?>" />
+                <input name="business" type="hidden" value="<?php echo $paypal; ?>" />
                 <input name="shopping_url" type="hidden" value="/" />
                 <input name="currency_code" type="hidden" value="<?php echo $currency; ?>" />
                 <input name="return" type="hidden" value="https://viker.mx/checkout/confirmation" />
