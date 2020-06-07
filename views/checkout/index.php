@@ -115,7 +115,7 @@
             <div class="row" id="paypalPayment" style="display: none;">
                 <?php
                 $error = false;
-                $amount = '';
+                $amount = 0;
                 $concept = '';
 
                 if (isset($_GET['error']))
