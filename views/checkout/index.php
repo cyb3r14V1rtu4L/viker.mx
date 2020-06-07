@@ -66,9 +66,6 @@
                                         }
                                     }
                                 }
-                            } else{
-                                $paypal = $stuff['paypal_account'];
-                                $currency = $stuff['paypal_currency'];
                             }
                         }
                         ?>
@@ -96,15 +93,27 @@
 
     <div class="row p-bottom-40">
         <!-- accepted payments column -->
+        <div class="col-xs-6">
 
+            <!--<p class="lead">Payment Methods:</p>
+            <img src="../../dist/img/credit/visa.png" alt="Visa">
+            <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+            <img src="../../dist/img/credit/american-express.png" alt="American Express">
+            <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
+
+            <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
+                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+            </p>-->
+        </div>
         <!-- /.col -->
         <div class="col-xs-6">
+
             <div class="row" id="paypalPayment" style="display: none;">
                 <?php
                 $error = false;
                 $amount = '';
-                $concept = 'Food and Stuff Delivery';
-                $order = date('ymdHis');
+                $concept = '';
 
                 if (isset($_GET['error']))
                     $error = $_GET['error'];
@@ -115,7 +124,8 @@
                 if (isset($_POST['submitPayment'])) {
 
                     $amount = $_POST['amount'];
-
+                    $concept = 'Food and Stuff Delivery';
+                    $order = date('ymdHis');
 
                     ?>
 
@@ -124,9 +134,9 @@
                     <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
                         <input name="cmd" type="hidden" value="_cart" />
                         <input name="upload" type="hidden" value="1" />
-                        <input name="business" type="hidden" value="<?php echo $paypal;?>" />
+                        <input name="business" type="hidden" value="cyberia.virtual@gmail.com" />
                         <input name="shopping_url" type="hidden" value="/" />
-                        <input name="currency_code" type="hidden" value="<?php echo $currency;?>" />
+                        <input name="currency_code" type="hidden" value="MXN" />
                         <input name="return" type="hidden" value="https://viker.mx/checkout/confirmation" />
                         <input name="notify_url" type="hidden" value="https://viker.mx/ipn.php" />
 
@@ -137,8 +147,6 @@
                         <input name="quantity_1" type="hidden" value="1" />
 
                     </form>
-
-
                     <script>
                         $(document).ready(function () {
                             $("#realizarPago").submit();
@@ -164,13 +172,9 @@
                 ?>
 
             </div>
+
         </div>
         <!-- /.col -->
-
-        <div class="col-xs-6">
-
-
-        </div>
     </div>
     <!-- /.row -->
 
