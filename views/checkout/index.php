@@ -103,7 +103,7 @@
                 <?php
                 $error = false;
                 $amount = '';
-                $concept = '';
+                $concept = 'Food and Stuff Delivery';
                 $order = date('ymdHis');
 
                 if (isset($_GET['error']))
@@ -115,7 +115,7 @@
                 if (isset($_POST['submitPayment'])) {
 
                     $amount = $_POST['amount'];
-                    $concept = 'Food and Stuff Delivery';
+
 
                     ?>
 
