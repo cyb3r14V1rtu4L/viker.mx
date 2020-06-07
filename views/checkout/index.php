@@ -96,22 +96,9 @@
 
     <div class="row p-bottom-40">
         <!-- accepted payments column -->
-        <div class="col-xs-6">
 
-            <!--<p class="lead">Payment Methods:</p>
-            <img src="../../dist/img/credit/visa.png" alt="Visa">
-            <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-            <img src="../../dist/img/credit/american-express.png" alt="American Express">
-            <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
-
-            <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-                dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-            </p>-->
-        </div>
         <!-- /.col -->
         <div class="col-xs-6">
-
             <div class="row" id="paypalPayment" style="display: none;">
                 <?php
                 $error = false;
@@ -134,22 +121,7 @@
 
                     <div class="loading">Please Wait...</div>
 
-                    <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <input name="cmd" type="hidden" value="_cart" />
-                        <input name="upload" type="hidden" value="1" />
-                        <input name="business" type="hidden" value="<?php echo $paypal;?>" />
-                        <input name="shopping_url" type="hidden" value="/" />
-                        <input name="currency_code" type="hidden" value="<?php echo $currency;?>" />
-                        <input name="return" type="hidden" value="https://viker.mx/checkout/confirmation" />
-                        <input name="notify_url" type="hidden" value="https://viker.mx/ipn.php" />
 
-                        <input name="rm" type="hidden" value="2" />
-                        <input name="item_number_1" type="hidden" value="<?php echo $order; ?>" />
-                        <input name="item_name_1" type="hidden" value="<?php echo $concept; ?>" />
-                        <input name="amount_1" type="hidden" value="<?php echo $amount; ?>" />
-                        <input name="quantity_1" type="hidden" value="1" />
-
-                    </form>
                     <script>
                         $(document).ready(function () {
                             $("#realizarPago").submit();
@@ -175,9 +147,28 @@
                 ?>
 
             </div>
-
         </div>
         <!-- /.col -->
+
+        <div class="col-xs-6">
+
+            <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <input name="cmd" type="hidden" value="_cart" />
+                <input name="upload" type="hidden" value="1" />
+                <input name="business" type="hidden" value="<?php echo $paypal;?>" />
+                <input name="shopping_url" type="hidden" value="/" />
+                <input name="currency_code" type="hidden" value="<?php echo $currency;?>" />
+                <input name="return" type="hidden" value="https://viker.mx/checkout/confirmation" />
+                <input name="notify_url" type="hidden" value="https://viker.mx/ipn.php" />
+
+                <input name="rm" type="hidden" value="2" />
+                <input name="item_number_1" type="hidden" value="<?php echo $order; ?>" />
+                <input name="item_name_1" type="hidden" value="<?php echo $concept; ?>" />
+                <input name="amount_1" type="hidden" value="<?php echo $amount; ?>" />
+                <input name="quantity_1" type="hidden" value="1" />
+
+            </form>
+        </div>
     </div>
     <!-- /.row -->
 
