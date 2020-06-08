@@ -21,7 +21,7 @@ class checkoutController extends Controller
     }
 
     public function confirmation() {
-        $this->pr($_POST);
+        $this->pr($_POST);exit();
         $this->destroySessions();
 
         $this->_view->renderizar('confirmation');
