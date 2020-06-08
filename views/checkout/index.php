@@ -126,7 +126,7 @@
                     $amount = $_GET['amount'];
 
                 if (isset($_POST['submitPayment'])) {
-
+                $this->pr($_POST);exit();
                     $amount = $_POST['amount'];
                     $paypal = $_POST['business'];
                     $currency = $_POST['currency_code'];
