@@ -69,6 +69,7 @@
                             }else{
                                 $paypal = $stuff['paypal_account'];
                                 $currency = $stuff['paypal_currency'];
+
                             }
                         }
                         ?>
@@ -118,6 +119,8 @@
                 $amount = '';
                 $concept = '';
 
+                $order = 'VKR' . uniqid();
+
                 if (isset($_GET['error']))
                     $error = $_GET['error'];
 
@@ -130,7 +133,7 @@
                     $currency = $_POST['currency_code'];
 
                     $concept = 'Food and Stuff Delivery';
-                    $order = date('ymdHis');
+
 
                     ?>
                     <div class="loading">Please Wait...</div>
@@ -168,6 +171,9 @@
                         </div>
                         <div class="form-group">
                             <input type="hidden" id="currency_code" name="currency_code" class="form-control" value="<?php echo $currency; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" id="order_uid" name="order_uid" class="form-control" value="<?php echo $order; ?>">
                         </div>
                         <div class="form-group">
                             <input type="hidden" id="amount" name="amount" class="form-control" value="1.00">

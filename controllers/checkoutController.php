@@ -11,6 +11,12 @@ class checkoutController extends Controller
 
     public function index() {
         $this->_view->setTemplates(array('geoloc'),true);
+        if (isset($_POST['submitPayment'])) {
+            $order_id = $_POST['order_uid'];
+            $shopping_data = Session::get('ShoppingData');
+            $shopping_data['order_uid'] = $order_id;
+            Session::set('ShoppingData', $shopping_data);
+        }
         $this->_view->renderizar('index');
     }
 
@@ -33,7 +39,7 @@ class checkoutController extends Controller
                 if($e_id !== 'enterprise_data')
                 {
                     $dataO['enterprise_id'] = $e;
-                    $dataO['order_uid'] = 'VKR' . uniqid();
+                    $dataO['order_uid'] = $shopping_data['order_uid'];
                     $dataO['user_id'] = Session::get('user_id');
                     $dataO['notes_order'] = $shopping_data['item_note_' . $e];
                     $dataO['date_order'] = date("Y-m-d H:i");
