@@ -391,7 +391,7 @@ class ajaxController extends Controller {
                 if($e_id !== 'enterprise_data')
                 {
                     $dataO['enterprise_id'] = $e;
-                    $dataO['order_uid'] = 'VKR-' . uniqid();
+                    $dataO['order_uid'] = strtoupper('VKR-' . uniqid());
                     $dataO['user_id'] = Session::get('user_id');
                     $dataO['notes_order'] = $shopping_data['item_note_' . $e];
                     $dataO['date_order'] = date("Y-m-d H:i");
