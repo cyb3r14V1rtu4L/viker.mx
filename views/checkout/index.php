@@ -168,7 +168,7 @@
                             <input type="hidden" id="concept" name="concept" class="form-control" value="<?php echo $concept; ?>">
                         </div>
                         <div class="form-group">
-                            <input type="text" id="business" name="business" class="form-control" value="<?php echo $paypal; ?>">
+                            <input type="hidden" id="business" name="business" class="form-control" value="<?php echo $paypal; ?>">
                         </div>
                         <div class="form-group">
                             <input type="hidden" id="currency_code" name="currency_code" class="form-control" value="<?php echo $currency; ?>">
