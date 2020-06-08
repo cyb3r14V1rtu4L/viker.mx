@@ -67,8 +67,7 @@
                                     }
                                 }
                             }else{
-                                $this->pr($stuff);
-                                $paypal = $stuff['paypal_acount'];
+                                $paypal = $stuff['paypal_account'];
                                 $currency = $stuff['paypal_currency'];
                             }
                         }
