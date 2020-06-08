@@ -66,6 +66,9 @@
                                         }
                                     }
                                 }
+                            }else{
+                                $paypal = $stuff['paypal_acount'];
+                                $currency = $stuff['paypal_currency'];
                             }
                         }
                         ?>
@@ -115,6 +118,7 @@
                 $amount = '';
                 $concept = '';
 
+
                 if (isset($_GET['error']))
                     $error = $_GET['error'];
 
@@ -124,6 +128,9 @@
                 if (isset($_POST['submitPayment'])) {
 
                     $amount = $_POST['amount'];
+                    $paypal = $_POST['business'];
+                    $currency = $_POST['currency_code'];
+
                     $concept = 'Food and Stuff Delivery';
                     $order = date('ymdHis');
 
@@ -134,9 +141,9 @@
                     <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
                         <input name="cmd" type="hidden" value="_cart" />
                         <input name="upload" type="hidden" value="1" />
-                        <input name="business" type="hidden" value="cyberia.virtual@gmail.com" />
+                        <input name="business" type="hidden" value="<?php echo $paypal;?>" />
                         <input name="shopping_url" type="hidden" value="/" />
-                        <input name="currency_code" type="hidden" value="MXN" />
+                        <input name="currency_code" type="hidden" value="<?php echo $currency;?>" />
                         <input name="return" type="hidden" value="https://viker.mx/checkout/confirmation" />
                         <input name="notify_url" type="hidden" value="https://viker.mx/ipn.php" />
 
@@ -160,6 +167,12 @@
                     <form class="form-amount" action="/checkout/index" method="post">
                         <div class="form-group">
                             <input type="hidden" id="concept" name="concept" class="form-control" value="<?php echo $concept; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" id="business" name="business" class="form-control" value="<?php echo $paypal; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" id="currency_code" name="currency_code" class="form-control" value="<?php echo $currency; ?>">
                         </div>
                         <div class="form-group">
                             <input type="hidden" id="amount" name="amount" class="form-control" value="1.00">
