@@ -118,7 +118,6 @@
                 $amount = '';
                 $concept = '';
 
-
                 if (isset($_GET['error']))
                     $error = $_GET['error'];
 
@@ -134,9 +133,7 @@
                     $order = date('ymdHis');
 
                     ?>
-
                     <div class="loading">Please Wait...</div>
-
                     <form id="realizarPago" action="https://www.paypal.com/cgi-bin/webscr" method="post">
                         <input name="cmd" type="hidden" value="_cart" />
                         <input name="upload" type="hidden" value="1" />
@@ -145,7 +142,6 @@
                         <input name="currency_code" type="hidden" value="<?php echo $currency;?>" />
                         <input name="return" type="hidden" value="https://viker.mx/checkout/confirmation" />
                         <input name="notify_url" type="hidden" value="https://viker.mx/ipn.php" />
-
                         <input name="rm" type="hidden" value="2" />
                         <input name="item_number_1" type="hidden" value="<?php echo $order; ?>" />
                         <input name="item_name_1" type="hidden" value="<?php echo $concept; ?>" />

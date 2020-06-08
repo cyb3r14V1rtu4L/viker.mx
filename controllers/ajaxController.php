@@ -391,6 +391,7 @@ class ajaxController extends Controller {
                 if($e_id !== 'enterprise_data')
                 {
                     $dataO['enterprise_id'] = $e;
+                    $dataO['order_uid'] = 'VKR' . uniqid();
                     $dataO['user_id'] = Session::get('user_id');
                     $dataO['notes_order'] = $shopping_data['item_note_' . $e];
                     $dataO['date_order'] = date("Y-m-d H:i");
@@ -408,6 +409,8 @@ class ajaxController extends Controller {
                     $dataO['total_vikers'] = $checkout_shop['granTotal_cycler_float'];
                     $dataO['total_change'] = ($checkout_shop['pay_change'] > 0 && $checkout_shop['pay_change'] !== null) ? $checkout_shop['pay_change'] : 0.00;
                     $dataO['status'] = 'NEW';
+                    $dataO['origin'] = 'cash';
+
                     $orderData = $this->model->insert("order_enterprise",$dataO,array());
                     #$this->pr($orderData);
                     $order_id = $orderData['data'];
