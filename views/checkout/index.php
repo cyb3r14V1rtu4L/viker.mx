@@ -67,6 +67,7 @@
                                     }
                                 }
                             }else{
+                                $this->pr($stuff);
                                 $paypal = $stuff['paypal_acount'];
                                 $currency = $stuff['paypal_currency'];
                             }
