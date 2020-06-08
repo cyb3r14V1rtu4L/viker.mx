@@ -119,7 +119,7 @@
                 $amount = '';
                 $concept = '';
 
-                $order = 'VKR' . uniqid();
+                $order = strtoupper('VKR' . uniqid());
 
                 if (isset($_GET['error']))
                     $error = $_GET['error'];
