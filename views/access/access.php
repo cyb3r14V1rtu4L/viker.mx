@@ -10,7 +10,7 @@
                 <?php if(!Session::get('autenticado') && !Session::get('lock')): ?>
                     <div class="row">
                         <p class="text-center">
-                            <a class="btn btn-success" href="<?php echo BASE_URL . 'login'; ?>">Login</a>
+                            <a class="btn btn-success" href="<?php echo BASE_URL . 'login'; ?>">Iniciar Sesión</a>
                         </p>
 
                     </div>

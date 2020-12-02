@@ -35,7 +35,7 @@
 
 <!--Designerd by: http://bootstrapthemes.co-->
 <head>
-    <title>VIKER | Food & Stuff Delivery</title>
+    <title>EdiQ | Administrador de Contenidos</title>
 
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -300,7 +300,7 @@
 
 
                         All Rights Reserved
-                        © <a>viker.mx</a> 2017
+                        © <a>ediq.mx</a> <?php echo date("Y");?>
                     </p>
                 </div>
             </div>
@@ -311,7 +311,7 @@
 
     <!-- End off scroll up -->
 
-    <!--<div class="text-center copyright panel-footer navbar-fixed-bottom bg-black">Copyright  © <a href="http://viker.mx" target="_blank">viker.mx</a></div>-->
+    <!--<div class="text-center copyright panel-footer navbar-fixed-bottom bg-black">Copyright  © <a href="http://ediq.mx" target="_blank">ediq.mx</a></div>-->
 </div> <!--culmn -->
 <!-- JS includes -->
 

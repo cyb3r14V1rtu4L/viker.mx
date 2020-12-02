@@ -63,107 +63,51 @@ class uploaderController extends Controller
     }
 
 
-    public function profile_photo($user_id = 'trash') //Customer
+    public function libro_ediq() // Arma Páginas del Breviario
     {
-        if (empty($_FILES['profile_photo']))
+        if (empty($_FILES['ediq_photo']))
         {
             echo json_encode(['error'=>'No files found for upload.']);
             return;
         }
 
-        $images = $_FILES['profile_photo'];
+        $images = $_FILES['ediq_photo'];
         $success = null;
-
         $paths= [];
         $filenames = $images['name'];
-        for($i=0; $i < count($filenames); $i++)
-        {
-            $filename = basename($filenames[$i]);
-            $target = ROOT."public/uploads/customer/profile/$user_id/";
+        $total_files = count($filenames);
+        $target_dir = ROOT."public/uploads/enterprise/breviario/";
+        $target_dir_new = ROOT."public/uploads/enterprise/breviario/paginas/bachillerato-1t/";
 
-            if (!file_exists($target)) {
-                mkdir($target);
-            }
+        $xi = explode(".", $filenames[0]);
+        $i = intval($xi[0]);
 
-            if(move_uploaded_file($images['tmp_name'][$i], $target.'profile.jpg')) {
+        if ($i == 1) {
+            $target = $target_dir_new . basename('1.jpg');
+            $tmp  = $_FILES['ediq_photo']['tmp_name'][0];
+            move_uploaded_file($tmp, $target);
+            copy($target_dir.'blank.jpg', $target_dir_new.'2.jpg');
+            chmod($target_dir_new.'1.jpg',0777);
+            chmod($target_dir_new.'2.jpg',0777);
+        }
+
+        if ($i >= 2) {
+            $target = $target_dir_new . basename(($i+1).'.jpg');
+
+            $tmp  = $_FILES['ediq_photo']['tmp_name'][0];
+            if (move_uploaded_file($tmp, $target)) {
+                chmod($target_dir_new.basename(($i+1)).'.jpg',0777);
                 $success = true;
-                $paths[] = $target.$filename;
-            } else {
-                $success = false;
-                break;
+                $paths[] = $target;
             }
         }
 
-        if ($success === true)
-        {
+        if($success === true) {
             $output = ['uploaded' => $paths];
         } elseif ($success === false) {
             $output = ['error'=>'Error while uploading images. Contact the system administrator'];
-            foreach ($paths as $file) {
-                unlink($file);
-            }
         } else {
-            $output = ['error'=>'No files were processed.'];
-        }
-        echo json_encode($output);
-    }
-
-    public function photo_product($stuff_id)
-    {
-        if (empty($_FILES['photo_product']))
-        {
-            echo json_encode(['error'=>'No files found for upload.']);
-            return;
-        }
-        
-        $target = ROOT."public/uploads/enterprise/stuff/$stuff_id/";
-        if (!file_exists($target))
-        {
-            mkdir($target);
-        }
-        
-        $handle = opendir($target);
-        while($file = readdir($handle))
-        {
-            if(is_file($target.$file))
-            {
-                unlink($target.$file);
-            }
-        }
-
-        $images = $_FILES['photo_product'];
-        $success = null;
-
-        $paths= [];
-        $filenames = $images['name'];
-        for($i=0; $i < count($filenames); $i++)
-        {
-            $filename = basename($filenames[$i]);
-            $target = ROOT."public/uploads/enterprise/stuff/$stuff_id/";
-            if (!file_exists($target)) {
-                mkdir($target);
-            }
-
-
-            if(move_uploaded_file($images['tmp_name'][$i], $target.$filename)) {
-                $success = true;
-                $paths[] = $target.$filename;
-            } else {
-                $success = false;
-                break;
-            }
-        }
-
-        if ($success === true)
-        {
-            $output = ['uploaded' => $paths];
-        } elseif ($success === false) {
-            $output = ['error'=>'Error while uploading images. Contact the system administrator'];
-            foreach ($paths as $file) {
-                unlink($file);
-            }
-        } else {
-            $output = ['error'=>'No files were processed.'];
+            $output = ['success'=>'Breviario paginado...'];
         }
         echo json_encode($output);
     }

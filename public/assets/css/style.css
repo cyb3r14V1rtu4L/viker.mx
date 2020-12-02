@@ -408,21 +408,21 @@ Button
     border-radius: 0;
 }
 .btn-default:hover{
-    border-color:#ff6863;
-    background-color: #ff6863;
+    border-color:#fff;
+    background-color: #fea82e;
 }
 
 .btn-primary{
     color: #fff;
-    background-color: #ff6863;
+    background-color: #fea82e;
     border:1px solid;
-    border-color: #ff6863;
+    border-color: #fff;
     padding: 1rem 2rem;
 }
 .btn-primary:hover{
     background-color: #eee;
     border-color: #eee;
-    color:#ff6863;
+    color:#fea82e;
 }
 
 .btn-success{}

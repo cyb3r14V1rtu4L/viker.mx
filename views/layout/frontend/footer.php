@@ -7,8 +7,8 @@
             <div class="main_footer text-center p-top-40 p-bottom-30">
                 <p class="wow fadeInRight" data-wow-duration="1s">
                     Copyright  ©
-                    <a href="http://viker.mx">
-                    viker.mx
+                    <a href="http://ediq.mx">
+                    ediq.mx
                     </a>
                 </p>
             </div>
@@ -23,7 +23,7 @@
 
 
                     All Rights Reserved
-                    © <a>viker.mx</a> 2017
+                    © <a>ediq.mx</a> <?php echo date("Y");?>
                 </p>
             </div>
         </div>
@@ -34,7 +34,7 @@
 
 <!-- End off scroll up -->
 
-<!--<div class="text-center copyright panel-footer navbar-fixed-bottom bg-black">Copyright  © <a href="http://viker.mx" target="_blank">viker.mx</a></div>-->
+<!--<div class="text-center copyright panel-footer navbar-fixed-bottom bg-black">Copyright  © <a href="http://ediq.mx" target="_blank">ediq.mx</a></div>-->
 </div> <!--culmn -->
 <!-- JS includes -->
 

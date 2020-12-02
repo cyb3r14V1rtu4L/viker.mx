@@ -118,15 +118,6 @@ if(Session::get('autenticado'))
                     case 'enterprise':
                         include_once('menu/menu-enterprise.php');
                         break;
-                    case 'administrator':
-                        include_once('menu/menu-admin.php');
-                        break;
-                    case 'verifier':
-                        include_once('menu/menu-verifier.php');
-                        break;
-                    case 'traveler':
-                        include_once('menu/menu-traveler.php');
-                        break;
                     case 'content':
                         include_once('menu/menu-content.php');
                         break;
@@ -149,4 +140,3 @@ if(Session::get('autenticado'))
 
     ?>
 
-    

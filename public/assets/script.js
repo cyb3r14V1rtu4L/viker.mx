@@ -118,7 +118,7 @@ function profileRequest()
             ublockAjax();
         }
     }else {
-            swal('Viker','Please Fill all Fields','warning');
+            swal('EdiQ','Llena todos los campos por favor','warning');
             ublockAjax();
     }
     ublockAjax();

@@ -22,10 +22,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <a href="#" class="active" id="login-form-link">Login</a>
+                                        <a href="#" class="active" id="login-form-link">Iniciar Sesión</a>
                                     </div>
                                     <div class="col-xs-6">
-                                        <a href="#" id="register-form-link">Register</a>
+                                        <a href="#" id="register-form-link">Registrar</a>
                                     </div>
                                 </div>
                                 <hr>
@@ -39,10 +39,10 @@
                                             } ?>
 
                                             <div class="form-group">
-                                                <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Username (E-mail)" value="">
+                                                <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Usuario" value="">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
                                             </div>
                                             <!--<div class="form-group text-center">
                                                 <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
@@ -52,7 +52,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
                                                         <input type="hidden" name="submitButton" value="1">
-                                                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-danger" value="Login">
+                                                        <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-warning" value="Iniciar Sesión">
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,40 +71,39 @@
                                                 <div class="input-with-icon  right">
                                                     <i class=""></i>
                                                     <select name="type" id="type" class="form-control reg_info text4rea">
-                                                        <option selected value="">Choose Profile</option>
-                                                        <option value="1" >Enterprise</option>
-                                                        <option selected value="2" >Customer</option>
-                                                        <option value="3" >Cycler</option>
+                                                        <option selected value="">Señeccionar Nivel Educativo</option>
+                                                        <option value="1" >Primaria</option>
+                                                        <option value="2" >Secundaria</option>
+                                                        <option value="3" >Bachillerato</option>
                                                     </select>
                                                 </div>
 
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control reg_info" placeholder="First Name" value="">
+                                                <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control reg_info" placeholder="Nombre" value="">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="last_name" id="last_name" tabindex="1" class="form-control reg_info" placeholder="Last Name"  >
+                                                <input type="text" name="last_name" id="last_name" tabindex="1" class="form-control reg_info" placeholder="Apellidos"  >
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="phone_number" id="phone_number" tabindex="1" class="form-control reg_info" placeholder="Phone Number"  maxlength="10" onKeyPress="return onlyNum(event)" value="">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="text" name="email" id="email" tabindex="1" class="form-control reg_info" placeholder="Email Address" value="" >
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" name="password" id="password" tabindex="2" class="form-control reg_info" placeholder="Password">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control reg_info" placeholder="Confirm Password">
+                                                <input type="text" name="phone_number" id="phone_number" tabindex="1" class="form-control reg_info" placeholder="Teléfono"  maxlength="10" onKeyPress="return onlyNum(event)" value="">
                                             </div>
 
                                             <div class="form-group">
+                                                <input type="text" name="email" id="email" tabindex="1" class="form-control reg_info" placeholder="Correo Electrónico" value="" >
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" name="password" id="password" tabindex="2" class="form-control reg_info" placeholder="Contraseña">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control reg_info" placeholder="Confirmar Contraseña">
+                                            </div>
 
+                                            <div class="form-group">
                                                 </br>
                                                 <div class="row">
                                                     <div class="col-sm-6 col-sm-offset-3">
-                                                        <input type="button" onclick="profileRequest();" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-danger" value="Register Now !!">
+                                                        <input type="button" onclick="profileRequest();" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-warning" value="Registrate Ahora!!">
                                                     </div>
                                                 </div>
                                             </div>

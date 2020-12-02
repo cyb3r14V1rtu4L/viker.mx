@@ -2440,7 +2440,7 @@ fieldset[disabled] .btn-warning.active {
 
 .btn-danger {
   color: #ffffff;
-  background-color: #d9534f;
+  background-color: #ffc500;
   border-color: #d43f3a;
 }
 
@@ -2451,7 +2451,7 @@ fieldset[disabled] .btn-warning.active {
 .open .dropdown-toggle.btn-danger {
   color: #ffffff;
   background-color: #d2322d;
-  border-color: #ac2925;
+  border-color: #fff;
 }
 
 .btn-danger:active,
@@ -2475,12 +2475,12 @@ fieldset[disabled] .btn-danger:active,
 .btn-danger.disabled.active,
 .btn-danger[disabled].active,
 fieldset[disabled] .btn-danger.active {
-  background-color: #d9534f;
+  background-color: #ffc500;
   border-color: #d43f3a;
 }
 
 .btn-danger .badge {
-  color: #d9534f;
+  color: #ffc500;
   background-color: #fff;
 }
 
@@ -5170,7 +5170,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .label-danger {
-  background-color: #d9534f;
+  background-color: #ffc500;
 }
 
 .label-danger[href]:hover,
@@ -5468,7 +5468,7 @@ a.thumbnail.active {
 }
 
 .progress-bar-danger {
-  background-color: #d9534f;
+  background-color: #ffc500;
 }
 
 .progress-striped .progress-bar-danger {
