@@ -34,7 +34,7 @@
 
 <!--Designerd by: http://bootstrapthemes.co-->
 <head>
-    <title>.:: EdiQ | CMS ::.</title>
+    <title>VIKER | Food & Stuff Delivery</title>
 
     <meta charset="utf-8">
     <meta name="description" content="">

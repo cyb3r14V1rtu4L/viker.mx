@@ -99,7 +99,10 @@ if( $controlador !== 'checkout'  ) {
                 echo '<div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                 
-                    <li class="animated growIn slower go"><a href="/'.$dash.'">CMS</a></li>
+                    <li class="animated growIn slower go"><a href="/'.$dash.'">Dash</a></li>
+                    <li class="animated growIn slower go"><a href="#stuff">Stuff</a></li>
+                    '.$special.'
+                    <li class="animated growIn slower go"><a href=""><li class=""><a href="#about"><i class="fa fa-info fa-2x" style="color:#f39c12 !important"></i></a></li></a></li>
 
                     
                 </ul>

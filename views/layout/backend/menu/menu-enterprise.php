@@ -1,1 +1,4 @@
-<li class="<?php if($metodo=='index'){echo 'active'; }?>"> <a href="/enterprise/guias/" onclick="block()"> <i class="fa fa-book"></i> <span class="title">Crear Guía</span> </a> </li>
+<li class="<?php if($metodo=='index'){echo 'active'; }?>"> <a href="/enterprise/index" onclick="block()"> <i class="fa fa-th "></i> <span class="title">Orders</span> </a> </li>
+<li class="<?php if($metodo=='profile'){echo 'active'; }?>"> <a href="/enterprise/company/profile/" onclick="block()"> <i class="fa fa-users"></i> <span class="title">Profile / Company</span> </a> </li>
+<li class="<?php if($metodo=='products'){echo 'active'; }?>"> <a href="/enterprise/company/products/" onclick="block()"> <i class="fa fa-cubes"></i> <span class="title">Manage Products</span> </a> </li>
+<li class="<?php if($metodo=='reports'){echo 'active'; }?>"> <a href="/enterprise/company/reports" onclick="block()"> <i class="fa fa-clipboard"></i> <span class="title">Reports</span> </a> </li>

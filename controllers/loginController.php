@@ -25,18 +25,18 @@ class loginController extends Controller
 
                 if (!$this->validarEmail($this->getPostParam('email'))) {
 
-                    $this->_view->error = 'Usuario Incorrecto';
+                    $this->_view->error = 'Incorrect Email';
                     $this->_view->renderizar('index');
                     exit;
                 }
-                $this->_view->error = 'Ingresar Usuario';
+                $this->_view->error = 'Enter an email';
                 $this->_view->renderizar('index');
                 exit;
 
             }
 
             if (!$this->getSql('password')) {
-                $this->_view->error = 'Ingresar una Contraseña';
+                $this->_view->error = 'Enter a password';
                 $this->_view->renderizar('index');
                 exit;
             }
@@ -54,7 +54,7 @@ class loginController extends Controller
             $row = $data;
 
             if (!$row) {
-                $this->_view->error = 'Los datos del Usuario o Contraseña son incorrectos';
+                $this->_view->error = 'Incorrect username or password.';
                 $this->_view->renderizar('index');
                 exit;
             }
