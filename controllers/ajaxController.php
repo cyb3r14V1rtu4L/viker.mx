@@ -16,7 +16,7 @@ class ajaxController extends Controller {
         $encrypt=new Encryption(HASH_KEY);
         $dataArray = $this->unserilizeArray($_POST['dataInArray']);
         $UserExist = $this->model->select_row('system_users', 'user_id', array("username"=>$dataArray['email']));
-
+        $data = null;
         $response = false;
         $message_t = 'error';
         $file_template = '';
