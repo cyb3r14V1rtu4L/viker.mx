@@ -68,6 +68,7 @@ function profileRequest()
         {
             request = 0;
             //btn.button('reset');
+            consolel.log($(this).id);
         }
 
     });
