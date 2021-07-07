@@ -320,7 +320,7 @@ class ajaxController extends Controller {
                                             <div class="form-group">
                                                 <div class="input-with-icon  right">
                                                     <i class=""></i>
-                                                    <select name="type" id="pay_with" class="form-control reg_info text4rea" onchange="payWith(this.value);">
+                                                    <select name="type" id="pay_with" class="form-control text4rea" onchange="payWith(this.value);">
                                                         <option selected value="">Choose Your payment method...</option>
                                                         <option value="1" >Cash</option>
                                                         <option value="2" >Paypal</option>
